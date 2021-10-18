@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103171630}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2070181373}
@@ -875,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070181370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.79, z: -5.08}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 103171631}
@@ -893,10 +893,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0455c873050ab4389fe2848b6e71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 1, z: -2.85}
   player: {fileID: 1494417688}
-  moveSpeed: 0.2
   focus: {fileID: 103171631}
-  mouseSensitivity: 3
-  zoomLevel: 1
-  camDistMinMax: {x: 0.5, y: 5}
+  yOffset: 1
+  zOffset: 5
+  mouseSensitivity: 1
+  cam: {fileID: 2070181372}
+  scrollSensitivity: 3
+  scrollDamp: 6
+  zoomMinMax: {x: 2, y: 15}
+  collisionSensitivity: 2.5
