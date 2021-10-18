@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public bool isopen;
-    public void OpenChest()
+    Animator _doorAnim;
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (isopen)
-        {
-            isopen = true;
-            Debug.Log("Door is Open");
+        _doorAnim.SetBool("IsOpening", true);
+    }
 
-        }
+    private void OnTriggerExit(Collider other)
+    {
+        _doorAnim.SetBool("IsOpening", false);
+    }
+    public void Start()
+    {
 
+        _doorAnim = this.transform.parent.GetComponent<Animator>();
 
 
     }
+
+
+
+
 }
     
