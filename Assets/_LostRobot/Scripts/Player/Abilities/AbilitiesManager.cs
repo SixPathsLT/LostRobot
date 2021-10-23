@@ -8,8 +8,11 @@ public class AbilitiesManager : MonoBehaviour
     }
     [SerializeField]
     private Ability[] abilities;
+    public static GameObject player;
   
-    void Start() { }
+    void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     
     void Update() {
         foreach (Ability ability in abilities) {

@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform player;
     public Transform focus;
     public float yOffset;
-    public float zOffset = 5f;
+    public float zOffset = 8f;
     public float mouseSensitivity = 3f;
     public Camera cam;
 
