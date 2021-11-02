@@ -11,7 +11,7 @@ public class MeleeAbility : Ability
 
     public override void StartCooldown() {
         base.StartCooldown();
-
+        
     }
 
     public override void Process() {

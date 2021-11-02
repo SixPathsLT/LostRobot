@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MeleeAbilityData
   m_EditorClassIdentifier: 
   keyCode: 323
-  durationTime: 0
+  durationTime: 0.3
   coolDownTime: 0.3

@@ -39,4 +39,9 @@ public abstract class Ability : ScriptableObject
         this.state = state;
     }
 
+    public bool IsActive()
+    {
+        return state == AbilityState.Active;
+    }
+
 }
