@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    public Door[] doors;
+    public GameObject[] doors;
     
     public void LockDown()
     {
-        doors[1].Close();
-        
+
+        foreach (GameObject door in doors)
+        {
+            if(Random.Range(0, 2) == 0)
+            {
+
+                door.GetComponent<DoorController>().Close();
+
+                Debug.Log("closeddd");
+            }
+
+            
+        }
     }
 
     

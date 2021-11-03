@@ -15,8 +15,12 @@ public class LockDown : MonoBehaviour
         timer = Random.Range(4, 10);
         yield return new WaitForSeconds(timer);
         LockDownInitiated = true;
+
+        FindObjectOfType<DoorManager>().LockDown();
         Debug.Log(LockDownInitiated);
+
         timer = Random.Range(4, 10);
+
 
         yield return new WaitForSeconds(timer);
 
@@ -28,6 +32,7 @@ public class LockDown : MonoBehaviour
     }
     void Update()
     {
+            
 
         
     }

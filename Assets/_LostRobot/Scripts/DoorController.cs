@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,23 @@ public class DoorController : MonoBehaviour
     {
         LockDown = FindObjectOfType<LockDown>();
     }
-    private void OnTriggerEnter(Collider other)
+
+    internal void Close()
     {
+        _doorAnim.SetBool("IsOpening", false);
+
+        Locked = true;
+    }
+
+    public void HandleDoor()
+    {
+        OpenDoor();
+
+
+    }
+    public void OpenDoor()
+    {
+        
         if (!LockDown.LockDownInitiated)
         {
             _doorAnim.SetBool("IsOpening", true);
@@ -23,8 +39,20 @@ public class DoorController : MonoBehaviour
         else if (LockDown.LockDownInitiated && !Locked)
         {
             _doorAnim.SetBool("IsOpening", true);
-            
+
         }
+
+    }
+   
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<Enemy>() != null)
+            OpenDoor();
+
+        if (Input.GetKey(KeyCode.Q))
+            HandleDoor();
+
     }
 
     private void OnTriggerExit(Collider other)
