@@ -6,7 +6,6 @@ public class MeleeAbility : Ability
     
     public override void Activate() {
         base.Activate();
-
     }
 
     public override void StartCooldown() {
