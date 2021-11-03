@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 1148952603}
   - component: {fileID: 1148952602}
   - component: {fileID: 1148952601}
+  - component: {fileID: 1148952605}
   - component: {fileID: 1148952600}
   - component: {fileID: 1148952599}
   - component: {fileID: 1148952604}
@@ -472,6 +473,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1148952605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148952598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b7ae6530ccc02418165f6ed559ad5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleBehaviour: {fileID: 11400000, guid: 29b72014642587e4b98b0aed7ed1a8de, type: 2}
+  patrolBehaviour: {fileID: 11400000, guid: 03437f83f3da0e54987cac6a0fb26194, type: 2}
+  chaseBehaviour: {fileID: 11400000, guid: 2bd3b9ccf70000b49a18aa951f4a7d8f, type: 2}
+  combatBehaviour: {fileID: 11400000, guid: 6508e3940e3f46e4aa80e0461d666356, type: 2}
+  captureBehaviour: {fileID: 11400000, guid: fd260f503f6c9a841b50f4606e329743, type: 2}
 --- !u!1 &1399169960
 GameObject:
   m_ObjectHideFlags: 0
