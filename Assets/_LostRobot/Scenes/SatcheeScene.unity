@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 1494417683}
   speed: 5
+  focus: {fileID: 103171630}
   turnSmoothTime: 0.1
 --- !u!143 &1494417683
 CharacterController:
