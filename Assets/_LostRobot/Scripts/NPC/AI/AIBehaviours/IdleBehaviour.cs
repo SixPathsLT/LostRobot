@@ -11,7 +11,7 @@ public class IdleBehaviour : AIBehaviour {
     }
 
     public override void Process() {
-        
+       
     }
 
     public override void End() {
