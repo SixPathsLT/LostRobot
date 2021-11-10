@@ -9,11 +9,15 @@ public class SpeedAbility : Ability
         base.Activate();
         initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = increasedSpeed;
+
+        AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("SpeedBoost", true);
     }
 
     public override void StartCooldown() {
         base.StartCooldown();
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = initialSpeed;
+
+        AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("SpeedBoost", false);
     }
 
     public override void Process() {

@@ -11,12 +11,11 @@ public class DoorManager : MonoBehaviour
 
         foreach (GameObject door in doors)
         {
-            if(Random.Range(0, 2) == 0)
+            if (Random.Range(0, 2) == 0)
             {
 
                 door.GetComponent<DoorController>().Close();
-
-                Debug.Log("closeddd");
+                
             }
 
             

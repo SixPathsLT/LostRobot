@@ -15,9 +15,19 @@ public class DoorController : MonoBehaviour
 
     internal void Close()
     {
+
+      
+      StartCoroutine(ChangeColor());
         _doorAnim.SetBool("IsOpening", false);
 
         Locked = true;
+    }
+
+    IEnumerator ChangeColor()
+    {
+        transform.parent.GetComponentInParent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(3);
+        transform.parent.GetComponentInParent<Renderer>().material.color = Color.white;
     }
 
     public void HandleDoor()

@@ -6,11 +6,14 @@ public class MeleeAbility : Ability
     
     public override void Activate() {
         base.Activate();
+
+        AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("Attack", true);
     }
 
     public override void StartCooldown() {
         base.StartCooldown();
-        
+        AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("Attack", false);
+       
     }
 
     public override void Process() {
