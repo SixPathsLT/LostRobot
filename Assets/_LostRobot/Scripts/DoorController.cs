@@ -6,7 +6,7 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     Animator _doorAnim;
-    public bool Locked = true;
+    public bool Locked;
     LockDown LockDown;
     private void Awake()
     {
@@ -20,7 +20,8 @@ public class DoorController : MonoBehaviour
       StartCoroutine(ChangeColor());
         _doorAnim.SetBool("IsOpening", false);
 
-        Locked = true;
+        //Commented to prevent doors from locking when walking away
+        //Locked = true;
     }
 
     IEnumerator ChangeColor()
@@ -39,7 +40,7 @@ public class DoorController : MonoBehaviour
     public void OpenDoor()
     {
         
-        if (!LockDown.LockDownInitiated)
+        if (!LockDown.LockDownInitiated && !Locked)
         {
             _doorAnim.SetBool("IsOpening", true);
 
