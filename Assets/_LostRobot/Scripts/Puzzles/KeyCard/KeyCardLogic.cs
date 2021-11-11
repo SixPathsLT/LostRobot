@@ -16,13 +16,7 @@ public class KeyCardLogic : MonoBehaviour
         door.Locked = true;
     }
 
-    private void Update()
-    {
-        checkInfo();
-        checkKey();
-    }
-
-    private void checkInfo()
+    public void checkInfo()
     {
         if (!obtainedInfo)
         {
@@ -34,7 +28,7 @@ public class KeyCardLogic : MonoBehaviour
         }
     }
 
-    private void checkKey()
+    public void checkKey()
     {
         if (!obtainedKey)
         {
@@ -68,6 +62,7 @@ public class KeyCardLogic : MonoBehaviour
             {
                 obtainedInfo = true;
             }
+            checkInfo();
         }
     }
 

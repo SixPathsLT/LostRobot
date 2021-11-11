@@ -9,6 +9,9 @@ public class KeyCardTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKey(KeyCode.E))
+        {
             main.gotKey(true);
+            main.checkKey();
+        }                
     }
 }

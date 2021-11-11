@@ -7,12 +7,13 @@ public class MeleeAbility : Ability
     public override void Activate() {
         base.Activate();
 
-        AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("Attack", true);
+        AbilitiesManager.player.GetComponentInChildren<Animator>().SetInteger("Attack_Index", Random.Range(0, AbilitiesManager.player.GetComponentInChildren<Animator>().GetInteger("Attack_Max_Index")));
+        AbilitiesManager.player.GetComponentInChildren<Animator>().SetTrigger("AttackTrigger");
     }
 
     public override void StartCooldown() {
         base.StartCooldown();
-        AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("Attack", false);
+        //AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("Attack", false);
        
     }
 
