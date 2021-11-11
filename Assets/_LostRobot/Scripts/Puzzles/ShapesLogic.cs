@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ShapesLogic : Puzzles
 {
+    [HideInInspector]
     public List<GameObject> puzzleImages = new List<GameObject>();
+
     int[] correctImages = new int[4];
     int[] displayedImages = new int[6];
     public int width = 1;
@@ -16,27 +18,8 @@ public class ShapesLogic : Puzzles
 
     private RaycastHit hit;
     private int imageCount = 0;
-    float timer;
+    public float timer;
 
-
-    private void Start()
-    {
-        LoadImages();
-        SelectRandom();
-        SetPosition();
-    }
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer > 45)
-        {
-            Debug.Log("Time's up!");
-            SelectOptions(false);
-        }
-        else
-            SelectOptions(true);
-
-    }
     private void LoadImages() //loads all the images in the folder
     {
         object[] loadedImages = Resources.LoadAll("Image Prefabs", typeof(GameObject));
@@ -85,17 +68,19 @@ public class ShapesLogic : Puzzles
             imageIndex = displayedImages[j];
             position = new Vector3(choicesXOffset, choicesYOffset, 0);
             choicesXOffset = choicesXOffset + width;
+            bool isChosen = false;
             for (int k = 0; k < correctImages.Length; k++)
             {
-                if (displayedImages[j] == correctImages[k])
+                if (displayedImages[j] == correctImages[k] && isChosen == false)
                 {
                     puzzleImages[imageIndex].tag = "Solution";
+                    isChosen = true;
                     break;
                 }
-                else
-                {
-                    puzzleImages[imageIndex].tag = "Puzzle button";
-                }
+            }
+            if (!isChosen)
+            {
+                puzzleImages[imageIndex].tag = "Puzzle button";
             }
             Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
         }
@@ -114,8 +99,41 @@ public class ShapesLogic : Puzzles
                     hit.collider.tag = "Solved";
                 }
             }
-            if (imageCount == 4)
+            if (imageCount == correctImages.Length)
+            {
                 Debug.Log("You won!");
+                PuzzleManager.door.Locked = false;
+                //call ui to display information
+            }
         }
+    }
+
+    public override void Activate()
+    {
+        base.Activate();
+        LoadImages();
+        SelectRandom();
+        SetPosition();
+    }
+
+    public override void InProgress(bool started)
+    {
+        base.InProgress(started);
+        if (started)
+        {
+            timer += Time.deltaTime;
+            if (timer > 45)
+            {
+                Debug.Log("Time's up!");
+                SelectOptions(false);
+                Fail();
+                started = false;
+            }
+            else
+            {
+                SelectOptions(true);
+            }
+        }
+        
     }
 }

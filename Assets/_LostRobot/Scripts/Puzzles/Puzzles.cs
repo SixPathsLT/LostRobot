@@ -1,28 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PuzzleManager;
 
 public abstract class Puzzles : MonoBehaviour
 {
     public virtual void Activate()
     {
-        //call puzzle ui
     }
     public virtual void Fail()
     {
-        //start lockdown
+        PuzzleManager.lockdown.LockDownInitiated = true;
     }
 
-    public virtual void InProgress() { 
-        Time.timeScale = 0;
+    public virtual void InProgress(bool started) { 
     }
 
     public virtual void Finished() { 
-        Time.timeScale = 1;
     }
 
     public virtual void Passed(GameObject door)
     {
-        //unlocks door/computer
+        //unlocks information
     }
+
+    
 }
