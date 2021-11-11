@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
         camDist = cam.transform.localPosition.z;
         zoomDist = zOffset;
         camDist = zoomDist;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()
     {
