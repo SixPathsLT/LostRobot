@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 4487159}
   - component: {fileID: 4487158}
   - component: {fileID: 4487157}
+  - component: {fileID: 4487162}
   m_Layer: 0
   m_Name: DoorTrigger
   m_TagString: Untagged
@@ -170,7 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044539660424eca459510e4db3a34fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 4487159}
+  puzzles:
+  - {fileID: 4487162}
 --- !u!65 &4487158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -197,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Locked: 1
+  puzzle: {fileID: 4487157}
 --- !u!23 &4487160
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -247,6 +250,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4487155}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4487162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4487155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c461c1b1247365d439972a988a9a4a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleImages: []
+  width: 1
+  displayYOffest: -1
+  displayXOffset: 0
+  choicesXOffset: -2
+  choicesYOffset: 3
+  timer: 0
 --- !u!1 &103171630
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c461c1b1247365d439972a988a9a4a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorManager: {fileID: 0}
   puzzleImages: []
   width: -1
   displayYOffest: 0

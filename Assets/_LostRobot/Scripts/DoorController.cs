@@ -8,6 +8,7 @@ public class DoorController : MonoBehaviour
     Animator _doorAnim;
     public bool Locked;
     LockDown LockDown;
+    public PuzzleManager puzzle;
     private void Awake()
     {
         LockDown = FindObjectOfType<LockDown>();
@@ -72,13 +73,17 @@ public class DoorController : MonoBehaviour
     }
     public void Start()
     {
-
         _doorAnim = this.transform.parent.GetComponent<Animator>();
-
-
+        puzzle = GameObject.Find("DoorTrigger").GetComponent<PuzzleManager>();
     }
 
-
+    void SolvePuzzle()
+    {
+        if (Locked)
+        {
+            puzzle.ChoosePuzzle(0);
+        }
+    }
 
 
 }

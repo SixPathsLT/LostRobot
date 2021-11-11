@@ -19,6 +19,7 @@ public class ShapesLogic : Puzzles
     private RaycastHit hit;
     private int imageCount = 0;
     public float timer;
+    bool state = false;
 
     private void LoadImages() //loads all the images in the folder
     {
@@ -103,6 +104,7 @@ public class ShapesLogic : Puzzles
             {
                 Debug.Log("You won!");
                 PuzzleManager.door.Locked = false;
+                state = false;
                 //call ui to display information
             }
         }
@@ -114,12 +116,13 @@ public class ShapesLogic : Puzzles
         LoadImages();
         SelectRandom();
         SetPosition();
+        state = true;
+        Debug.Log("Started puzzle");
     }
 
-    public override void InProgress(bool started)
+    private void Update()
     {
-        base.InProgress(started);
-        if (started)
+        if (state)
         {
             timer += Time.deltaTime;
             if (timer > 45)
@@ -127,13 +130,12 @@ public class ShapesLogic : Puzzles
                 Debug.Log("Time's up!");
                 SelectOptions(false);
                 Fail();
-                started = false;
+                state = false;
             }
             else
             {
                 SelectOptions(true);
             }
         }
-        
     }
 }

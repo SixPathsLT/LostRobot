@@ -10,7 +10,7 @@ public abstract class Puzzles : MonoBehaviour
     }
     public virtual void Fail()
     {
-        PuzzleManager.lockdown.LockDownInitiated = true;
+        lockdown.LockDownInitiated = true;
     }
 
     public virtual void InProgress(bool started) { 
