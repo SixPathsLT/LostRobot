@@ -7,11 +7,11 @@ public class StunAbility : Ability
     public override void Activate() {
         base.Activate();
 
-        Collider[] colliders = Physics.OverlapSphere(AbilitiesManager.player.transform.position, 5f);
+        Collider[] colliders = Physics.OverlapSphere(AbilitiesManager.player.transform.position, 10f);
         foreach (var collider in colliders) {
-            Enemy enemy  = collider.GetComponent<Enemy>();
-            if (enemy != null)
-                enemy.StartCoroutine("Stun", durationTime);
+            AIManager aiManager  = collider.GetComponent<AIManager>();
+            if (aiManager != null)
+                aiManager.StartCoroutine("Stun", durationTime);
         }
 
     }

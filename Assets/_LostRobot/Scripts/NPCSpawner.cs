@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    public GameObject[] npcPrefabs;
+   [SerializeField] private GameObject[] npcPrefabs;
 
     static private NPCSpawner instance;
     static private List<GameObject> spawnedNPCs = new List<GameObject>();

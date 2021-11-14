@@ -14,7 +14,7 @@ public class MeleeWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
+        AIManager enemy = other.GetComponent<AIManager>();
 
         if (enemy != null)
         {

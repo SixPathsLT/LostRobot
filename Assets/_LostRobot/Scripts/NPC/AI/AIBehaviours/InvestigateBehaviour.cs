@@ -63,13 +63,15 @@ public class InvestigateBehaviour : AIBehaviour {
 
         GameObject obj;
         foreach (var collider in colliders) {
-            if (collider.gameObject.GetComponent<MeshCollider>() != null || collider.gameObject.GetComponent<DoorController>() != null)
-                continue;
+
 
             obj = collider.gameObject;
             if (obj.transform.root != null && obj.tag != "Player")
                 obj = obj.transform.root.gameObject;
 
+            if (obj.GetComponent<Collider>() == null || obj.GetComponent<MeshCollider>() != null || obj.GetComponent<Collider>().isTrigger == true)
+                continue;
+           
             if (obj == gameObject)
                 continue;
 

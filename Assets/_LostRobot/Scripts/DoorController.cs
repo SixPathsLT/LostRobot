@@ -59,10 +59,10 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Enemy>() != null)
+        if (other.GetComponent<AIManager>() != null)
             OpenDoor();
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.E))
             HandleDoor();
 
     }
