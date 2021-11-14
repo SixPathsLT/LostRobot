@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour {
 
+    public bool isStunned;
+
     public static GameObject player;
-    public AIBehaviour idleBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
+    public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
 
     AIBehaviour currentBehaviour;
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
-        SetBehaviour(idleBehaviour);
+        SetBehaviour(patrolBehaviour);
     }
 
     public void SetBehaviour(AIBehaviour aiBehaviour) {
@@ -25,9 +27,15 @@ public class AIManager : MonoBehaviour {
     }
 
     void Update() {
-        if (currentBehaviour != null)
+        if (currentBehaviour != null && !isStunned)
             currentBehaviour.Process();
-        
+
+    }
+
+    public IEnumerator Stun(float duration) {
+        isStunned = true;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
     }
 
 }
