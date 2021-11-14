@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1548088790079049589}
   m_Layer: 5
   m_Name: basic_battery_charge
-  m_TagString: Solution
+  m_TagString: Puzzle button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

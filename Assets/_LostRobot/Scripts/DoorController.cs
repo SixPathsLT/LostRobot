@@ -77,11 +77,14 @@ public class DoorController : MonoBehaviour
         puzzle = GameObject.Find("DoorTrigger").GetComponent<PuzzleManager>();
     }
 
-    void SolvePuzzle()
+    void OnTriggerEnter()
     {
-        if (Locked)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            puzzle.ChoosePuzzle(0);
+            if (Locked)
+            {
+                puzzle.ChoosePuzzle(0);
+            }
         }
     }
 

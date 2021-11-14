@@ -19,13 +19,17 @@ public class ShapesLogic : Puzzles
     private RaycastHit hit;
     private int imageCount = 0;
     public float timer;
+    float countDown;
     bool state = false;
+
+    public GameObject canvas;
 
     private void LoadImages() //loads all the images in the folder
     {
         object[] loadedImages = Resources.LoadAll("Image Prefabs", typeof(GameObject));
         for (int i = 0; i < loadedImages.Length; i++)
             puzzleImages.Add((GameObject)loadedImages[i]);
+        canvas.SetActive(true);
     }
 
     private void SelectRandom()
@@ -61,7 +65,8 @@ public class ShapesLogic : Puzzles
         {
             imageIndex = correctImages[i];
             position = new Vector3(displayXOffset, displayYOffest, 0);
-            Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
+            GameObject image = Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
+            image.transform.parent = canvas.transform;
             displayXOffset = displayXOffset + width;
         }
         for (int j = 0; j < displayedImages.Length; j++)//sets position of images the player can choose from
@@ -83,7 +88,8 @@ public class ShapesLogic : Puzzles
             {
                 puzzleImages[imageIndex].tag = "Puzzle button";
             }
-            Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
+            GameObject image = Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
+            image.transform.parent = canvas.transform;
         }
     }
 
@@ -98,14 +104,15 @@ public class ShapesLogic : Puzzles
                 {
                     imageCount++;
                     hit.collider.tag = "Solved";
+                    Destroy(hit.collider.gameObject);
                 }
-            }
-            if (imageCount == correctImages.Length)
-            {
-                Debug.Log("You won!");
-                PuzzleManager.door.Locked = false;
-                state = false;
-                //call ui to display information
+                if (imageCount == correctImages.Length)
+                {
+                    Debug.Log("You won!");
+                    PuzzleManager.door.Locked = false;
+                    state = false;
+                    canvas.SetActive(false);
+                }
             }
         }
     }
@@ -117,25 +124,26 @@ public class ShapesLogic : Puzzles
         SelectRandom();
         SetPosition();
         state = true;
-        Debug.Log("Started puzzle");
     }
 
     private void Update()
     {
         if (state)
         {
-            timer += Time.deltaTime;
-            if (timer > 45)
+            countDown += Time.deltaTime;
+            if (countDown > timer)
             {
                 Debug.Log("Time's up!");
-                SelectOptions(false);
-                Fail();
                 state = false;
+                SelectOptions(state);
+                canvas.SetActive(false);
+                Fail();
             }
             else
             {
-                SelectOptions(true);
+                SelectOptions(state);
             }
         }
     }
+
 }

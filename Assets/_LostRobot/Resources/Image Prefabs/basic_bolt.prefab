@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1857386451777367210}
   m_Layer: 5
   m_Name: basic_bolt
-  m_TagString: Untagged
+  m_TagString: Puzzle button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

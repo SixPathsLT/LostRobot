@@ -7,6 +7,7 @@ public abstract class Puzzles : MonoBehaviour
 {
     public virtual void Activate()
     {
+
     }
     public virtual void Fail()
     {

@@ -8,6 +8,7 @@ TagManager:
   - Puzzle button
   - Solution
   - Solved
+  - Incorrect
   layers:
   - Default
   - TransparentFX
