@@ -11,11 +11,12 @@ public class CaptureBehaviour : AIBehaviour {
     }
 
     public override void Process() {
-
+        AIManager.player.transform.position = new Vector3(-30, 1, 21);
+        AIManager.player.GetComponent<PlayerController>().data.SetConciousness(0);
+        aiManager.SetBehaviour(aiManager.investigateBehaviour);
     }
 
     public override void End() {
-
     }
 
 }

@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fa36f9cd18d4984991ac50700702eaa, type: 3}
-  m_Name: EasyIdle
+  m_Name: EasyInvestigate
   m_EditorClassIdentifier: 
