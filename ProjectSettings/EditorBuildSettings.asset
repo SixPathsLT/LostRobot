@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_LostRobot/Scenes/SaifScene.unity
+    guid: 1233fe5b86fd222409ab9aafb9c3b7a6
   m_configObjects: {}

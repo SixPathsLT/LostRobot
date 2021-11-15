@@ -25,6 +25,7 @@ public class InvestigateBehaviour : AIBehaviour {
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
 
             float distance = Vector3.Distance(gameObject.transform.position, investigatingObject.transform.position);
+            bool isPlayer = investigatingObject.CompareTag("Player");
 
             if (rigidbody != null && distance > 2) {
                 Vector3 direction = investigatingObject.transform.position - gameObject.transform.position;
@@ -34,7 +35,7 @@ public class InvestigateBehaviour : AIBehaviour {
             } else {
                 ChangeColor(Color.cyan);
 
-                if (investigatingObject.CompareTag("Player"))
+                if (isPlayer)
                     ChangeColor(Color.red);
                 
                 if (timeElapsed > Random.Range(5, 10)) {

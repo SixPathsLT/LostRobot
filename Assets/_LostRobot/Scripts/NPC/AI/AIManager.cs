@@ -13,7 +13,7 @@ public class AIManager : MonoBehaviour {
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
-        SetBehaviour(patrolBehaviour);
+        SetBehaviour(investigateBehaviour);
     }
 
     public void SetBehaviour(AIBehaviour aiBehaviour) {
