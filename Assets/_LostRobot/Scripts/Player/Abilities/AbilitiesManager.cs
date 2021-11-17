@@ -9,6 +9,8 @@ public class AbilitiesManager : MonoBehaviour
     [SerializeField]
     private Ability[] abilities;
     public static GameObject player;
+
+    private Ability selectedAbility;
   
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -16,8 +18,14 @@ public class AbilitiesManager : MonoBehaviour
     
     void Update() {
         foreach (Ability ability in abilities) {
-            ability.Process();
+            if (Input.GetKey(ability.keyCode)) {
+                selectedAbility = ability;
+                break;
+            }
         }
+        
+        if (selectedAbility != null)
+            selectedAbility.Process();
     }
 
 }

@@ -3,7 +3,7 @@ using static AbilitiesManager;
 
 public abstract class Ability : ScriptableObject
 {
-    [SerializeField] protected KeyCode keyCode;
+    [SerializeField] public KeyCode keyCode;
     [SerializeField] protected float durationTime, coolDownTime;
 
     protected AbilityState state = AbilityState.Ready;
@@ -16,7 +16,7 @@ public abstract class Ability : ScriptableObject
     public virtual void Process() {
         switch (state) {
             case AbilityState.Ready:
-                if (Input.GetKey(keyCode))
+                if (Input.GetMouseButton(0))
                     Activate();
                 break;
             default:

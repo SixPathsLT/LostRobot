@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957d7db3b90a3c94e89c2e910b7d03d5, type: 3}
   m_Name: StunAbilityData
   m_EditorClassIdentifier: 
-  state: 0
-  keyCode: 49
+  keyCode: 51
   durationTime: 5
   coolDownTime: 10

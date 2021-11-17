@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f853dab10c07b4b429e0075bb739bff0, type: 3}
   m_Name: MeleeAbilityData
   m_EditorClassIdentifier: 
-  keyCode: 323
+  keyCode: 49
   durationTime: 0.3
   coolDownTime: 0.3
