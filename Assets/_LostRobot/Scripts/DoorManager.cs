@@ -6,23 +6,26 @@ public class DoorManager : MonoBehaviour
 {
     public GameObject[] doors;
     
-    public void LockDown()
+    public void LockDownEnter()
     {
 
         foreach (GameObject door in doors)
         {
-            if (Random.Range(0, 2) == 0)
+            if (Random.Range(0, doors.Length) == 0)
             {
+                door.GetComponentInChildren<DoorController>().Lock();
+            }            
+        }
+    }
+    public void LockDownExit()
+    {
 
-                door.GetComponent<DoorController>().Close();
-                
-            }
-
-            
+        foreach (GameObject door in doors)
+        {
+            door.GetComponentInChildren<DoorController>().Unlock();
         }
     }
 
-    
     void Update()
     {
         

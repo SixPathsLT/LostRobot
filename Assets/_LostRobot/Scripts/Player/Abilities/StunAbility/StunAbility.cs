@@ -7,6 +7,8 @@ public class StunAbility : Ability
     public override void Activate() {
         base.Activate();
 
+        AbilitiesManager.playerAnim.SetTrigger("StunTrigger");
+
         Collider[] colliders = Physics.OverlapSphere(AbilitiesManager.player.transform.position, 10f);
         foreach (var collider in colliders) {
             AIManager aiManager  = collider.GetComponent<AIManager>();

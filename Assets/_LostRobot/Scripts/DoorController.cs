@@ -12,6 +12,7 @@ public class DoorController : MonoBehaviour
     private void Awake()
     {
         LockDown = FindObjectOfType<LockDown>();
+        _doorAnim = GetComponentInParent<Animator>();
     }
 
     internal void Close()
@@ -19,7 +20,7 @@ public class DoorController : MonoBehaviour
 
       
       StartCoroutine(ChangeColor());
-        _doorAnim.SetBool("IsOpening", false);
+        _doorAnim.SetBool("Open", false);
 
         //Commented to prevent doors from locking when walking away
         //Locked = true;
@@ -43,14 +44,14 @@ public class DoorController : MonoBehaviour
         
         if (!LockDown.LockDownInitiated && !Locked)
         {
-            _doorAnim.SetBool("IsOpening", true);
+            _doorAnim.SetBool("Open", true);
 
             Locked = false;
 
         }
         else if (LockDown.LockDownInitiated && !Locked)
         {
-            _doorAnim.SetBool("IsOpening", true);
+            _doorAnim.SetBool("Open", true);
 
         }
 
@@ -69,12 +70,12 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        _doorAnim.SetBool("IsOpening", false);
+        _doorAnim.SetBool("Open", false);
     }
     public void Start()
     {
         _doorAnim = this.transform.parent.GetComponent<Animator>();
-        puzzle = GameObject.Find("DoorTrigger").GetComponent<PuzzleManager>();
+        //puzzle = GameObject.Find("DoorTrigger").GetComponent<PuzzleManager>();
     }
 
     void OnTriggerEnter()
@@ -88,6 +89,14 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    public void Lock()
+    {
+        _doorAnim.SetBool("Lockdown", true);
+    }
 
+    public void Unlock()
+    {
+        _doorAnim.SetBool("Lockdown", false);
+    }
 }
 

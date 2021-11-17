@@ -15,3 +15,4 @@ MonoBehaviour:
   keyCode: 51
   durationTime: 5
   coolDownTime: 10
+  sprite: {fileID: 21300000, guid: 2004d0294eb293945815e08419674e33, type: 3}

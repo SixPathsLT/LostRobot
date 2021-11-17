@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LockDown : MonoBehaviour
 {
-    public int timer;
+    public Vector2 timerRange;
+    public Vector2 intervalRange;
     public bool LockDownInitiated = false;
     private void Start()
     {
@@ -12,19 +13,20 @@ public class LockDown : MonoBehaviour
     }
     IEnumerator LockDownCoroutine ()
     {
-        timer = Random.Range(4, 10);
+        var timer = Random.Range(intervalRange.x, intervalRange.y);
         yield return new WaitForSeconds(timer);
         LockDownInitiated = true;
 
-        FindObjectOfType<DoorManager>().LockDown();
+        FindObjectOfType<DoorManager>().LockDownEnter();
         Debug.Log(LockDownInitiated);
 
-        timer = Random.Range(4, 10);
+        timer = Random.Range(timerRange.x, timerRange.y);
 
 
         yield return new WaitForSeconds(timer);
 
         LockDownInitiated = false;
+        FindObjectOfType<DoorManager>().LockDownExit();
         Debug.Log(LockDownInitiated);
 
         StartCoroutine(LockDownCoroutine());

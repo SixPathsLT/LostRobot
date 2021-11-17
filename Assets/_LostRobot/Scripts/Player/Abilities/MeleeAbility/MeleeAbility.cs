@@ -3,18 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/Melee")]
 public class MeleeAbility : Ability
 {
-    
+    PlayerMovement player;
+    float initialSpeed;
+
     public override void Activate() {
         base.Activate();
-
-        AbilitiesManager.player.GetComponentInChildren<Animator>().SetInteger("Attack_Index", Random.Range(0, AbilitiesManager.player.GetComponentInChildren<Animator>().GetInteger("Attack_Max_Index")));
-        AbilitiesManager.player.GetComponentInChildren<Animator>().SetTrigger("AttackTrigger");
+        initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
+        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = 0;
+        AbilitiesManager.playerAnim.SetInteger("Attack_Index", Random.Range(0, AbilitiesManager.playerAnim.GetInteger("Attack_Max_Index")));
+        AbilitiesManager.playerAnim.SetTrigger("AttackTrigger");
     }
 
     public override void StartCooldown() {
         base.StartCooldown();
-        //AbilitiesManager.player.GetComponentInChildren<Animator>().SetBool("Attack", false);
-       
+        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = initialSpeed;
     }
 
     public override void Process() {
