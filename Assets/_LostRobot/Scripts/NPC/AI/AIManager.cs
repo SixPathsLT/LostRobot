@@ -8,8 +8,8 @@ public class AIManager : MonoBehaviour {
 
     public static GameObject player;
     public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
-
-    AIBehaviour currentBehaviour;
+    [HideInInspector]
+    public AIBehaviour currentBehaviour;
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");

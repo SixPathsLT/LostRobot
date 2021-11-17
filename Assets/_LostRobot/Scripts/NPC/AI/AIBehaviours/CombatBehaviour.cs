@@ -7,11 +7,11 @@ public class CombatBehaviour : AIBehaviour {
 
     Transform player;
 
-    public override void Init(GameObject gameObject) {
+    public override void Init(GameObject gameObject)
+    {
         base.Init(gameObject);
-        /*
-        player = GameObject.FindGameObjectsWithTag("Player").transform;
-        */
+
+        
     }
 
     public override void Process() {
@@ -23,11 +23,18 @@ public class CombatBehaviour : AIBehaviour {
          */
 
          
+        /*
+        player = GameObject.FindGameObjectsWithTag("Player").transform;
+        */
+    }
    
+    
+
+    public override void End() 
+{
+    
     }
 
-    public override void End() {
 
-    }
 
 }
