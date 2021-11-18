@@ -6,6 +6,7 @@ public class AIManager : MonoBehaviour {
 
     [HideInInspector]
     public bool isStunned;
+    public List<GameObject> nodes;
 
     public static GameObject player;
     public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
