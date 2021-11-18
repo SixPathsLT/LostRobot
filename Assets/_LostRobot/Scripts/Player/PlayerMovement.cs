@@ -7,12 +7,16 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController Controller;
     public Animator anim;
     public float speed = 12f;
+    public float gravity = 10f;
     public GameObject focus;
 
     public float turnSmoothTime = 0.1f;
-    float turnSmoothVelocity;
+   public float turnSmoothVelocity;
 
-   
+    [HideInInspector]
+    public Vector3 direction;
+
+
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -20,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-        Vector3 direction = ((focus.transform.right * horizontal) + (focus.transform.forward * vertical)).normalized;
+        direction = ((focus.transform.right * horizontal) + (focus.transform.forward * vertical)).normalized;
         direction.y = 0;
 
        anim.SetFloat("Vel", direction.magnitude);
@@ -35,5 +39,8 @@ public class PlayerMovement : MonoBehaviour
             Controller.Move(direction * speed * Time.deltaTime);
 
         }
+
+        if (transform.position.y > 1)
+            Controller.Move(Vector3.down * gravity * Time.deltaTime);
     }
 }
