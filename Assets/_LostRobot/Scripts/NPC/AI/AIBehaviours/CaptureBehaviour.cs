@@ -7,12 +7,10 @@ public class CaptureBehaviour : AIBehaviour {
 
     public override void Init(GameObject gameObject) {
         base.Init(gameObject);
-
     }
 
     public override void Process() {
-        AIManager.player.transform.position = new Vector3(-30, 1, 21);
-        AIManager.player.GetComponent<PlayerController>().data.SetConciousness(0);
+        AIManager.player.GetComponent<PlayerController>().HandleCapture();
         aiManager.SetBehaviour(aiManager.investigateBehaviour);
     }
 

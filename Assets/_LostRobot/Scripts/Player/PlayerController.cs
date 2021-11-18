@@ -1,24 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-   [SerializeField] PuzzleManager puzzleManager;
+public class PlayerController : MonoBehaviour {
+
     public PlayerData data;
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    void Start() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    
+    void Update() {
+        HandleDeath();
+    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.P))
-        {
-            puzzleManager.ChoosePuzzle(0);
-        }
+    public void HandleCapture() {
+        ReduceConsciousness(10);
+        Respawn();
+    }
+
+    private void HandleDeath() {
+       if (data.GetHealth() < 1) {
+            ReduceConsciousness(10);
+            Respawn();
+       }
+    }
+
+    private void Respawn() {
+        transform.position = GameObject.Find("RespawnLocation").transform.position;
+        data.SetHealth(100);
+    }
+
+    private void ReduceConsciousness(int amount) {
+        int consciousness = data.GetConcioussness() - amount;
+        if (consciousness < 1)
+            consciousness = 0;
+
+        data.SetConciousness(consciousness);
     }
 }
