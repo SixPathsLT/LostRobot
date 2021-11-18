@@ -39,7 +39,10 @@ public class CameraController : MonoBehaviour
         var rotation = focus.transform.rotation;
         float mouseX = Input.GetAxis("Mouse Y") * mouseSensitivity / 2;
         float mouseY = Input.GetAxis("Mouse X") * mouseSensitivity;
-        rotation = Quaternion.Euler(rotation.eulerAngles.x - mouseX,
+      
+        float xRot = rotation.eulerAngles.x - mouseX;
+        xRot = Mathf.Clamp(xRot, 2, 60);
+        rotation = Quaternion.Euler(xRot,
                                     rotation.eulerAngles.y + mouseY, rotation.eulerAngles.z);
         focus.transform.rotation = rotation;
     }
@@ -59,19 +62,51 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    float requiredDist = 0f;
     private void CameraCollision()
     {
-        cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
+        
+        float dist = Vector3.Distance(focus.transform.position, cam.transform.position);
+
+        GameObject tempCam = new GameObject();
+        tempCam.transform.SetParent(focus);
+        tempCam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
+        bool canReset = true;
+        if (Physics.Linecast(focus.transform.position, tempCam.transform.position, out hit)) {
+            if (hit.collider.gameObject.CompareTag("Player"))
+                return;
+
+            canReset = false;
+        }
+        Destroy(tempCam);
+
+        if (canReset)
+            //cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
+            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist), 5f * Time.deltaTime);
+
+        if (player.GetComponent<PlayerMovement>().direction.magnitude > 0.1f && (int) dist < (int)requiredDist)
+            return;
+
         if (Physics.Linecast(focus.transform.position, cam.transform.position, out hit))
         {
+            if (hit.collider.gameObject.CompareTag("Player"))
+                return;
+
+            requiredDist = Vector3.Distance(cam.transform.position, hit.point);
+            
             cam.transform.position = hit.point;
+            // cam.transform.position = Vector3.MoveTowards(cam.transform.position, hit.point, speed  * Time.deltaTime);
+
             var desiredCamPos = cam.transform.localPosition;
             desiredCamPos = new Vector3(desiredCamPos.x, desiredCamPos.y, desiredCamPos.z + collisionSensitivity);
             cam.transform.localPosition = desiredCamPos;
+           // cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, desiredCamPos, speed * Time.deltaTime);
         }
         if (cam.transform.localPosition.z > -1f)
         {
-            cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f);
+           // cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f);
+            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f), 300f * Time.deltaTime);
+       
         }
     }
 }
