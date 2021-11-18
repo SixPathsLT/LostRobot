@@ -9,8 +9,8 @@ public class AIManager : MonoBehaviour {
 
     public static GameObject player;
     public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
-
-    AIBehaviour currentBehaviour;
+    [HideInInspector]
+    public AIBehaviour currentBehaviour;
 
     [HideInInspector]
     public Stack<WorldTile> routeTiles;

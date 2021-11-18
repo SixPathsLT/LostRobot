@@ -7,16 +7,35 @@ using UnityEngine;
 public class PlayerData : ScriptableObject {
 
     public event Action<int> UIUpdater;
-    [SerializeField] int health, conciousness;
+    [SerializeField] int currentHealth, maxHealth, currentConciousness, maxConciousness;
 
     public void SetHealth(int health) {
-        this.health = health;
+        this.currentHealth = health;
         UIUpdater?.Invoke(health);
     }
 
     public void SetConciousness(int value) {
-        this.conciousness = value;
-        UIUpdater?.Invoke(conciousness);
+        this.currentConciousness = value;
+        UIUpdater?.Invoke(currentConciousness);
     }
 
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int GetConcioussness()
+    {
+        return currentConciousness;
+    }
+
+    public int GetMaxConcioussness()
+    {
+        return maxConciousness;
+    }
 }

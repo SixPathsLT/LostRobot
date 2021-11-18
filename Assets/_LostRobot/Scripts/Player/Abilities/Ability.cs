@@ -5,8 +5,10 @@ public abstract class Ability : ScriptableObject
 {
     [SerializeField] public KeyCode keyCode;
     [SerializeField] protected float durationTime, coolDownTime;
+    [SerializeField] public Sprite sprite;
 
-    protected AbilityState state = AbilityState.Ready;
+    [HideInInspector]
+    public AbilityState state = AbilityState.Ready;
     protected float elapsedTime;
 
     public virtual void Activate() {

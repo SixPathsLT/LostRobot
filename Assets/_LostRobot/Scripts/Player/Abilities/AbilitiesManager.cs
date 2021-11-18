@@ -7,13 +7,15 @@ public class AbilitiesManager : MonoBehaviour
         Ready, Cooldown, Active
     }
     [SerializeField]
-    private Ability[] abilities;
+    public Ability[] abilities;
     public static GameObject player;
+    public static Animator playerAnim;
 
-    private Ability selectedAbility;
+    public Ability selectedAbility;
   
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerAnim = player.GetComponentInChildren<Animator>();
     }
     
     void Update() {

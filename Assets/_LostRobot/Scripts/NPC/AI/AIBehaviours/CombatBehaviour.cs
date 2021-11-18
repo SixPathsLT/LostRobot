@@ -5,17 +5,36 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIBehaviours/CombatBehaviour")]
 public class CombatBehaviour : AIBehaviour {
 
-    public override void Init(GameObject gameObject) {
+    Transform player;
+
+    public override void Init(GameObject gameObject)
+    {
         base.Init(gameObject);
 
+        
     }
 
     public override void Process() {
 
+        /*
+         animator.transform.LookAt(player);
+         float distance = Vector3.Distance(animator.transform.position, player.position);
+         if (distance > ?)
+         */
+
+         
+        /*
+        player = GameObject.FindGameObjectsWithTag("Player").transform;
+        */
+    }
+   
+    
+
+    public override void End() 
+{
+    
     }
 
-    public override void End() {
 
-    }
 
 }
