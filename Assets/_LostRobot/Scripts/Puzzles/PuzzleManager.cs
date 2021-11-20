@@ -5,7 +5,7 @@ using UnityEngine;
 public class PuzzleManager : MonoBehaviour
 {
     public static LockDown lockdown;
-    public static DoorController door;
+    public static DoorController doors;
     public Puzzles[] puzzles;
     //public enum PuzzleState { Activated, InProgress, Finished, Failed, Passed};
     //public enum PuzzleType { Tetris, Shapes};
@@ -17,5 +17,6 @@ public class PuzzleManager : MonoBehaviour
     private void Start()
     {
         lockdown = FindObjectOfType<LockDown>();
+        doors = GetComponentInParent<DoorController>();
     }
 }
