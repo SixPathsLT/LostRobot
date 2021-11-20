@@ -61,51 +61,38 @@ public class CameraController : MonoBehaviour
             camDist = Mathf.Lerp(camDist, -zoomDist, Time.deltaTime * scrollDamp);
         }
     }
-
-    float requiredDist = 0f;
+    
     private void CameraCollision()
     {
-        
-        float dist = Vector3.Distance(focus.transform.position, cam.transform.position);
-
-        GameObject tempCam = new GameObject();
-        tempCam.transform.SetParent(focus);
-        tempCam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
-        bool canReset = true;
-        if (Physics.Linecast(focus.transform.position, tempCam.transform.position, out hit)) {
-            if (hit.collider.gameObject.CompareTag("Player"))
-                return;
-
-            canReset = false;
+  
+        Vector3 resetToVector = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
+        if (Physics.Raycast(cam.transform.position, cam.transform.position - focus.transform.position, out hit, Mathf.Abs(cam.transform.localPosition.z != camDist ?  camDist * 2 : camDist))) {
+            float z = focus.transform.InverseTransformPoint(hit.point).z / 2f;
+                resetToVector.z = z;
         }
-        Destroy(tempCam);
-
-        if (canReset)
-            //cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
-            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist), 5f * Time.deltaTime);
-
-        if (player.GetComponent<PlayerMovement>().direction.magnitude > 0.1f && (int) dist < (int)requiredDist)
-            return;
+        cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, resetToVector, 5f * Time.deltaTime);
 
         if (Physics.Linecast(focus.transform.position, cam.transform.position, out hit))
         {
             if (hit.collider.gameObject.CompareTag("Player"))
-                return;
+                return; 
 
-            requiredDist = Vector3.Distance(cam.transform.position, hit.point);
-            
-            cam.transform.position = hit.point;
-            // cam.transform.position = Vector3.MoveTowards(cam.transform.position, hit.point, speed  * Time.deltaTime);
+            Vector3 hitVector = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+
+            hitVector.y = Mathf.Clamp(hitVector.y, focus.transform.position.y + 0.4f, focus.transform.position.y + 0.4f);
+
+            //cam.transform.position = hitVector;
+             cam.transform.position = Vector3.MoveTowards(cam.transform.position, hitVector, 10f * Time.deltaTime);
 
             var desiredCamPos = cam.transform.localPosition;
             desiredCamPos = new Vector3(desiredCamPos.x, desiredCamPos.y, desiredCamPos.z + collisionSensitivity);
-            cam.transform.localPosition = desiredCamPos;
-           // cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, desiredCamPos, speed * Time.deltaTime);
+            //cam.transform.localPosition = desiredCamPos;
+            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, desiredCamPos, 10f * Time.deltaTime);
         }
         if (cam.transform.localPosition.z > -1f)
         {
            // cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f);
-            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f), 300f * Time.deltaTime);
+            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f), 5f * Time.deltaTime);
        
         }
     }
