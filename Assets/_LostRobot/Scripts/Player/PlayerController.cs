@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public PlayerData data;
+    public PlayerData checkpoint;
+    [HideInInspector] public Vector3 respawnPoint;
 
     void Start() {
         Cursor.visible = false;
@@ -29,8 +31,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Respawn() {
-        transform.position = GameObject.Find("RespawnLocation").transform.position;
-        data.SetHealth(100);
+        //transform.position = GameObject.Find("RespawnLocation").transform.position;
+        transform.position = respawnPoint;
+        data.currentHealth = checkpoint.currentHealth;
+        data.maxHealth = checkpoint.maxHealth;
+        data.currentConciousness = checkpoint.currentConciousness;
+        data.maxConciousness = checkpoint.maxConciousness;
+        //data.SetHealth(100);
     }
 
     private void ReduceConsciousness(int amount) {

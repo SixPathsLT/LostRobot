@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject {
 
     public event Action<int> UIUpdater;
-    [SerializeField] int currentHealth, maxHealth, currentConciousness, maxConciousness;
+    public int currentHealth, maxHealth, currentConciousness, maxConciousness;
 
     public void SetHealth(int health) {
         this.currentHealth = health;
