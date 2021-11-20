@@ -18,7 +18,7 @@ public class LockDown : MonoBehaviour
         LockDownInitiated = true;
 
         FindObjectOfType<DoorManager>().LockDownEnter();
-        Debug.Log(LockDownInitiated);
+        //Debug.Log(LockDownInitiated);
 
         timer = Random.Range(timerRange.x, timerRange.y);
 
@@ -27,7 +27,7 @@ public class LockDown : MonoBehaviour
 
         LockDownInitiated = false;
         FindObjectOfType<DoorManager>().LockDownExit();
-        Debug.Log(LockDownInitiated);
+       // Debug.Log(LockDownInitiated);
 
         StartCoroutine(LockDownCoroutine());
 
