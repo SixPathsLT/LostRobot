@@ -11,7 +11,7 @@ public class CaptureBehaviour : AIBehaviour {
 
     public override void Process() {
         AIManager.player.GetComponent<PlayerController>().HandleCapture();
-        aiManager.SetBehaviour(aiManager.investigateBehaviour);
+        aiManager.SetBehaviour(aiManager.patrolBehaviour);
     }
 
     public override void End() {

@@ -13,9 +13,13 @@ public class PatrolBehaviour : AIBehaviour {
     int dir = 1;
     public override void Init(GameObject gameObject) {
         base.Init(gameObject);
+
+        Reset();
+
         rbd = gameObject.GetComponent<Rigidbody>();
         for (int i = 0; i < aiManager.nodes.Count; i++)
             path.Add(aiManager.nodes[i].transform.position);
+        
     }
 
     public override void Process() {
@@ -24,18 +28,37 @@ public class PatrolBehaviour : AIBehaviour {
             currentNode++;
         if (currentNode >= path.Count || currentNode < 0)
         {
-            dir *= -1;
-            currentNode += dir;
+            //dir *= -1;
+            //currentNode += dir;
+            currentNode = 0;
         }
+
         Vector3 desiredPos = path[currentNode];
-        desiredPos = Vector3.ClampMagnitude(desiredPos, maxForce);
+        
+       
+        if (aiManager.routeTiles == null)
+            aiManager.pathfinding.FindPath(gameObject, desiredPos);
+
+        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform)) {
+            aiManager.routeTiles = null;
+            aiManager.SetBehaviour(aiManager.chaseBehaviour);
+        }
+
+
+        /*desiredPos = Vector3.ClampMagnitude(desiredPos, maxForce);
         desiredPos = desiredPos / rbd.mass;
         rbd.velocity = Vector3.ClampMagnitude(rbd.velocity + desiredPos, maxSpeed);
-        gameObject.transform.position = gameObject.transform.position + rbd.velocity;
+        gameObject.transform.position = gameObject.transform.position + rbd.velocity;*/
     }
 
     public override void End() {
+        Reset();
+    }
 
+    private void Reset() {
+        currentNode = 0;
+        path.Clear();
+        dir = 1;
     }
 
 }

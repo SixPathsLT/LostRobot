@@ -6,20 +6,35 @@ public class AIManager : MonoBehaviour {
 
     [HideInInspector]
     public bool isStunned;
+
+    [SerializeField]
+    float speed = 4.5f;
+
+    [Header("Vision")]
+    [SerializeField]
+    float maxDegrees = 45f;
+    [SerializeField]
+    float maxDistance = 10f;
+
     public List<GameObject> nodes;
 
     public static GameObject player;
     public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
-    [HideInInspector]
+   // [HideInInspector]
     public AIBehaviour currentBehaviour;
 
     [HideInInspector]
     public Stack<WorldTile> routeTiles;
-    WorldTile nextTile;
+    [HideInInspector]
+    public WorldTile nextTile;
+
+    [HideInInspector]
+    public Pathfinding pathfinding;
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
-        SetBehaviour(investigateBehaviour);
+        SetBehaviour(patrolBehaviour);
+        pathfinding = FindObjectOfType<Pathfinding>();
     }
 
     public void SetBehaviour(AIBehaviour aiBehaviour) {
@@ -32,29 +47,33 @@ public class AIManager : MonoBehaviour {
             currentBehaviour.Init(gameObject);
     }
 
-
     void Update() {
         if (currentBehaviour != null && !isStunned)
-            currentBehaviour.Process();
+             currentBehaviour.Process();
 
-        //example :)
-       // if (routeTiles == null)
-          //  FindObjectOfType<Pathfinding>().FindPath(gameObject, new Vector3(95.5f, 1, 124.5f));
-
+        if (routeTiles == null) {
+            nextTile = null;
+            //example :)
+           // pathfinding.FindPath(gameObject, AIManager.player.transform.position/*new Vector3(95.5f, 1, 124.5f)*/);
+        }
 
         if (nextTile != null && nextTile.position.y != transform.position.y)
             nextTile.position = new Vector3(nextTile.position.x, transform.position.y, nextTile.position.z);
         
-        if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, nextTile.position) < 1)) {
-            nextTile = routeTiles.Pop();
-
+        if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, nextTile.position) < 0.1f)) {
             if (routeTiles.Count < 1)
                 routeTiles = null;
+            else
+                nextTile = routeTiles.Pop();
         } else if (nextTile != null) {
-            transform.rotation =  Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(nextTile.position - transform.position), 3f * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, nextTile.position, 5f * Time.deltaTime);
-        }
+            Quaternion rotation = transform.rotation;
+            Vector3 lookDirection = (nextTile.position - transform.position).normalized;
+            if (lookDirection != Vector3.zero)
+                rotation = Quaternion.LookRotation(lookDirection);
 
+            transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, nextTile.position, speed * Time.deltaTime);
+        }
     }
 
     public IEnumerator Stun(float duration) {
