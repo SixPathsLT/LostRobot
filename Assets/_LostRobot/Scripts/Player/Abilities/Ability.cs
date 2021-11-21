@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using static AbilitiesManager;
 
@@ -5,7 +7,7 @@ public abstract class Ability : ScriptableObject
 {
     [SerializeField] public KeyCode keyCode;
     [SerializeField] protected float durationTime, coolDownTime;
-    [SerializeField] public Sprite sprite;
+    [SerializeField] public Texture icon;
 
     [HideInInspector]
     public AbilityState state = AbilityState.Ready;
@@ -23,7 +25,7 @@ public abstract class Ability : ScriptableObject
                 break;
             default:
                 if (state == AbilityState.Active && elapsedTime >= durationTime)
-                    StartCooldown();
+                    StartCooldown();                
                 else if (state == AbilityState.Cooldown && elapsedTime >= coolDownTime)
                     SetState(AbilityState.Ready);
                 else
