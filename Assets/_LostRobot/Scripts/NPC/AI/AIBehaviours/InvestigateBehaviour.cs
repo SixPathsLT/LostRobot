@@ -19,7 +19,7 @@ public class InvestigateBehaviour : AIBehaviour {
 
     public override void Process() {
 
-        if (((CloakingAbility)AIManager.player.GetComponent<AbilitiesManager>().selectedAbility).UsingCloakingAbility()) {
+        if (AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
             return;
         }
