@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Puzzles : MonoBehaviour
 {
-   public abstract void Activate()
+    public abstract void Activate();
 }

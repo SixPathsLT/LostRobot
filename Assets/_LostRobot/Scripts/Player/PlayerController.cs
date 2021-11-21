@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector] public Vector3 respawnPoint;
 
     void Start() {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     
     void Update() {

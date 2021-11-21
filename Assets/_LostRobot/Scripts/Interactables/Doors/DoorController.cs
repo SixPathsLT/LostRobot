@@ -7,6 +7,7 @@ public class DoorController : MonoBehaviour
 {
     Animator _doorAnim;
     public bool Locked;
+    public bool triggerPuzzle;
     LockDown LockDown;
     public PuzzleManager puzzle;
     private void Awake()
@@ -17,21 +18,12 @@ public class DoorController : MonoBehaviour
 
     internal void Close()
     {
-
-      
-      StartCoroutine(ChangeColor());
         _doorAnim.SetBool("Open", false);
 
         //Commented to prevent doors from locking when walking away
         //Locked = true;
     }
 
-    IEnumerator ChangeColor()
-    {
-        transform.parent.GetComponentInParent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(3);
-        transform.parent.GetComponentInParent<Renderer>().material.color = Color.white;
-    }
 
     public void HandleDoor()
     {
@@ -62,7 +54,7 @@ public class DoorController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Locked)
+            if (Locked && triggerPuzzle)
             {
                 puzzle.ChoosePuzzle(this);
             }
@@ -78,7 +70,7 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        _doorAnim.SetBool("Open", false);
+        Close();
     }
     public void Start()
     {
@@ -89,12 +81,14 @@ public class DoorController : MonoBehaviour
     public void Lock()
     {
         _doorAnim.SetBool("Lockdown", true);
+        transform.parent.GetComponentInParent<Renderer>().material.color = Color.red;
     }
 
     public void Unlock()
     {
         _doorAnim.SetBool("Lockdown", false);
-        
+        transform.parent.GetComponentInParent<Renderer>().material.color = Color.white;
+
     }
 }
 

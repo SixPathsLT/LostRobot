@@ -16,7 +16,11 @@ public class ShapesLogic : Puzzles
     private int imageCount = 0;
     public float timer;
     float countDown;
+    public int maxGuesses;
+    private int remainingGuesses;
     bool state = false;
+    public Text guesses;
+    public Slider time;
 
     public GameObject canvas;
     public Image[] optionsImages;
@@ -30,7 +34,7 @@ public class ShapesLogic : Puzzles
         canvas.SetActive(true);
         hit = canvas.GetComponent<GraphicRaycaster>();
         eventSystem = GetComponent<EventSystem>();
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     private void SelectRandom()
@@ -106,8 +110,18 @@ public class ShapesLogic : Puzzles
                     {
                         imageCount++;
                         result.gameObject.tag = "Solved";
-                        result.gameObject.GetComponent<Image>().color = new Color(100, 0, 0, 0.2f);
+                        result.gameObject.GetComponent<Image>().color = Color.gray;
                     }
+                    else if (result.gameObject.tag == "Incorrect")
+                    {
+                        remainingGuesses--;
+                        guesses.text = "" + remainingGuesses;
+                    }
+                }
+                if (remainingGuesses <= 0)
+                {
+                    FindObjectOfType<Notification>().SendNotification("You Ran out of Guesses");
+                    Reset();
                 }
                 if (imageCount == correctImages.Length)
                 {
@@ -126,25 +140,28 @@ public class ShapesLogic : Puzzles
 
     public override void Activate()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         LoadImages();
         SelectRandom();
         SetTags();
+        remainingGuesses = maxGuesses;
+        guesses.text = "" + remainingGuesses;
+        time.maxValue = timer;        
         state = true;
+        FindObjectOfType<PuzzleManager>().abil.enabled = false;
     }
 
     private void Update()
     {
+        time.value = countDown;
         if (state)
         {
             countDown += Time.deltaTime;
             if (countDown > timer)
             {
                 Debug.Log("Time's up!");
-                state = false;
-                SelectOptions(state);
-                canvas.SetActive(false);
                 Reset();
-                Time.timeScale = 1;
             }
             else
             {
@@ -155,12 +172,17 @@ public class ShapesLogic : Puzzles
 
     private void Reset()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        FindObjectOfType<PuzzleManager>().abil.enabled = true;
         countDown = 0;
         imageCount = 0;
         foreach (Image image in optionsImages)
             image.color = Color.white;
-        foreach (Image image in displayImages)
-            image.color = Color.white;
+        state = false;
+        SelectOptions(state);
+        canvas.SetActive(false);
+        Time.timeScale = 1;
     }
 
 }
