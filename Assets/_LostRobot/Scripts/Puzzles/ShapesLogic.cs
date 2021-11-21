@@ -1,35 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ShapesLogic : Puzzles
 {
-    [HideInInspector]
-    public List<GameObject> puzzleImages = new List<GameObject>();
+    private List<Sprite> puzzleImages = new List<Sprite>();
 
     int[] correctImages = new int[4];
     int[] displayedImages = new int[6];
-    public int width = 1;
-    public int displayYOffest = -1;
-    public int displayXOffset = 0;
-    public int choicesXOffset = -2;
-    public int choicesYOffset = 3;
 
-    private RaycastHit hit;
+    private GraphicRaycaster hit;
+    PointerEventData pointerData;
+    EventSystem eventSystem;
+    public LayerMask UILayer;
     private int imageCount = 0;
     public float timer;
     float countDown;
     bool state = false;
 
     public GameObject canvas;
+    public Image[] optionsImages;
+    public Image[] displayImages;
 
     private void LoadImages() //loads all the images in the folder
     {
-        object[] loadedImages = Resources.LoadAll("Image Prefabs", typeof(GameObject));
+        object[] loadedImages = Resources.LoadAll("Shapes", typeof(Sprite));
         for (int i = 0; i < loadedImages.Length; i++)
-            puzzleImages.Add((GameObject)loadedImages[i]);
+            puzzleImages.Add((Sprite)loadedImages[i]);
         canvas.SetActive(true);
+        //Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.visible = true;
+        hit = canvas.GetComponent<GraphicRaycaster>();
+        eventSystem = GetComponent<EventSystem>();
+        Time.timeScale = 0;
     }
 
     private void SelectRandom()
@@ -57,39 +61,32 @@ public class ShapesLogic : Puzzles
         }
     }
 
-    private void SetPosition()
+    private void SetTags()
     {
         int imageIndex;
-        Vector3 position;
         for (int i = 0; i < correctImages.Length; i++)//sets target image the player has to match
         {
             imageIndex = correctImages[i];
-            position = new Vector3(displayXOffset, displayYOffest, 0);
-            GameObject image = Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
-            image.transform.parent = canvas.transform;
-            displayXOffset = displayXOffset + width;
+            displayImages[i].GetComponent<Image>().sprite = puzzleImages[imageIndex];
         }
         for (int j = 0; j < displayedImages.Length; j++)//sets position of images the player can choose from
         {
             imageIndex = displayedImages[j];
-            position = new Vector3(choicesXOffset, choicesYOffset, 0);
-            choicesXOffset = choicesXOffset + width;
             bool isChosen = false;
             for (int k = 0; k < correctImages.Length; k++)
             {
                 if (displayedImages[j] == correctImages[k] && isChosen == false)
                 {
-                    puzzleImages[imageIndex].tag = "Solution";
+                    optionsImages[j].tag = "Solution";
                     isChosen = true;
                     break;
                 }
             }
             if (!isChosen)
             {
-                puzzleImages[imageIndex].tag = "Puzzle button";
+                optionsImages[j].tag = "Incorrect";
             }
-            GameObject image = Instantiate(puzzleImages[imageIndex], position, Quaternion.identity);
-            image.transform.parent = canvas.transform;
+            optionsImages[j].GetComponent<Image>().sprite = puzzleImages[imageIndex];
         }
     }
 
@@ -97,32 +94,39 @@ public class ShapesLogic : Puzzles
     {
         if (active)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(ray, out hit) && hit.collider.tag == "Solution")
+                pointerData = new PointerEventData(eventSystem);
+                pointerData.position = Input.mousePosition;
+                List<RaycastResult> results = new List<RaycastResult>();
+                hit.Raycast(pointerData, results);
+                foreach (RaycastResult result in results)
                 {
-                    imageCount++;
-                    hit.collider.tag = "Solved";
-                    Destroy(hit.collider.gameObject);
+                    if (result.gameObject.tag == "Solution")
+                    {
+                        imageCount++;
+                        result.gameObject.tag = "Solved";
+                        Destroy(result.gameObject);
+                    }
                 }
                 if (imageCount == correctImages.Length)
                 {
                     Debug.Log("You won!");
-                    PuzzleManager.doors.Locked = false;
                     state = false;
                     canvas.SetActive(false);
+                    Time.timeScale = 1;
                 }
             }
+
+
         }
     }
 
-    public override void Activate()
+    void Start()
     {
-        base.Activate();
         LoadImages();
         SelectRandom();
-        SetPosition();
+        SetTags();
         state = true;
     }
 
@@ -138,6 +142,7 @@ public class ShapesLogic : Puzzles
                 SelectOptions(state);
                 canvas.SetActive(false);
                 Fail();
+                Time.timeScale = 1;
             }
             else
             {
