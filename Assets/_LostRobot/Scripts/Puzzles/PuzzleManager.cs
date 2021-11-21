@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    public static LockDown lockdown;
-    public static DoorController doors;
     public Puzzles[] puzzles;
+    int puzzleType;
+    DoorController door;
 
-    //public enum PuzzleState { Activated, InProgress, Finished, Failed, Passed};
-    //public enum PuzzleType { Tetris, Shapes};
-    public void ChoosePuzzle(int type)
+    public void ChoosePuzzle(DoorController door)
     {
-        puzzles[type].Activate();
+        puzzleType = Random.Range(0, puzzles.Length);
+        this.door = door;
+        puzzles[puzzleType].Activate();
+        
     }
 
-    private void Start()
+    public void Unlock()
     {
-        lockdown = FindObjectOfType<LockDown>();
-        doors = GetComponentInParent<DoorController>();
+        door.Locked = false;
     }
 }

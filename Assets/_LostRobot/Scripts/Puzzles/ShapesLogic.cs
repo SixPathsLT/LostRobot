@@ -13,7 +13,6 @@ public class ShapesLogic : Puzzles
     private GraphicRaycaster hit;
     PointerEventData pointerData;
     EventSystem eventSystem;
-    public LayerMask UILayer;
     private int imageCount = 0;
     public float timer;
     float countDown;
@@ -29,8 +28,6 @@ public class ShapesLogic : Puzzles
         for (int i = 0; i < loadedImages.Length; i++)
             puzzleImages.Add((Sprite)loadedImages[i]);
         canvas.SetActive(true);
-        //Cursor.lockState = CursorLockMode.Confined;
-        //Cursor.visible = true;
         hit = canvas.GetComponent<GraphicRaycaster>();
         eventSystem = GetComponent<EventSystem>();
         Time.timeScale = 0;
@@ -54,6 +51,7 @@ public class ShapesLogic : Puzzles
             displayedImages[b] = index[b];
         for (int c = 0; c < displayedImages.Length; c++)//reshuffles images to be displayed so they appear in a random order
         {
+            
             int d = Random.Range(c, displayedImages.Length);
             int temp2 = displayedImages[c];
             displayedImages[c] = displayedImages[d];
@@ -94,6 +92,8 @@ public class ShapesLogic : Puzzles
     {
         if (active)
         {
+            //Cursor.lockState = CursorLockMode.Confined;
+            //Cursor.visible = true;
             if (Input.GetMouseButtonDown(0))
             {
                 pointerData = new PointerEventData(eventSystem);
@@ -106,7 +106,7 @@ public class ShapesLogic : Puzzles
                     {
                         imageCount++;
                         result.gameObject.tag = "Solved";
-                        Destroy(result.gameObject);
+                        result.gameObject.GetComponent<Image>().color = new Color(100, 0, 0, 0.2f);
                     }
                 }
                 if (imageCount == correctImages.Length)
@@ -115,6 +115,8 @@ public class ShapesLogic : Puzzles
                     state = false;
                     canvas.SetActive(false);
                     Time.timeScale = 1;
+                    FindObjectOfType<PuzzleManager>().Unlock();
+                    Reset();
                 }
             }
 
@@ -122,7 +124,7 @@ public class ShapesLogic : Puzzles
         }
     }
 
-    void Start()
+    public override void Activate()
     {
         LoadImages();
         SelectRandom();
@@ -141,7 +143,7 @@ public class ShapesLogic : Puzzles
                 state = false;
                 SelectOptions(state);
                 canvas.SetActive(false);
-                Fail();
+                Reset();
                 Time.timeScale = 1;
             }
             else
@@ -149,6 +151,16 @@ public class ShapesLogic : Puzzles
                 SelectOptions(state);
             }
         }
+    }
+
+    private void Reset()
+    {
+        countDown = 0;
+        imageCount = 0;
+        foreach (Image image in optionsImages)
+            image.color = Color.white;
+        foreach (Image image in displayImages)
+            image.color = Color.white;
     }
 
 }

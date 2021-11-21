@@ -64,7 +64,7 @@ public class DoorController : MonoBehaviour
         {
             if (Locked)
             {
-                puzzle.ChoosePuzzle(0);
+                puzzle.ChoosePuzzle(this);
             }
         }
 
@@ -83,18 +83,7 @@ public class DoorController : MonoBehaviour
     public void Start()
     {
         _doorAnim = this.transform.parent.GetComponent<Animator>();
-        //puzzle = GameObject.Find("DoorTrigger").GetComponent<PuzzleManager>();
-    }
-
-    void OnTriggerEnter()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Locked)
-            {
-                puzzle.ChoosePuzzle(0);
-            }
-        }
+        puzzle = FindObjectOfType<PuzzleManager>();
     }
 
     public void Lock()
@@ -105,6 +94,7 @@ public class DoorController : MonoBehaviour
     public void Unlock()
     {
         _doorAnim.SetBool("Lockdown", false);
+        
     }
 }
 
