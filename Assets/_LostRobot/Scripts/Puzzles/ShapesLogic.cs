@@ -109,7 +109,7 @@ public class ShapesLogic : Puzzles
                 if (imageCount == correctImages.Length)
                 {
                     Debug.Log("You won!");
-                    PuzzleManager.door.Locked = false;
+                    PuzzleManager.doors.Locked = false;
                     state = false;
                     canvas.SetActive(false);
                 }

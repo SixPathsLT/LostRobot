@@ -1,34 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Abilities/Stun")]
 public class StunAbility : Ability
 {
+    float initialSpeed;
+    public float stunTime;
 
     public override void Activate() {
         base.Activate();
-
+        initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
+        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = 0;
         AbilitiesManager.playerAnim.SetTrigger("StunTrigger");
 
         Collider[] colliders = Physics.OverlapSphere(AbilitiesManager.player.transform.position, 10f);
-        bool foundEnemies = false;
         foreach (var collider in colliders) {
             AIManager aiManager  = collider.GetComponent<AIManager>();
             if (aiManager != null)
-            {
-                foundEnemies = true;
-                aiManager.StartCoroutine("Stun", durationTime);
-                FindObjectOfType<Notification>().SendNotification("Stunned nearby enemies for " + (int)durationTime + " seconds.");
-            }
+                aiManager.StartCoroutine("Stun", stunTime);
         }
-
-        if (!foundEnemies)
-            FindObjectOfType<Notification>().SendNotification("No enemies near you to Stun.");
 
     }
 
     public override void StartCooldown() {
         base.StartCooldown();
-
+        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = initialSpeed;
     }
 
     public override void Process() {
@@ -37,5 +34,6 @@ public class StunAbility : Ability
             return;
  
     }
-   
+
+
 }

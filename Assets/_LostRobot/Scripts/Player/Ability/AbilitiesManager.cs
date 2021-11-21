@@ -11,6 +11,8 @@ public class AbilitiesManager : MonoBehaviour
     public Ability[] abilities;
     public static GameObject player;
     public static Animator playerAnim;
+    public AudioSource abilitySounds;
+    public AudioClip[] audioClips;
 
     public Ability selectedAbility;
   
@@ -33,7 +35,15 @@ public class AbilitiesManager : MonoBehaviour
         if (selectedAbility != null)
             selectedAbility.Process();
     }
+    	
 
+
+
+    public void PlayAudio(int clip)
+    {
+        abilitySounds.clip = audioClips[clip];
+        abilitySounds.Play();
+    }
     internal bool UsingCloakingAbility() {
         return selectedAbility == abilities[3] && selectedAbility.IsActive() && ((CloakingAbility)selectedAbility).hidingSpot != null && ((CloakingAbility)selectedAbility).IsActive();
     }

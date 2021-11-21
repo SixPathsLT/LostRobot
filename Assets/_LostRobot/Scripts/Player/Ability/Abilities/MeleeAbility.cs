@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/Melee")]
 public class MeleeAbility : Ability
 {
-    PlayerMovement player;
     float initialSpeed;
 
     public override void Activate() {

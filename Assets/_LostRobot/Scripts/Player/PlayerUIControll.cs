@@ -14,7 +14,7 @@ public class PlayerUIControll : MonoBehaviour
     public Color health;
     public Color conciousness;
     public Color coolDown;
-    public Sprite selectedAbility;
+    public Texture selectedAbility;
 
     public Renderer[] healthIndicators;
     public int[] hIndexes;
@@ -22,6 +22,7 @@ public class PlayerUIControll : MonoBehaviour
     public int[] cIndexes;
     public Renderer[] coolDownIndicators;
     public int[] cDIndexes;
+    public GameObject abilityIcon;
 
     // Update is called once per frame
     void Update()
@@ -72,12 +73,16 @@ public class PlayerUIControll : MonoBehaviour
                 coolDown = coolDownGradient.Evaluate(.5f);
                 break;
         }
-        selectedAbility = abilityInfo.selectedAbility.sprite;
+        selectedAbility = abilityInfo.selectedAbility.icon;
+        abilityIcon.GetComponent<Renderer>().material.SetTexture("_MainTex", selectedAbility);
 
         for (int i = 0; i < concioussnessIndicators.Length; i++)
         {
             coolDownIndicators[i].materials[cDIndexes[i]].color = coolDown;
             coolDownIndicators[i].materials[cDIndexes[i]].SetColor("_EmissionColor", coolDown * 12f);
         }
+
+        abilityIcon.GetComponent<Renderer>().material.color = coolDown;
+        abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", coolDown);
     }
 }

@@ -60,6 +60,14 @@ public class DoorController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Locked)
+            {
+                puzzle.ChoosePuzzle(0);
+            }
+        }
+
         if (other.GetComponent<AIManager>() != null)
             OpenDoor();
 
