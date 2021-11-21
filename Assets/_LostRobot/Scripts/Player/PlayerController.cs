@@ -36,13 +36,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Respawn() {
-        //transform.position = GameObject.Find("RespawnLocation").transform.position;
-        transform.position = respawnPoint;
+        transform.position = GameObject.Find("RespawnLocation").transform.position;
+        /*transform.position = respawnPoint;
         data.currentHealth = checkpoint.currentHealth;
         data.maxHealth = checkpoint.maxHealth;
         data.currentConciousness = checkpoint.currentConciousness;
-        data.maxConciousness = checkpoint.maxConciousness;
-        //data.SetHealth(100);
+        data.maxConciousness = checkpoint.maxConciousness;*/
+        data.SetHealth(100);
     }
 
     private void ReduceConsciousness(int amount) {

@@ -19,6 +19,9 @@ public class AbilitiesManager : MonoBehaviour
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         playerAnim = player.GetComponentInChildren<Animator>();
+
+        selectedAbility = abilities[0];
+
     }
     
     void Update() {
@@ -35,8 +38,6 @@ public class AbilitiesManager : MonoBehaviour
         if (selectedAbility != null)
             selectedAbility.Process();
     }
-    	
-
 
 
     public void PlayAudio(int clip)

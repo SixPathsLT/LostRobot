@@ -41,11 +41,11 @@ public class Pathfinding : MonoBehaviour {
                 Vector3 position = Vector3.right * (x * TILE_SIZE + OFFSET) + Vector3.forward * (z * TILE_SIZE + OFFSET);
                 position.y = 1f;
 
-                bool hasGround = Physics.Raycast(position + ( Vector3.up * 100f), Vector3.down);
+                bool hasGround = Physics.Raycast(position + ( Vector3.up * 1), Vector3.down);
                 if (!hasGround)
                     continue;
                 
-                bool canWalk = !Physics.CheckSphere(position, 0.8f, 1, QueryTriggerInteraction.Ignore);
+                bool canWalk = !Physics.CheckSphere(position, 0.5f, 1, QueryTriggerInteraction.Ignore);
                 WorldTile tile = new WorldTile(position, canWalk);
    
                 tiles[x, z] = tile;
@@ -58,7 +58,7 @@ public class Pathfinding : MonoBehaviour {
             if (tile == null)
                 continue;
 
-            tile.canWalk = !Physics.CheckSphere(tile.position, 0.8f, 1, QueryTriggerInteraction.Ignore);
+           // tile.canWalk = !Physics.CheckSphere(tile.position, 0.8f, 1, QueryTriggerInteraction.Ignore);
         }
     }
 

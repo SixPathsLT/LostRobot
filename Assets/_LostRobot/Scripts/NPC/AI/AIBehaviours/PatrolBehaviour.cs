@@ -27,6 +27,7 @@ public class PatrolBehaviour : AIBehaviour {
         float distance = Vector3.Distance(gameObject.transform.position, path[currentNode]);
         if (distance <= 3)
             currentNode++;
+        currentNode = Random.Range(0, path.Count - 1);
         if (currentNode >= path.Count || currentNode < 0)
         {
             //dir *= -1;
