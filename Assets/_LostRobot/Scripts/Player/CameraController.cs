@@ -64,8 +64,11 @@ public class CameraController : MonoBehaviour
     
     private void CameraCollision()
     {
-  
-        Vector3 resetToVector = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, camDist);
+        if (cam.transform.localPosition.y < 1f)
+            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, 1f, cam.transform.localPosition.z), 50f * Time.deltaTime);
+
+
+        Vector3 resetToVector = new Vector3(cam.transform.localPosition.x, 1f, camDist);
         if (Physics.Raycast(cam.transform.position, cam.transform.position - focus.transform.position, out hit, Mathf.Abs(cam.transform.localPosition.z != camDist ?  camDist * 2 : camDist))) {
             float z = focus.transform.InverseTransformPoint(hit.point).z / 2f;
                 resetToVector.z = z;
@@ -77,23 +80,22 @@ public class CameraController : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("Player"))
                 return; 
 
-            Vector3 hitVector = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-
-            hitVector.y = Mathf.Clamp(hitVector.y, focus.transform.position.y + 0.4f, focus.transform.position.y + 0.4f);
-
+            Vector3 hitVector = new Vector3(hit.point.x, 1f, hit.point.z);
             //cam.transform.position = hitVector;
              cam.transform.position = Vector3.MoveTowards(cam.transform.position, hitVector, 10f * Time.deltaTime);
 
             var desiredCamPos = cam.transform.localPosition;
-            desiredCamPos = new Vector3(desiredCamPos.x, desiredCamPos.y, desiredCamPos.z + collisionSensitivity);
+            desiredCamPos = new Vector3(desiredCamPos.x, 1f, desiredCamPos.z + collisionSensitivity);
             //cam.transform.localPosition = desiredCamPos;
             cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, desiredCamPos, 10f * Time.deltaTime);
         }
         if (cam.transform.localPosition.z > -1f)
         {
            // cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f);
-            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -1f), 5f * Time.deltaTime);
+            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, 1f, -1f), 5f * Time.deltaTime);
        
         }
+
+
     }
 }

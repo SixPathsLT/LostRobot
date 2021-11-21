@@ -18,6 +18,12 @@ public class InvestigateBehaviour : AIBehaviour {
     }
 
     public override void Process() {
+
+        if (((CloakingAbility)AIManager.player.GetComponent<AbilitiesManager>().selectedAbility).UsingCloakingAbility()) {
+            aiManager.SetBehaviour(aiManager.patrolBehaviour);
+            return;
+        }
+
         if (investigatingObject == null) {      
             investigatingObject = GetUnCheckedObject();
             ChangeColor(Color.yellow);
@@ -38,7 +44,7 @@ public class InvestigateBehaviour : AIBehaviour {
                 if (isPlayer)
                     ChangeColor(Color.red);
                 
-                if (timeElapsed > Random.Range(5, 10)) {
+                if (timeElapsed > Random.Range(1, 3)) {
                     if (investigatingObject.CompareTag("Player"))
                         aiManager.SetBehaviour(aiManager.captureBehaviour);
                     else

@@ -6,7 +6,7 @@ public static class Utils {
         float degree = Vector3.Angle(target.position - viewer.position, viewer.forward);
         Vector3 targetDirection = (target.position - viewer.position);
 
-        if (degree < 90 && Vector3.Distance(viewer.position, target.position) < 3f)
+        if (degree < 90 && Vector3.Distance(viewer.position, target.position) < 4f)
             return true;
         
         if (degree < maxDegrees) {
@@ -18,6 +18,5 @@ public static class Utils {
         }
         return false;
     }
-
 
 }

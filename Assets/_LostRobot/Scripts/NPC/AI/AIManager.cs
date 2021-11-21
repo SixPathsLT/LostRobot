@@ -77,6 +77,8 @@ public class AIManager : MonoBehaviour {
     }
 
     public IEnumerator Stun(float duration) {
+        nextTile = null;
+        routeTiles = null;
         isStunned = true;
         yield return new WaitForSeconds(duration);
         isStunned = false;

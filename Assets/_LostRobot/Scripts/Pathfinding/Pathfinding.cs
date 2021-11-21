@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour {
 
-    static bool DEBUGGING = false;
+    static readonly bool DEBUGGING = false;
     static readonly int GRID_SIZE_X = 200;
     static readonly int GRID_SIZE_Y = 200;
     static readonly int TOTAL_GRID_SIZE = GRID_SIZE_X * GRID_SIZE_Y;
     static readonly int STRAIGHT_COST = 10;
     static readonly int DIAGONAL_COST = 14;
-    static readonly float TILE_SIZE = 1.8f;
+    static readonly float TILE_SIZE = 1.4f;
     static readonly float OFFSET = 0.5f;
 
     WorldTile[,] tiles = new WorldTile[GRID_SIZE_X, GRID_SIZE_Y];
@@ -57,7 +57,7 @@ public class Pathfinding : MonoBehaviour {
         foreach (var tile in tiles) {
             if (tile == null)
                 continue;
-          
+
             tile.canWalk = !Physics.CheckSphere(tile.position, 0.8f, 1, QueryTriggerInteraction.Ignore);
         }
     }
@@ -81,18 +81,11 @@ public class Pathfinding : MonoBehaviour {
         if (endTile != null && !endTile.canWalk)
             endTile = GetNeighbours(endTile)[0];
         
-
         if (startTile == null || endTile == null) {
             Debug.Log(this + " Failed to find start/end tile. ");
             requests.Remove(gameObject);
             yield break;
         }
-
-       /* if (!startTile.canWalk || !endTile.canWalk) {
-            Debug.Log(this + " Failed to process path. start/end tiles are unwalkable.");
-            requests.Remove(gameObject);
-            yield break;
-        }*/
 
         currentTile = startTile;
         Node startNode = new Node(startTile);
@@ -102,13 +95,12 @@ public class Pathfinding : MonoBehaviour {
         checkedTiles = new HashSet<WorldTile>();
         
         Vector3 rayStartPos = gameObject.transform.position;
-
         bool quickFind = false;
         RaycastHit hit;
 
         Vector3 targetDirection = (endPosition - gameObject.transform.position);
 
-        if (Physics.Raycast(rayStartPos, targetDirection, out hit, 100f, 1, QueryTriggerInteraction.Ignore)) {
+        if (Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition), 1, QueryTriggerInteraction.Ignore)) {
             if (hit.collider.CompareTag("Player")) {
                 foundNode = endNode;
                 foundNode.previousNode = startNode;
@@ -124,7 +116,7 @@ public class Pathfinding : MonoBehaviour {
             Node current = GetBestNode(unCheckedNodes);
             if (current == null)
                 continue;
-
+            
             currentTile = current.tile;
 
             unCheckedNodes.Remove(current);
@@ -182,11 +174,13 @@ public class Pathfinding : MonoBehaviour {
     private bool SkippableNode(Node prevNode, Node nextNode) {
         Vector3 prevPosition = prevNode.tile.position;
         Vector3 nextPosition = nextNode.tile.position;
+
+        float dist = Vector3.Distance(prevPosition, nextPosition);
+
         prevPosition.y = 0.7f;
         nextPosition.y = 0.7f;
 
-        float dist = Vector3.Distance(prevPosition, nextPosition);
-        bool canWalk = !Physics.CheckSphere(nextPosition, 0.5f, 0, QueryTriggerInteraction.Ignore);
+        bool canWalk = !Physics.CheckSphere(nextPosition, 0.9f, 0, QueryTriggerInteraction.Ignore);
         Vector3 targetDirection = (nextPosition - prevPosition);
 
         RaycastHit hit;
@@ -204,42 +198,63 @@ public class Pathfinding : MonoBehaviour {
         Node current = endNode;
         int nodes = 0;
 
+        Node lastCheckedNode = null;
         while (current.previousNode != null) {
             bool canSkip = false;
 
             if (reduceNodes && current != startNode && SkippableNode(startNode, current) && SkippableNode(startNode, current.previousNode)) {
                 nodes++;
-                routeTiles.Push(current.tile);
-
+                AddTileToRoute(current.tile);
                 if (current == endNode && SkippableNode(startNode, endNode))
                     break;
 
                 nodes++;
-                routeTiles.Push(current.previousNode.tile);
+                AddTileToRoute(current.previousNode.tile);
                 break;
-            } else  if (reduceNodes && current != endNode && current.previousNode != null && current.previousNode != startNode) {
+            } else if (reduceNodes && current != endNode && current.previousNode != null && current.previousNode != startNode) {
                 Node prevNode = current.previousNode;
+                bool canSkipMainNodes = SkippableNode(startNode, current) || SkippableNode(current, endNode);
 
-                Vector3 nextDirection = (current.tile.position - current.previousNode.tile.position).normalized;
-
-                if (SkippableNode(prevNode, current)) {
+                if (canSkipMainNodes) {
                     canSkip = true;
                     nodes++;
+                } else if (lastCheckedNode == null)
+                    lastCheckedNode = current;
+                else {
+                    Node runningNode = current;
+                    Node lastSkippedNode = null;
+                    while (runningNode.previousNode != null) {
+                        if (lastCheckedNode != null && SkippableNode(runningNode.previousNode, lastCheckedNode)) {
+                            nodes++;
+                            lastSkippedNode = runningNode;
+                        } else if (lastSkippedNode != null) {
+                            AddTileToRoute(lastSkippedNode.tile);
+                            //AddTileToRoute(runningNode.tile);
+                            nodes++;
+                            canSkip = true;
+                            current = runningNode;
+                            lastCheckedNode = null;
+                            break;
+                        }
+                        runningNode = runningNode.previousNode;
+                    }
                 }
             }
-
+            
             if (!canSkip)
-                routeTiles.Push(current.tile);
+                AddTileToRoute(current.tile);
 
             current = current.previousNode;
         }
-
-        Debug.Log(this + " skipped " + nodes + " nodes. Returned: " +routeTiles.Count+" route tiles.");
-
+        //Debug.Log(this + " skipped " + nodes + " nodes. Returned: " +routeTiles.Count+" route tiles.");
         Stack<WorldTile> copy = new Stack<WorldTile>(new Stack<WorldTile>(routeTiles));
-        routeTiles.Push(GetTile(aiObject.transform.position));
+        AddTileToRoute(GetTile(aiObject.transform.position));
+        return routeTiles;
+    }
 
-        return copy;
+    void AddTileToRoute(WorldTile tile) {
+        if(!routeTiles.Contains(tile))
+            routeTiles.Push(tile);
     }
 
     int GetDistanceCost(Node a, Node b) {

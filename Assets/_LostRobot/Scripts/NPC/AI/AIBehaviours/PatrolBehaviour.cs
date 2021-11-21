@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIBehaviours/PatrolBehaviour")]
 public class PatrolBehaviour : AIBehaviour {
 
+    public float maxVisionDistance = 15f;
     Rigidbody rbd;
     int currentNode = 0;
     List<Vector3> path;
@@ -39,7 +40,7 @@ public class PatrolBehaviour : AIBehaviour {
         if (aiManager.routeTiles == null)
             aiManager.pathfinding.FindPath(gameObject, desiredPos);
 
-        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform)) {
+        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform, 45, maxVisionDistance) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
             aiManager.routeTiles = null;
             aiManager.SetBehaviour(aiManager.chaseBehaviour);
         }

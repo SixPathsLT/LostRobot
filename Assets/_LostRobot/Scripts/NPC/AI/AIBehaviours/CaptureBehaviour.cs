@@ -10,8 +10,12 @@ public class CaptureBehaviour : AIBehaviour {
     }
 
     public override void Process() {
-        AIManager.player.GetComponent<PlayerController>().HandleCapture();
-        aiManager.SetBehaviour(aiManager.patrolBehaviour);
+        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
+            AIManager.player.GetComponent<PlayerController>().HandleCapture();
+            aiManager.SetBehaviour(aiManager.patrolBehaviour);
+        //} else {
+           // aiManager.SetBehaviour(aiManager.investigateBehaviour);
+        }
     }
 
     public override void End() {

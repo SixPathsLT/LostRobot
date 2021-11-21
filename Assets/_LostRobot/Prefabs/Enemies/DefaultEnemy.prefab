@@ -207,7 +207,6 @@ GameObject:
   - component: {fileID: 6719148343987687750}
   - component: {fileID: 6719148343987687746}
   - component: {fileID: 6719148343987687751}
-  - component: {fileID: 6719148343987687752}
   - component: {fileID: 6719148343987687747}
   m_Layer: 0
   m_Name: DefaultEnemy
@@ -295,11 +294,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b7ae6530ccc02418165f6ed559ad5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStunned: 0
+  speed: 4
+  maxDegrees: 45
+  maxDistance: 10
+  nodes: []
   investigateBehaviour: {fileID: 11400000, guid: 29b72014642587e4b98b0aed7ed1a8de, type: 2}
   patrolBehaviour: {fileID: 11400000, guid: 03437f83f3da0e54987cac6a0fb26194, type: 2}
   chaseBehaviour: {fileID: 11400000, guid: 2bd3b9ccf70000b49a18aa951f4a7d8f, type: 2}
   combatBehaviour: {fileID: 11400000, guid: 6508e3940e3f46e4aa80e0461d666356, type: 2}
   captureBehaviour: {fileID: 11400000, guid: fd260f503f6c9a841b50f4606e329743, type: 2}
+  currentBehaviour: {fileID: 0}
+  pathfinding: {fileID: 0}
 --- !u!135 &6719148343987687751
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -313,18 +319,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6719148343987687752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6719148343987687753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 507f10082caf567408b62c51826bcd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &6719148343987687747
 Rigidbody:
   m_ObjectHideFlags: 0

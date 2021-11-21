@@ -1,22 +1,25 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Abilities/Melee")]
-public class MeleeAbility : Ability
-{
-    PlayerMovement player;
+[CreateAssetMenu(menuName = "Abilities/Speed")]
+public class SpeedAbility : Ability
+{ 
     float initialSpeed;
-
+    float increasedSpeed = 10f;
     public override void Activate() {
         base.Activate();
         initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
-        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = 0;
-        AbilitiesManager.playerAnim.SetInteger("Attack_Index", Random.Range(0, AbilitiesManager.playerAnim.GetInteger("Attack_Max_Index")));
-        AbilitiesManager.playerAnim.SetTrigger("AttackTrigger");
+        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = increasedSpeed;
+
+        AbilitiesManager.playerAnim.SetBool("SpeedBoost", true);
+        
+        FindObjectOfType<Notification>().SendNotification("Speed boost activated for " + (int) durationTime + " seconds.");
     }
 
     public override void StartCooldown() {
         base.StartCooldown();
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = initialSpeed;
+
+        AbilitiesManager.playerAnim.SetBool("SpeedBoost", false);
     }
 
     public override void Process() {
@@ -25,5 +28,5 @@ public class MeleeAbility : Ability
             return;
 
     }
-    
+
 }

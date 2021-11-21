@@ -6,7 +6,7 @@ public class Notification : MonoBehaviour {
     
     public TextMeshProUGUI meshPro;
 
-    public void SendNotification(string message, float time = 3, float delay = 0) {
+    public void SendNotification(string message, float time = 4, float delay = 0) {
         StartCoroutine(ProcessNotification(message, time, delay));
     }
 

@@ -16,6 +16,8 @@ public class CombatBehaviour : AIBehaviour {
 
     public override void Process() {
 
+
+
         /*
          animator.transform.LookAt(player);
          float distance = Vector3.Distance(animator.transform.position, player.position);

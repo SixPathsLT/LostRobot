@@ -14,11 +14,16 @@ public class PlayerController : MonoBehaviour {
     
     void Update() {
         HandleDeath();
+
     }
 
     public void HandleCapture() {
+
         ReduceConsciousness(10);
         Respawn();
+        FindObjectOfType<Notification>().SendNotification("You were detected by the AI. Your consciousness level is now " + data.GetConcioussness() + ".");
+
+       
     }
 
     private void HandleDeath() {

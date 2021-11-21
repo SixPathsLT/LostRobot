@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class AudioPlayer : MonoBehaviour {
 
     [SerializeField] private AudioClip[] clips;
     private AudioSource source;
 
-    static private AudioManager instance;
+    static private AudioPlayer instance;
 
     void Awake() {
         if (instance != null)
@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour {
             Debug.Log("Clip not found: " + name);
     }
 
-    public static AudioManager GetInstance() {
+    public static AudioPlayer GetInstance() {
         return instance;
     }
 
