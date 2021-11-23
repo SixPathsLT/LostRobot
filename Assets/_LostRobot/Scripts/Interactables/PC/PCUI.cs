@@ -58,10 +58,9 @@ public class PCUI : MonoBehaviour
         text.GetComponent<Text>().text = file.text;
         textOpened = true;
         controller.enabled = false;
-
     }
 
-    void Close()
+    public void Close()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -69,7 +68,6 @@ public class PCUI : MonoBehaviour
         canvas.SetActive(false);
         textOpened = false;
         controller.enabled = true;
-
     }
 
     private void Update()

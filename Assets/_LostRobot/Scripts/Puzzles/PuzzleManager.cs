@@ -19,6 +19,7 @@ public class PuzzleManager : MonoBehaviour
         puzzleType = Random.Range(0, puzzles.Length);
         this.door = door;
         puzzles[puzzleType].Activate();
+        pc = null;
     }
 
     public void ChoosePCPUzzle(PCUI pc)
@@ -26,6 +27,7 @@ public class PuzzleManager : MonoBehaviour
         puzzleType = Random.Range(0, puzzles.Length);
         this.pc = pc;
         puzzles[puzzleType].Activate();
+        door = null;
     }
 
     public void Unlock()
