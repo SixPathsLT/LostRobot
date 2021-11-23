@@ -4,19 +4,19 @@ using System.Collections;
 
 public class BatchRenaming : ScriptableWizard
 {
-    public string baseName = "Object";
+    public string baseName = "";
     public bool incrementValues = false;
     public bool incrementFirstValue = false;
-    public int startNumber = 0;
-    public int increment = 1;
+    public int startNumber = 1;
+    public int incrementBy = 1;
 
-    [MenuItem("Edit/Batch Rename...")]
+    [MenuItem("Tools/Batch Rename...")]
 
     static void CreateWizard()
     {
         DisplayWizard("Batch Rename", typeof(BatchRenaming), "Rename");
     }
-    void UpdateSelectionHelper()
+    void ObjectsSelected()
     {
         helpString = "";
         if (Selection.objects != null)
@@ -44,16 +44,14 @@ public class BatchRenaming : ScriptableWizard
                     else
                     {
                         O.name = baseName + postFix;
-                        postFix += increment;
+                        postFix += incrementBy;
                     }
                 }
                 else
                 {
                     O.name = baseName + postFix;
-                    postFix += increment;
+                    postFix += incrementBy;
                 }
-                
-
             }
             else
                 O.name = baseName;
@@ -62,10 +60,10 @@ public class BatchRenaming : ScriptableWizard
 
     private void OnEnable()
     {
-        UpdateSelectionHelper();
+        ObjectsSelected();
     }
     private void OnSelectionChange()
     {
-        UpdateSelectionHelper();
+        ObjectsSelected();
     }
 }

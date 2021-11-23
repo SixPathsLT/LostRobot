@@ -28,8 +28,6 @@ public class DoorController : MonoBehaviour
     public void HandleDoor()
     {
         OpenDoor();
-
-
     }
     public void OpenDoor()
     {
@@ -46,7 +44,6 @@ public class DoorController : MonoBehaviour
             _doorAnim.SetBool("Open", true);
 
         }
-
     }
    
 
@@ -56,7 +53,7 @@ public class DoorController : MonoBehaviour
         {
             if (Locked && triggerPuzzle)
             {
-                puzzle.ChoosePuzzle(this);
+                puzzle.ChooseDoorPuzzle(this);
             }
         }
 
