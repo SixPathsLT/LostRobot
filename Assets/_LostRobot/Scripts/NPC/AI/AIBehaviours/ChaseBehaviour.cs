@@ -35,7 +35,7 @@ public class ChaseBehaviour : AIBehaviour {
 
         if (range > 50)
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
-        else if (range < 3.5f)
+        else if (Utils.CanSeeTransform(gameObject.transform, player) && range < 3.5f)
             aiManager.SetBehaviour(aiManager.captureBehaviour);
         else
         {

@@ -60,13 +60,14 @@ public class AIManager : MonoBehaviour {
         if (nextTile != null && nextTile.position.y != transform.position.y)
             nextTile.position = new Vector3(nextTile.position.x, transform.position.y, nextTile.position.z);
         
-        if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, nextTile.position) < 0.1f)) {
+        if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, nextTile.position) < 0.3f)) {
             if (routeTiles.Count < 1)
                 routeTiles = null;
             else
                 nextTile = routeTiles.Pop();
         } else if (nextTile != null) {
             Quaternion rotation = transform.rotation;
+
             Vector3 lookDirection = (nextTile.position - transform.position).normalized;
             if (lookDirection != Vector3.zero)
                 rotation = Quaternion.LookRotation(lookDirection);

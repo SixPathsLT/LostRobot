@@ -209,12 +209,11 @@ public class Pathfinding : MonoBehaviour {
                 if (!SkippableNode(runningNode.previousNode.previousNode, current)) {
                     AddTileToRoute(runningNode.tile);
                     AddTileToRoute(runningNode.previousNode.tile);
-                    AddTileToRoute(runningNode.previousNode.previousNode.tile);
                     break;
                 } else
                     totalNodes +=2;
 
-                runningNode = runningNode.previousNode.previousNode;
+                runningNode = runningNode.previousNode;
             } 
             totalNodes++;
             current = runningNode.previousNode;

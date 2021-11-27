@@ -24,10 +24,18 @@ public class PatrolBehaviour : AIBehaviour {
     }
 
     public override void Process() {
+        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform, 45, maxVisionDistance) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility())
+        {
+            aiManager.routeTiles = null;
+            aiManager.SetBehaviour(aiManager.chaseBehaviour);
+            return;
+        }
+
+
         float distance = Vector3.Distance(gameObject.transform.position, path[currentNode]);
         if (distance <= 3)
             currentNode++;
-        currentNode = Random.Range(0, path.Count - 1);
+        currentNode = Random.Range(0, path.Count);
         if (currentNode >= path.Count || currentNode < 0)
         {
             //dir *= -1;
@@ -36,15 +44,14 @@ public class PatrolBehaviour : AIBehaviour {
         }
 
         Vector3 desiredPos = path[currentNode];
-        
+
+        if (Vector3.Distance(gameObject.transform.position, desiredPos) < 3)
+            return; 
        
         if (aiManager.routeTiles == null)
             aiManager.pathfinding.FindPath(gameObject, desiredPos);
 
-        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform, 45, maxVisionDistance) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
-            aiManager.routeTiles = null;
-            aiManager.SetBehaviour(aiManager.chaseBehaviour);
-        }
+
 
 
         /*desiredPos = Vector3.ClampMagnitude(desiredPos, maxForce);
