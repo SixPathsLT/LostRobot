@@ -26,15 +26,14 @@ public class ShapesLogic : Puzzles
     public Image[] optionsImages;
     public Image[] displayImages;
 
-    private void LoadImages() //loads all the images in the folder
+
+    private void Start()
     {
         object[] loadedImages = Resources.LoadAll("Shapes", typeof(Sprite));
         for (int i = 0; i < loadedImages.Length; i++)
             puzzleImages.Add((Sprite)loadedImages[i]);
-        canvas.SetActive(true);
         hit = canvas.GetComponent<GraphicRaycaster>();
         eventSystem = GetComponent<EventSystem>();
-        //Time.timeScale = 0;
     }
 
     private void SelectRandom()
@@ -55,7 +54,6 @@ public class ShapesLogic : Puzzles
             displayedImages[b] = index[b];
         for (int c = 0; c < displayedImages.Length; c++)//reshuffles images to be displayed so they appear in a random order
         {
-            
             int d = Random.Range(c, displayedImages.Length);
             int temp2 = displayedImages[c];
             displayedImages[c] = displayedImages[d];
@@ -96,8 +94,6 @@ public class ShapesLogic : Puzzles
     {
         if (active)
         {
-            //Cursor.lockState = CursorLockMode.Confined;
-            //Cursor.visible = true;
             if (Input.GetMouseButtonDown(0))
             {
                 pointerData = new PointerEventData(eventSystem);
@@ -126,15 +122,10 @@ public class ShapesLogic : Puzzles
                 if (imageCount == correctImages.Length)
                 {
                     Debug.Log("You won!");
-                    state = false;
-                    canvas.SetActive(false);
-                    Time.timeScale = 1;
                     FindObjectOfType<PuzzleManager>().Unlock();
                     Reset();
                 }
             }
-
-
         }
     }
 
@@ -142,7 +133,7 @@ public class ShapesLogic : Puzzles
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        LoadImages();
+        canvas.SetActive(true);
         SelectRandom();
         SetTags();
         remainingGuesses = maxGuesses;
@@ -154,9 +145,9 @@ public class ShapesLogic : Puzzles
 
     private void Update()
     {
-        time.value = countDown;
         if (state)
         {
+            time.value = countDown;
             countDown += Time.deltaTime;
             if (countDown > timer)
             {
@@ -174,6 +165,7 @@ public class ShapesLogic : Puzzles
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        canvas.SetActive(false);
         FindObjectOfType<PuzzleManager>().abil.enabled = true;
         countDown = 0;
         imageCount = 0;
@@ -181,8 +173,6 @@ public class ShapesLogic : Puzzles
             image.color = Color.white;
         state = false;
         SelectOptions(state);
-        canvas.SetActive(false);
-        Time.timeScale = 1;
     }
 
 }
