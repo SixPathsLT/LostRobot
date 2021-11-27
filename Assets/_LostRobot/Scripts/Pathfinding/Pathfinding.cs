@@ -45,7 +45,7 @@ public class Pathfinding : MonoBehaviour {
                 if (!hasGround)
                     continue;
                 
-                bool canWalk = !Physics.CheckSphere(position, 0.5f, 1, QueryTriggerInteraction.Ignore);
+                bool canWalk = !Physics.CheckSphere(position, 0.9f, 1, QueryTriggerInteraction.Ignore);
                 WorldTile tile = new WorldTile(position, canWalk);
    
                 tiles[x, z] = tile;
@@ -58,8 +58,9 @@ public class Pathfinding : MonoBehaviour {
             if (tile == null)
                 continue;
 
-           // tile.canWalk = !Physics.CheckSphere(tile.position, 0.8f, 1, QueryTriggerInteraction.Ignore);
+            tile.canWalk = !Physics.CheckSphere(tile.position, 0.8f, 1, QueryTriggerInteraction.Ignore);
         }
+
     }
 
     public void FindPath(GameObject gameObject, Vector3 endPosition) {
@@ -144,9 +145,11 @@ public class Pathfinding : MonoBehaviour {
             }
         }
 
-        if (foundNode != null) 
+        if (foundNode != null)
+        {
             gameObject.GetComponent<AIManager>().routeTiles = TracePath(startNode, foundNode, !quickFind, gameObject);
-         else
+            gameObject.GetComponent<AIManager>().nextTile = null;
+        } else
             Debug.Log(this + " couldn't find route.");
 
         requests.Remove(gameObject);
@@ -196,60 +199,31 @@ public class Pathfinding : MonoBehaviour {
     public Stack<WorldTile> TracePath(Node startNode, Node endNode, bool reduceNodes, GameObject aiObject) {
         routeTiles = new Stack<WorldTile>();
         Node current = endNode;
-        int nodes = 0;
+        int totalNodes = -1;
+        AddTileToRoute(endNode.tile);
 
-        Node lastCheckedNode = null;
-        while (current.previousNode != null) {
-            bool canSkip = false;
-
-            if (reduceNodes && current != startNode && SkippableNode(startNode, current) && SkippableNode(startNode, current.previousNode)) {
-                nodes++;
-                AddTileToRoute(current.tile);
-                if (current == endNode && SkippableNode(startNode, endNode))
+        while (current != null) {
+            Node runningNode = current;
+    
+            while (runningNode.previousNode != null && runningNode.previousNode.previousNode != null) {
+                if (!SkippableNode(runningNode.previousNode.previousNode, current)) {
+                    AddTileToRoute(runningNode.tile);
+                    AddTileToRoute(runningNode.previousNode.tile);
+                    AddTileToRoute(runningNode.previousNode.previousNode.tile);
                     break;
+                } else
+                    totalNodes +=2;
 
-                nodes++;
-                AddTileToRoute(current.previousNode.tile);
-                break;
-            } else if (reduceNodes && current != endNode && current.previousNode != null && current.previousNode != startNode) {
-                Node prevNode = current.previousNode;
-                bool canSkipMainNodes = SkippableNode(startNode, current) || SkippableNode(current, endNode);
-
-                if (canSkipMainNodes) {
-                    canSkip = true;
-                    nodes++;
-                } else if (lastCheckedNode == null)
-                    lastCheckedNode = current;
-                else {
-                    Node runningNode = current;
-                    Node lastSkippedNode = null;
-                    while (runningNode.previousNode != null) {
-                        if (lastCheckedNode != null && SkippableNode(runningNode.previousNode, lastCheckedNode)) {
-                            nodes++;
-                            lastSkippedNode = runningNode;
-                        } else if (lastSkippedNode != null) {
-                            AddTileToRoute(lastSkippedNode.tile);
-                            //AddTileToRoute(runningNode.tile);
-                            nodes++;
-                            canSkip = true;
-                            current = runningNode;
-                            lastCheckedNode = null;
-                            break;
-                        }
-                        runningNode = runningNode.previousNode;
-                    }
-                }
-            }
-            
-            if (!canSkip)
-                AddTileToRoute(current.tile);
-
-            current = current.previousNode;
+                runningNode = runningNode.previousNode.previousNode;
+            } 
+            totalNodes++;
+            current = runningNode.previousNode;
         }
-        //Debug.Log(this + " skipped " + nodes + " nodes. Returned: " +routeTiles.Count+" route tiles.");
+
+        //Debug.Log(this + "Total nodes: " + totalNodes+ ", skipped " + (totalNodes - routeTiles.Count) + " unnecessary nodes, returned: " + routeTiles.Count+" waypoints.");
         Stack<WorldTile> copy = new Stack<WorldTile>(new Stack<WorldTile>(routeTiles));
         AddTileToRoute(GetTile(aiObject.transform.position));
-        return routeTiles;
+        return copy;
     }
 
     void AddTileToRoute(WorldTile tile) {
@@ -259,9 +233,7 @@ public class Pathfinding : MonoBehaviour {
 
     int GetDistanceCost(Node a, Node b) {
         int distance = (int) Vector3.Distance(a.tile.position, b.tile.position);
-        bool isDiagonal = a.tile.position.x != b.tile.position.x && a.tile.position.z != b.tile.position.z;
-       
-        return distance * (isDiagonal ? DIAGONAL_COST : STRAIGHT_COST);
+        return distance * (Utils.IsDiagonal(a.tile, b.tile) ? DIAGONAL_COST : STRAIGHT_COST);
     }
 
     WorldTile[] GetNeighbours(WorldTile tile) {
@@ -368,6 +340,7 @@ public class Pathfinding : MonoBehaviour {
                 }
 
                 Gizmos.color = tile.canWalk || hasEntity ? Color.green : Color.red;
+
                 Vector3 position = tile.position;
                 position.y = 0f;
 
@@ -383,6 +356,7 @@ public class Pathfinding : MonoBehaviour {
                     Gizmos.color = Color.magenta;
 
                 Gizmos.DrawCube(position, new Vector3(TILE_SIZE, 0.01f, TILE_SIZE));
+
             }
         }
 

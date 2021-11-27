@@ -19,4 +19,8 @@ public static class Utils {
         return false;
     }
 
+    public static bool IsDiagonal(WorldTile a, WorldTile b) {
+        return a.position.x != b.position.x && a.position.z != b.position.z;
+    }
+
 }
