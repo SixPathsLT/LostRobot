@@ -60,7 +60,7 @@ public class PlayerUIControll : MonoBehaviour
 
     private void UpdateCurrentAbility()
     {
-        var state = abilityInfo.selectedAbility.state;
+        var state = AbilitiesManager.selectedAbility.state;
         switch (state)
         {
             case AbilitiesManager.AbilityState.Ready:
@@ -73,7 +73,7 @@ public class PlayerUIControll : MonoBehaviour
                 coolDown = coolDownGradient.Evaluate(.5f);
                 break;
         }
-        selectedAbility = abilityInfo.selectedAbility.icon;
+        selectedAbility = AbilitiesManager.selectedAbility.icon;
         abilityIcon.GetComponent<Renderer>().material.SetTexture("_MainTex", selectedAbility);
 
         for (int i = 0; i < concioussnessIndicators.Length; i++)

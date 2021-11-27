@@ -24,7 +24,7 @@ public class SpeedAbility : Ability
 
     public override void Process() {
         base.Process();
-        if (state != AbilitiesManager.AbilityState.Ready)
+        if (state != AbilitiesManager.AbilityState.Active)
             return;
 
     }

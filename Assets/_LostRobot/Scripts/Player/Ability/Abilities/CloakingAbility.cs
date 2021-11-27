@@ -26,16 +26,13 @@ public class CloakingAbility : Ability
         if (state != AbilitiesManager.AbilityState.Active)
             return;
 
-        if (IsActive() && hidingSpot != null)
-        {
+        if (IsActive() && hidingSpot != null) {
             hidingSpot.transform.position = AbilitiesManager.player.transform.position;
             hidingSpot.SetActive(!(AbilitiesManager.player.GetComponent<PlayerMovement>().direction.magnitude > 0.1f));
         }
-        
     }
 
-    public override void End()
-    {
+    public override void End() {
         if (hidingSpot != null)
             Destroy(hidingSpot);
     }

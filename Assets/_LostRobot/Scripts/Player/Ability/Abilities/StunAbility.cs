@@ -10,15 +10,17 @@ public class StunAbility : Ability
 
     public override void Activate() {
         base.Activate();
+
+        AbilitiesManager.playerAnim.SetTrigger("StunTrigger");
+
         initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = 0;
-        AbilitiesManager.playerAnim.SetTrigger("StunTrigger");
 
         Collider[] colliders = Physics.OverlapSphere(AbilitiesManager.player.transform.position, 10f);
         foreach (var collider in colliders) {
             AIManager aiManager  = collider.GetComponent<AIManager>();
             if (aiManager != null)
-                aiManager.StartCoroutine("Stun", stunTime);
+                aiManager.StartCoroutine("Stun", durationTime);
         }
 
     }
@@ -30,7 +32,7 @@ public class StunAbility : Ability
 
     public override void Process() {
         base.Process();
-        if (state != AbilitiesManager.AbilityState.Ready)
+        if (state != AbilitiesManager.AbilityState.Active)
             return;
  
     }

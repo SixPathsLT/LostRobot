@@ -14,7 +14,7 @@ public class AbilitiesManager : MonoBehaviour
     public AudioSource abilitySounds;
     public AudioClip[] audioClips;
 
-    public Ability selectedAbility;
+    public static Ability selectedAbility;
   
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -26,6 +26,8 @@ public class AbilitiesManager : MonoBehaviour
     
     void Update() {
         foreach (Ability ability in abilities) {
+            ability.Process();
+
             if (Input.GetKey(ability.keyCode)) {
                 if (selectedAbility != null)
                     selectedAbility.End();
@@ -34,9 +36,6 @@ public class AbilitiesManager : MonoBehaviour
                 break;
             }
         }
-        
-        if (selectedAbility != null)
-            selectedAbility.Process();
     }
 
 
