@@ -9,6 +9,8 @@ TagManager:
   - Solution
   - Solved
   - Incorrect
+  - Target
+  - Bullet
   layers:
   - Default
   - TransparentFX

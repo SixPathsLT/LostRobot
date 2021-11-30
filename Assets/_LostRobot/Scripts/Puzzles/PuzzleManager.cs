@@ -5,6 +5,7 @@ using UnityEngine;
 public class PuzzleManager : MonoBehaviour
 {
     public AbilitiesManager abil;
+    public PlayerMovement movement;
     public Puzzles[] puzzles;
     int puzzleType;
     DoorController door;
@@ -13,12 +14,13 @@ public class PuzzleManager : MonoBehaviour
     private void Start()
     {
         abil = FindObjectOfType<AbilitiesManager>();
+        movement = FindObjectOfType<PlayerMovement>();
     }
     public void ChooseDoorPuzzle(DoorController door)
     {
         puzzleType = Random.Range(0, puzzles.Length);
         this.door = door;
-        puzzles[puzzleType].Activate();
+        puzzles[puzzleType].Activate(true);
         pc = null;
     }
 
@@ -26,7 +28,7 @@ public class PuzzleManager : MonoBehaviour
     {
         puzzleType = Random.Range(0, puzzles.Length);
         this.pc = pc;
-        puzzles[puzzleType].Activate();
+        puzzles[puzzleType].Activate(true);
         door = null;
     }
 
