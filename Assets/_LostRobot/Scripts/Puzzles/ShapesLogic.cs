@@ -69,7 +69,7 @@ public class ShapesLogic : Puzzles
             imageIndex = correctImages[i];
             displayImages[i].GetComponent<Image>().sprite = puzzleImages[imageIndex];
         }
-        for (int j = 0; j < displayedImages.Length; j++)//sets position of images the player can choose from
+        for (int j = 0; j < displayedImages.Length; j++)//sets tags of images the player can choose from
         {
             imageIndex = displayedImages[j];
             bool isChosen = false;
@@ -129,10 +129,9 @@ public class ShapesLogic : Puzzles
         }
     }
 
-    public override void Activate()
+    public override void Activate(bool showMouse)
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        base.Activate(true);
         canvas.SetActive(true);
         SelectRandom();
         SetTags();
@@ -161,10 +160,9 @@ public class ShapesLogic : Puzzles
         }
     }
 
-    private void Reset()
+    public override void Reset()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        base.Reset();
         canvas.SetActive(false);
         FindObjectOfType<PuzzleManager>().abil.enabled = true;
         countDown = 0;
