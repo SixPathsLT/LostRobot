@@ -116,7 +116,7 @@ public class CameraController : MonoBehaviour
                 dist *= dist * 10f;
 
            cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, desiredCamPos, dist * Time.deltaTime);
-        } else if (!Physics.CheckSphere(cam.transform.position, 0.5f, 1, QueryTriggerInteraction.Ignore))
+        } else if (!Physics.CheckSphere(cam.transform.position, 0.5f))
             ResetZoom();
         
         if (cam.transform.localPosition.z > -1f)

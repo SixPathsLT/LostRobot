@@ -66,20 +66,19 @@ public class AIManager : MonoBehaviour {
             else
                 nextTile = routeTiles.Pop();
         } else if (nextTile != null) {
+            float aiSpeed = speed;
             float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
             Vector3 aheadPos = (nextTile.position - transform.position).normalized * tileMultiplier;
-
             WorldTile tile = pathfinding.GetTile(transform.position + aheadPos);
+
             if (tile != null)
                 tile.canWalk = false;
 
-            float aiSpeed = speed;
-
             if (OBJECT_REQUIRED_REPATH != null || OBJECT_REQUIRED_REPATH != gameObject) {
                 if (Utils.HasAI(transform.position + (aheadPos.normalized * (tileMultiplier * 3))))
-                    aiSpeed /= 2f;
+                    aiSpeed /= 1.5f;
                 else if (Utils.HasAI(transform.position + (aheadPos.normalized * (tileMultiplier * 2))))
-                    aiSpeed /= 3f;
+                    aiSpeed /= 2f;
             }
             
             if (!Utils.HasAI(transform.position + aheadPos) || (OBJECT_REQUIRED_REPATH != null && OBJECT_REQUIRED_REPATH == gameObject)) {
@@ -90,31 +89,36 @@ public class AIManager : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, toPosition, aiSpeed * Time.deltaTime);
 
                 Quaternion rotation = transform.rotation;
-
                 Vector3 lookDirection = (toPosition - transform.position).normalized;
                 if (lookDirection != Vector3.zero)
                     rotation = Quaternion.LookRotation(lookDirection);
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
-            } else if (OBJECT_REQUIRED_REPATH == null) {
-                WorldTile lastTile = null;
-                while (routeTiles.Count > 0)
-                    lastTile = routeTiles.Pop();
-                
-                routeTiles = null;
-                nextTile = null;
-                if (lastTile != null) {
-                    pathfinding.FindPath(gameObject, lastTile.position, false);
-                    StartCoroutine(ResetRePath());
-                }
-            }
+            } else if (OBJECT_REQUIRED_REPATH == null && RePath(false))
+                StartCoroutine(ResetRePath());
         }
+    }
+
+    bool RePath(bool reduceNodes) {
+        WorldTile lastTile = null;
+        while (routeTiles.Count > 0)
+            lastTile = routeTiles.Pop();
+
+        routeTiles = null;
+        nextTile = null;
+        if (lastTile != null) {
+            pathfinding.FindPath(gameObject, lastTile.position, reduceNodes);
+            return true;
+        }
+        return false;
     }
 
     public IEnumerator ResetRePath() {
         OBJECT_REQUIRED_REPATH = gameObject;
         yield return new WaitForSeconds(2);
         OBJECT_REQUIRED_REPATH = null;
+        yield return new WaitForSeconds(1);
+        RePath(true);
     }
 
     public IEnumerator Stun(float duration) {
