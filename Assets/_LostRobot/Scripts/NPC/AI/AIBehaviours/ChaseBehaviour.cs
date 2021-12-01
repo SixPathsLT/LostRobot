@@ -9,12 +9,11 @@ public class ChaseBehaviour : AIBehaviour {
     float maxSpeed = 50;
     float frames = 5;
     Rigidbody rbd;
-    public override void Init(GameObject gameObject) {
-        base.Init(gameObject);
+    public override void Init(AIManager aiManager) {
         // rbd = gameObject.GetComponent<Rigidbody>();
     }
 
-    public override void Process() {
+    public override void Process(AIManager aiManager) {
 
         Transform player = AIManager.player.transform;
 
@@ -23,27 +22,27 @@ public class ChaseBehaviour : AIBehaviour {
             return;
         }
 
-        float range = Vector3.Distance(player.position, gameObject.transform.position);
+        float range = Vector3.Distance(player.position, aiManager.gameObject.transform.position);
 
-        Quaternion rotation = gameObject.transform.rotation;
-        Vector3 lookDirection = (player.transform.position - gameObject.transform.position).normalized;
+        Quaternion rotation = aiManager.gameObject.transform.rotation;
+        Vector3 lookDirection = (player.transform.position - aiManager.gameObject.transform.position).normalized;
         if (lookDirection != Vector3.zero)
             rotation = Quaternion.LookRotation(lookDirection);
 
-        if (Utils.CanSeeTransform(gameObject.transform, player.transform, 360f))
-            gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, rotation, 4f * Time.deltaTime);
+        if (Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform, 360f))
+            aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, rotation, 4f * Time.deltaTime);
 
         if (range > 50)
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
-        else if (Utils.CanSeeTransform(gameObject.transform, player) && range < 3.5f)
+        else if (Utils.CanSeeTransform(aiManager.gameObject.transform, player) && range < 3.5f)
             aiManager.SetBehaviour(aiManager.captureBehaviour);
         else
         {
 
             if (aiManager.routeTiles == null 
-                || (!Utils.CanSeeTransform(gameObject.transform, player.transform) && range < 20f && Utils.CanSeeTransform(gameObject.transform, player.transform, 360f)))
+                || (!Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform) && range < 20f && Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform, 360f)))
                 //|| (Utils.CanSeeTransform(gameObject.transform, player.transform, 45f, 10) && aiManager.nextTile != null && Vector3.Distance(aiManager.nextTile.position, player.transform.position) > range))
-                aiManager.pathfinding.FindPath(gameObject, player.transform.position);
+                aiManager.pathfinding.FindPath(aiManager.gameObject, player.transform.position);
 
 
             /*frames = range / maxSpeed;
@@ -55,7 +54,7 @@ public class ChaseBehaviour : AIBehaviour {
         }
     }
 
-    public override void End() {
+    public override void End(AIManager aiManager) {
        
     }
 

@@ -5,12 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIBehaviours/CaptureBehaviour")]
 public class CaptureBehaviour : AIBehaviour {
 
-    public override void Init(GameObject gameObject) {
-        base.Init(gameObject);
+    public override void Init(AIManager aiManager) {
     }
 
-    public override void Process() {
-        if (Utils.CanSeeTransform(gameObject.transform, AIManager.player.transform) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
+    public override void Process(AIManager aiManager) {
+        if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
             AIManager.player.GetComponent<PlayerController>().HandleCapture();
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
         //} else {
@@ -18,7 +17,7 @@ public class CaptureBehaviour : AIBehaviour {
         }
     }
 
-    public override void End() {
+    public override void End(AIManager aiManager) {
     }
 
 }

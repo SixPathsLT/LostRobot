@@ -7,14 +7,11 @@ public class CombatBehaviour : AIBehaviour {
 
     Transform player;
 
-    public override void Init(GameObject gameObject)
+    public override void Init(AIManager aiManager)
     {
-        base.Init(gameObject);
-
-        
     }
 
-    public override void Process() {
+    public override void Process(AIManager aiManager) {
 
 
 
@@ -32,7 +29,7 @@ public class CombatBehaviour : AIBehaviour {
    
     
 
-    public override void End() 
+    public override void End(AIManager aiManager) 
 {
     
     }

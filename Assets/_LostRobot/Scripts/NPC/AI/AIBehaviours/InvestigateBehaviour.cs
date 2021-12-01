@@ -11,13 +11,12 @@ public class InvestigateBehaviour : AIBehaviour {
 
    List<GameObject> investigatedObjects = new List<GameObject>();
 
-    public override void Init(GameObject gameObject) {
-        base.Init(gameObject);
+    public override void Init(AIManager aiManager) {
 
         Reset();
     }
 
-    public override void Process() {
+    public override void Process(AIManager aiManager) {
 
         if (AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
@@ -25,30 +24,30 @@ public class InvestigateBehaviour : AIBehaviour {
         }
 
         if (investigatingObject == null) {      
-            investigatingObject = GetUnCheckedObject();
-            ChangeColor(Color.yellow);
+            investigatingObject = GetUnCheckedObject(aiManager);
+            ChangeColor(aiManager, Color.yellow);
         } else {
-            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+            Rigidbody rigidbody = aiManager.gameObject.GetComponent<Rigidbody>();
 
-            float distance = Vector3.Distance(gameObject.transform.position, investigatingObject.transform.position);
+            float distance = Vector3.Distance(aiManager.gameObject.transform.position, investigatingObject.transform.position);
             bool isPlayer = investigatingObject.CompareTag("Player");
 
             if (rigidbody != null && distance > 2) {
-                Vector3 direction = investigatingObject.transform.position - gameObject.transform.position;
+                Vector3 direction = investigatingObject.transform.position - aiManager.gameObject.transform.position;
 
-                gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, Quaternion.LookRotation(direction), 2f * Time.deltaTime);
-                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, investigatingObject.transform.position, 2f * Time.deltaTime);
+                aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, Quaternion.LookRotation(direction), 2f * Time.deltaTime);
+                aiManager.gameObject.transform.position = Vector3.MoveTowards(aiManager.gameObject.transform.position, investigatingObject.transform.position, 2f * Time.deltaTime);
             } else {
-                ChangeColor(Color.cyan);
+                ChangeColor(aiManager, Color.cyan);
 
                 if (isPlayer)
-                    ChangeColor(Color.red);
+                    ChangeColor(aiManager, Color.red);
                 
                 if (timeElapsed > Random.Range(1, 3)) {
                     if (investigatingObject.CompareTag("Player"))
                         aiManager.SetBehaviour(aiManager.captureBehaviour);
                     else
-                        ChangeColor(Color.green);
+                        ChangeColor(aiManager, Color.green);
 
                     investigatingObject = null;
                     timeElapsed = 0;
@@ -59,14 +58,14 @@ public class InvestigateBehaviour : AIBehaviour {
         }
     }
 
-    void ChangeColor(Color color)
+    void ChangeColor(AIManager aiManager, Color color)
     {
-        gameObject.GetComponent<MeshRenderer>().material.color = color;
-        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = color;
+        aiManager.gameObject.GetComponent<MeshRenderer>().material.color = color;
+        aiManager.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = color;
     }
 
-    GameObject GetUnCheckedObject() {
-        Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, 15f);
+    GameObject GetUnCheckedObject(AIManager aiManager) {
+        Collider[] colliders = Physics.OverlapSphere(aiManager.gameObject.transform.position, 15f);
 
         GameObject obj;
         foreach (var collider in colliders) {
@@ -79,7 +78,7 @@ public class InvestigateBehaviour : AIBehaviour {
             if (obj.GetComponent<Collider>() == null || obj.GetComponent<MeshCollider>() != null || obj.GetComponent<Collider>().isTrigger == true)
                 continue;
            
-            if (obj == gameObject)
+            if (obj == aiManager.gameObject)
                 continue;
 
             if (!investigatedObjects.Contains(obj)) {
@@ -93,7 +92,7 @@ public class InvestigateBehaviour : AIBehaviour {
         return null;
     }
 
-    public override void End() {
+    public override void End(AIManager aiManager) {
         Reset();
     }
 
