@@ -299,7 +299,20 @@ MonoBehaviour:
   speed: 4
   maxDegrees: 45
   maxDistance: 10
-  nodes: []
+  nodes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentNode: 0
   investigateBehaviour: {fileID: 11400000, guid: 29b72014642587e4b98b0aed7ed1a8de, type: 2}
   patrolBehaviour: {fileID: 11400000, guid: 03437f83f3da0e54987cac6a0fb26194, type: 2}
   chaseBehaviour: {fileID: 11400000, guid: 2bd3b9ccf70000b49a18aa951f4a7d8f, type: 2}
@@ -345,13 +358,13 @@ Light:
   m_GameObject: {fileID: 6719148343987687753}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Intensity: 2.59
+  m_Range: 20
+  m_SpotAngle: 138.1
+  m_InnerSpotAngle: 19.73337
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -390,7 +403,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 5.83
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldTile {
 
-    public Vector3 position;
+    public readonly Vector3 position;
     public bool canWalk;
 
     public WorldTile(Vector3 position, bool canWalk) {

@@ -10,8 +10,8 @@ public class Pathfinding : MonoBehaviour {
     static readonly int TOTAL_GRID_SIZE = GRID_SIZE_X * GRID_SIZE_Y;
     static readonly int STRAIGHT_COST = 10;
     static readonly int DIAGONAL_COST = 14;
-    static readonly float TILE_SIZE = 1.4f;
-    static readonly float OFFSET = 0.5f;
+    public static readonly float TILE_SIZE = 1.4f;
+    public static readonly float OFFSET = 0.5f;
 
     WorldTile[,] tiles = new WorldTile[GRID_SIZE_X, GRID_SIZE_Y];
     HashSet<GameObject> requests = new HashSet<GameObject>();
@@ -45,7 +45,7 @@ public class Pathfinding : MonoBehaviour {
                 if (!hasGround)
                     continue;
                 
-                bool canWalk = !Physics.CheckSphere(position, 0.9f, 1, QueryTriggerInteraction.Ignore);
+                bool canWalk = !Physics.CheckSphere(position, 0.5f, 1, QueryTriggerInteraction.Ignore);
                 WorldTile tile = new WorldTile(position, canWalk);
    
                 tiles[x, z] = tile;
@@ -57,28 +57,26 @@ public class Pathfinding : MonoBehaviour {
         foreach (var tile in tiles) {
             if (tile == null)
                 continue;
-
-            tile.canWalk = !Physics.CheckSphere(tile.position, 0.8f, 1, QueryTriggerInteraction.Ignore);
+            tile.canWalk = !Physics.CheckSphere(tile.position, 0.5f, 1, QueryTriggerInteraction.Ignore);
         }
-
     }
 
-    public void FindPath(GameObject gameObject, Vector3 endPosition) {
+    public void FindPath(GameObject gameObject, Vector3 endPosition, bool reduceNodes = false) {
         if (requests.Contains(gameObject)) {
             Debug.Log(this + " " + gameObject.name + " already requested for a route.");
             return;
         }
 
         requests.Add(gameObject);
-        StartCoroutine(ProcessPath(gameObject, endPosition));
+        StartCoroutine(ProcessPath(gameObject, endPosition, reduceNodes));
     }
 
-    public IEnumerator ProcessPath(GameObject gameObject, Vector3 endPosition) {
-        WorldTile startTile = GetTile(gameObject.transform.position, true);
+    public IEnumerator ProcessPath(GameObject gameObject, Vector3 endPosition, bool reduceNodes = false) {
+        WorldTile startTile = GetTile(gameObject.transform.position);
         WorldTile endTile = GetTile(endPosition, true);
 
-        if (startTile != null && !startTile.canWalk)
-            startTile = GetNeighbours(startTile)[0];
+        //if (startTile != null && !startTile.canWalk)
+        //    startTile = GetNeighbours(startTile)[0];
         if (endTile != null && !endTile.canWalk)
             endTile = GetNeighbours(endTile)[0];
         
@@ -95,23 +93,23 @@ public class Pathfinding : MonoBehaviour {
         List<Node> unCheckedNodes = new List<Node>() { startNode };
         checkedTiles = new HashSet<WorldTile>();
         
-        Vector3 rayStartPos = gameObject.transform.position;
+        /*Vector3 rayStartPos = gameObject.transform.position;
         bool quickFind = false;
         RaycastHit hit;
 
-        Vector3 targetDirection = (endPosition - gameObject.transform.position);
+        Vector3 targetDirection = (endPosition - rayStartPos);
 
         if (Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition), 1, QueryTriggerInteraction.Ignore)) {
             if (hit.collider.CompareTag("Player")) {
                 foundNode = endNode;
-                foundNode.previousNode = startNode;
+                //foundNode.previousNode = startNode;
                 quickFind = true;
             }
         } else {
             foundNode = endNode;
-            foundNode.previousNode = startNode;
+            //foundNode.previousNode = startNode;
             quickFind = true;
-        }
+        }*/
 
         while (foundNode == null && unCheckedNodes.Count > 0) {
             Node current = GetBestNode(unCheckedNodes);
@@ -145,9 +143,11 @@ public class Pathfinding : MonoBehaviour {
             }
         }
 
-        if (foundNode != null)
-        {
-            gameObject.GetComponent<AIManager>().routeTiles = TracePath(startNode, foundNode, !quickFind, gameObject);
+        if (foundNode != null) {
+            //if (quickFind)
+              //  reduceNodes = false;
+
+            gameObject.GetComponent<AIManager>().routeTiles = TracePath(startNode, foundNode, gameObject, reduceNodes);
             gameObject.GetComponent<AIManager>().nextTile = null;
         } else
             Debug.Log(this + " couldn't find route.");
@@ -196,36 +196,43 @@ public class Pathfinding : MonoBehaviour {
         return false;
     }
 
-    public Stack<WorldTile> TracePath(Node startNode, Node endNode, bool reduceNodes, GameObject aiObject) {
-        routeTiles = new Stack<WorldTile>();
+    public Stack<WorldTile> TracePath(Node startNode, Node endNode, GameObject aiObject, bool reduceNodes) {
+        Stack<WorldTile> routeTiles = new Stack<WorldTile>();
         Node current = endNode;
         int totalNodes = -1;
-        AddTileToRoute(endNode.tile);
+
+        AddTileToRoute(routeTiles, endNode.tile);
 
         while (current != null) {
             Node runningNode = current;
-    
-            while (runningNode.previousNode != null && runningNode.previousNode.previousNode != null) {
-                if (!SkippableNode(runningNode.previousNode.previousNode, current)) {
-                    AddTileToRoute(runningNode.tile);
-                    AddTileToRoute(runningNode.previousNode.tile);
-                    break;
-                } else
-                    totalNodes +=2;
+            
+            if (reduceNodes) {
+                while (runningNode.previousNode != null && runningNode.previousNode.previousNode != null) {
+                    if (!SkippableNode(runningNode.previousNode.previousNode, current)) {
+                        AddTileToRoute(routeTiles, runningNode.tile);
+                        AddTileToRoute(routeTiles, runningNode.previousNode.tile);
+                        break;
+                    } else
+                        totalNodes += 2;
 
-                runningNode = runningNode.previousNode;
-            } 
+                    runningNode = runningNode.previousNode;
+                }
+            } else
+                AddTileToRoute(routeTiles, runningNode.tile);
+            
             totalNodes++;
             current = runningNode.previousNode;
         }
 
         //Debug.Log(this + "Total nodes: " + totalNodes+ ", skipped " + (totalNodes - routeTiles.Count) + " unnecessary nodes, returned: " + routeTiles.Count+" waypoints.");
-        Stack<WorldTile> copy = new Stack<WorldTile>(new Stack<WorldTile>(routeTiles));
-        AddTileToRoute(GetTile(aiObject.transform.position));
-        return copy;
+        if (DEBUGGING)  {
+            this.routeTiles = new Stack<WorldTile>(new Stack<WorldTile>(routeTiles));
+            AddTileToRoute(this.routeTiles, GetTile(aiObject.transform.position));
+        }
+        return routeTiles;
     }
 
-    void AddTileToRoute(WorldTile tile) {
+    void AddTileToRoute(Stack<WorldTile> routeTiles, WorldTile tile) {
         if(!routeTiles.Contains(tile))
             routeTiles.Push(tile);
     }
@@ -235,9 +242,9 @@ public class Pathfinding : MonoBehaviour {
         return distance * (Utils.IsDiagonal(a.tile, b.tile) ? DIAGONAL_COST : STRAIGHT_COST);
     }
 
+   readonly int rows = 3;
+   readonly int columns = 3;
     WorldTile[] GetNeighbours(WorldTile tile) {
-        int rows = 3;
-        int columns = 3;
         WorldTile[] foundTiles = new WorldTile[rows * columns];
         Vector3 startPosition = tile.position - new Vector3(TILE_SIZE, tile.position.y, TILE_SIZE);
 
@@ -267,7 +274,7 @@ public class Pathfinding : MonoBehaviour {
         return (position - (Vector3.zero * TOTAL_GRID_SIZE)) / TILE_SIZE;
     }
 
-    private WorldTile GetTile(Vector3 position, bool retry = false) {
+    public WorldTile GetTile(Vector3 position, bool retry = false) {
 
         Vector3 tilePosition = GetTilePosition(position);
         int x = (int) tilePosition.x;
@@ -327,18 +334,8 @@ public class Pathfinding : MonoBehaviour {
             foreach (var tile in tiles) {
                 if (tile == null)
                     continue;
-
-                Collider[] colliders = Physics.OverlapSphere(tile.position, 1f, 1, QueryTriggerInteraction.Ignore);
-                bool hasEntity = false;
-
-                foreach (var collider in colliders) {
-                    if (collider.GetComponent<AIManager>() != null) {
-                        hasEntity = true;
-                        break;
-                    }
-                }
-
-                Gizmos.color = tile.canWalk || hasEntity ? Color.green : Color.red;
+                
+                Gizmos.color = tile.canWalk ? Color.green : Color.red;
 
                 Vector3 position = tile.position;
                 position.y = 0f;

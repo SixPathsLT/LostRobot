@@ -11,7 +11,7 @@ public static class Utils {
         
         if (degree < maxDegrees) {
             RaycastHit hit;
-            if (Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance, 1, QueryTriggerInteraction.Ignore)) {
+            if (Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance, 0, QueryTriggerInteraction.Ignore)) {
                 if (hit.collider.transform == target)
                     return true;
             }
@@ -21,6 +21,16 @@ public static class Utils {
 
     public static bool IsDiagonal(WorldTile a, WorldTile b) {
         return a.position.x != b.position.x && a.position.z != b.position.z;
+    }
+
+    public static bool HasAI(Vector3 position, float radius = 1f) {
+        Collider[] colliders = Physics.OverlapSphere(position, radius, 1, QueryTriggerInteraction.Ignore);
+
+        foreach (var collider in colliders){
+            if (collider.GetComponent<AIManager>() != null)
+                return true;
+        }
+        return false;
     }
 
 }

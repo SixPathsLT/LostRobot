@@ -17,6 +17,8 @@ public class AIManager : MonoBehaviour {
     float maxDistance = 10f;
 
     public List<GameObject> nodes;
+    [HideInInspector]
+    public int currentNode = 0;
 
     public static GameObject player;
     public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
@@ -39,26 +41,24 @@ public class AIManager : MonoBehaviour {
 
     public void SetBehaviour(AIBehaviour aiBehaviour) {
         if (currentBehaviour != null)
-            currentBehaviour.End();
+            currentBehaviour.End(this);
 
         currentBehaviour = aiBehaviour;
 
         if (currentBehaviour != null)
-            currentBehaviour.Init(gameObject);
+            currentBehaviour.Init(this);
     }
+    static GameObject OBJECT_REQUIRED_REPATH = null;
 
     void Update() {
         if (currentBehaviour != null && !isStunned)
-             currentBehaviour.Process();
-
+            currentBehaviour.Process(this);
+        
         if (routeTiles == null) {
             nextTile = null;
             //example :)
-           // pathfinding.FindPath(gameObject, AIManager.player.transform.position/*new Vector3(95.5f, 1, 124.5f)*/);
+           // pathfinding.FindPath(gameObject, AIManager.player.transform.position);
         }
-
-        if (nextTile != null && nextTile.position.y != transform.position.y)
-            nextTile.position = new Vector3(nextTile.position.x, transform.position.y, nextTile.position.z);
         
         if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, nextTile.position) < 0.3f)) {
             if (routeTiles.Count < 1)
@@ -66,15 +66,55 @@ public class AIManager : MonoBehaviour {
             else
                 nextTile = routeTiles.Pop();
         } else if (nextTile != null) {
-            Quaternion rotation = transform.rotation;
+            float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
+            Vector3 aheadPos = (nextTile.position - transform.position).normalized * tileMultiplier;
 
-            Vector3 lookDirection = (nextTile.position - transform.position).normalized;
-            if (lookDirection != Vector3.zero)
-                rotation = Quaternion.LookRotation(lookDirection);
+            WorldTile tile = pathfinding.GetTile(transform.position + aheadPos);
+            if (tile != null)
+                tile.canWalk = false;
 
-            transform.rotation =  Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, nextTile.position, speed * Time.deltaTime);
+            float aiSpeed = speed;
+
+            if (OBJECT_REQUIRED_REPATH != null || OBJECT_REQUIRED_REPATH != gameObject) {
+                if (Utils.HasAI(transform.position + (aheadPos.normalized * (tileMultiplier * 3))))
+                    aiSpeed /= 2f;
+                else if (Utils.HasAI(transform.position + (aheadPos.normalized * (tileMultiplier * 2))))
+                    aiSpeed /= 3f;
+            }
+            
+            if (!Utils.HasAI(transform.position + aheadPos) || (OBJECT_REQUIRED_REPATH != null && OBJECT_REQUIRED_REPATH == gameObject)) {
+                Vector3 toPosition = nextTile.position;
+                if (toPosition.y != transform.position.y)
+                    toPosition = new Vector3(toPosition.x, transform.position.y, toPosition.z);
+
+                transform.position = Vector3.MoveTowards(transform.position, toPosition, aiSpeed * Time.deltaTime);
+
+                Quaternion rotation = transform.rotation;
+
+                Vector3 lookDirection = (toPosition - transform.position).normalized;
+                if (lookDirection != Vector3.zero)
+                    rotation = Quaternion.LookRotation(lookDirection);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+            } else if (OBJECT_REQUIRED_REPATH == null) {
+                WorldTile lastTile = null;
+                while (routeTiles.Count > 0)
+                    lastTile = routeTiles.Pop();
+                
+                routeTiles = null;
+                nextTile = null;
+                if (lastTile != null) {
+                    pathfinding.FindPath(gameObject, lastTile.position, false);
+                    StartCoroutine(ResetRePath());
+                }
+            }
         }
+    }
+
+    public IEnumerator ResetRePath() {
+        OBJECT_REQUIRED_REPATH = gameObject;
+        yield return new WaitForSeconds(2);
+        OBJECT_REQUIRED_REPATH = null;
     }
 
     public IEnumerator Stun(float duration) {
