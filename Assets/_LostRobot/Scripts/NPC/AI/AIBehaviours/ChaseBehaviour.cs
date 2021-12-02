@@ -18,7 +18,7 @@ public class ChaseBehaviour : AIBehaviour {
         Transform player = AIManager.player.transform;
 
         if (player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
-            aiManager.SetBehaviour(aiManager.patrolBehaviour);
+            aiManager.SetBehaviour(aiManager.investigateBehaviour);
             return;
         }
 
@@ -36,14 +36,11 @@ public class ChaseBehaviour : AIBehaviour {
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
         else if (Utils.CanSeeTransform(aiManager.gameObject.transform, player) && range < 3.5f)
             aiManager.SetBehaviour(aiManager.captureBehaviour);
-        else
-        {
-
+        else {
             if (aiManager.routeTiles == null 
                 || (!Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform) && range < 20f && Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform, 360f)))
                 //|| (Utils.CanSeeTransform(gameObject.transform, player.transform, 45f, 10) && aiManager.nextTile != null && Vector3.Distance(aiManager.nextTile.position, player.transform.position) > range))
                 aiManager.pathfinding.FindPath(aiManager.gameObject, player.transform.position);
-
 
             /*frames = range / maxSpeed;
             Vector3 desiredPosition = player.position + player.GetComponent<Rigidbody>().velocity * frames;

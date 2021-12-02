@@ -74,12 +74,11 @@ public class Pathfinding : MonoBehaviour {
     public IEnumerator ProcessPath(GameObject gameObject, Vector3 endPosition, bool reduceNodes = false) {
         WorldTile startTile = GetTile(gameObject.transform.position);
         WorldTile endTile = GetTile(endPosition, true);
-
         //if (startTile != null && !startTile.canWalk)
         //    startTile = GetNeighbours(startTile)[0];
         if (endTile != null && !endTile.canWalk)
-            endTile = GetNeighbours(endTile)[0];
-        
+           endTile = GetNeighbours(endTile)[0];
+                
         if (startTile == null || endTile == null) {
             Debug.Log(this + " Failed to find start/end tile. ");
             requests.Remove(gameObject);
@@ -99,7 +98,7 @@ public class Pathfinding : MonoBehaviour {
 
         Vector3 targetDirection = (endPosition - rayStartPos);
 
-        if (Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition), 1, QueryTriggerInteraction.Ignore)) {
+        if (Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition))) {
             if (hit.collider.CompareTag("Player")) {
                 foundNode = endNode;
                 //foundNode.previousNode = startNode;
@@ -145,7 +144,7 @@ public class Pathfinding : MonoBehaviour {
 
         if (foundNode != null) {
             //if (quickFind)
-              //  reduceNodes = false;
+             //   reduceNodes = false;
 
             gameObject.GetComponent<AIManager>().routeTiles = TracePath(startNode, foundNode, gameObject, reduceNodes);
             gameObject.GetComponent<AIManager>().nextTile = null;

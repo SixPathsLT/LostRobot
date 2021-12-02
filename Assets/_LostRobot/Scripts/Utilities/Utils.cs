@@ -6,15 +6,15 @@ public static class Utils {
         float degree = Vector3.Angle(target.position - viewer.position, viewer.forward);
         Vector3 targetDirection = (target.position - viewer.position);
 
-        if (degree < 90 && Vector3.Distance(viewer.position, target.position) < 4f)
-            return true;
-        
+        RaycastHit hit;
         if (degree < maxDegrees) {
-            RaycastHit hit;
-            if (Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance, 0, QueryTriggerInteraction.Ignore)) {
+            if (Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance)) {
                 if (hit.collider.transform == target)
                     return true;
             }
+        } else if (degree < 90 && Vector3.Distance(viewer.position, target.position) < 4f  && Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance)) {
+            if (hit.collider.transform == target)
+                return true;
         }
         return false;
     }

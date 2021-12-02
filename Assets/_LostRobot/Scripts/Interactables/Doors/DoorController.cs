@@ -47,22 +47,16 @@ public class DoorController : MonoBehaviour
     }
    
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Locked && triggerPuzzle)
-            {
-                puzzle.ChooseDoorPuzzle(this);
-            }
-        }
-
+    private void OnTriggerStay(Collider other) {
         if (other.GetComponent<AIManager>() != null)
             OpenDoor();
 
-        if (Input.GetKey(KeyCode.E))
+        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E)) {
             HandleDoor();
 
+            if (Locked && triggerPuzzle)
+                puzzle.ChooseDoorPuzzle(this);
+        }
     }
 
     private void OnTriggerExit(Collider other)

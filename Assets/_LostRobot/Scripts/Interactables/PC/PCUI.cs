@@ -45,8 +45,10 @@ public class PCUI : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Close();
-        trigger = false;
+        if (other.CompareTag("Player")) {
+            Close();
+            trigger = false;
+        }
 
     }
 
