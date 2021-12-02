@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CloakingAbilityData
   m_EditorClassIdentifier: 
   keyCode: 52
-  durationTime: 7
+  durationTime: 20
   coolDownTime: 15
   requiredConsciousness: 0
   icon: {fileID: 2800000, guid: b1e6f0943664107449fb65c21ca17265, type: 3}
-  state: 1
+  state: 0
   hidingPrefab: {fileID: 3435583415182234209, guid: db63ad48a53f5354490a94d5a9ac2c51, type: 3}
   hidingSpot: {fileID: 0}

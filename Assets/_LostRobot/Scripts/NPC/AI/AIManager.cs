@@ -7,8 +7,7 @@ public class AIManager : MonoBehaviour {
     [HideInInspector]
     public bool isStunned;
 
-    [SerializeField]
-    float speed = 4.5f;
+    public float speed = 4.5f;
 
     [Header("Vision")]
     [SerializeField]
@@ -50,17 +49,21 @@ public class AIManager : MonoBehaviour {
     }
     static GameObject OBJECT_REQUIRED_REPATH = null;
 
-    void Update() {
+    void FixedUpdate() {
         if (currentBehaviour != null && !isStunned)
             currentBehaviour.Process(this);
+
         
         if (routeTiles == null) {
             nextTile = null;
             //example :)
            // pathfinding.FindPath(gameObject, AIManager.player.transform.position);
         }
-        
-        if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, nextTile.position) < 0.3f)) {
+        Vector3 toPosition = nextTile == null ? Vector3.zero : nextTile.position;
+        if (toPosition.y != transform.position.y)
+            toPosition = new Vector3(toPosition.x, transform.position.y, toPosition.z);
+
+        if (routeTiles != null && (nextTile == null || Vector3.Distance(transform.position, toPosition) < 0.3f)) {
             if (routeTiles.Count < 1)
                 routeTiles = null;
             else
@@ -68,7 +71,7 @@ public class AIManager : MonoBehaviour {
         } else if (nextTile != null) {
             float aiSpeed = speed;
             float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
-            Vector3 aheadPos = (nextTile.position - transform.position).normalized * tileMultiplier;
+            Vector3 aheadPos = (toPosition - transform.position).normalized * tileMultiplier;
             WorldTile tile = pathfinding.GetTile(transform.position + aheadPos);
 
             if (tile != null)
@@ -82,10 +85,6 @@ public class AIManager : MonoBehaviour {
             }
             
             if (!Utils.HasAI(transform.position + aheadPos) || (OBJECT_REQUIRED_REPATH != null && OBJECT_REQUIRED_REPATH == gameObject)) {
-                Vector3 toPosition = nextTile.position;
-                if (toPosition.y != transform.position.y)
-                    toPosition = new Vector3(toPosition.x, transform.position.y, toPosition.z);
-
                 transform.position = Vector3.MoveTowards(transform.position, toPosition, aiSpeed * Time.deltaTime);
 
                 Quaternion rotation = transform.rotation;
@@ -101,7 +100,7 @@ public class AIManager : MonoBehaviour {
 
     bool RePath(bool reduceNodes) {
         WorldTile lastTile = null;
-        while (routeTiles.Count > 0)
+        while (routeTiles != null && routeTiles.Count > 0)
             lastTile = routeTiles.Pop();
 
         routeTiles = null;

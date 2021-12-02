@@ -18,7 +18,7 @@ public class ChaseBehaviour : AIBehaviour {
         Transform player = AIManager.player.transform;
 
         if (player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
-            aiManager.SetBehaviour(aiManager.patrolBehaviour);
+            aiManager.SetBehaviour(aiManager.investigateBehaviour);
             return;
         }
 
