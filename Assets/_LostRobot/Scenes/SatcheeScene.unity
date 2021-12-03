@@ -3503,7 +3503,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eeba5d5f0f613394195e334d36daadac, type: 2}
   abilitySounds: {fileID: 0}
   audioClips: []
-  selectedAbility: {fileID: 0}
 --- !u!114 &1943397087
 MonoBehaviour:
   m_ObjectHideFlags: 0

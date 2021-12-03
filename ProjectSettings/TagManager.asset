@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Puzzle button
+  - Target
+  - Bullet
+  - Incorrect
+  - Solution
+  - Solved
   layers:
   - Default
   - TransparentFX
