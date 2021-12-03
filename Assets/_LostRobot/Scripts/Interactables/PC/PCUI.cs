@@ -52,7 +52,7 @@ public class PCUI : MonoBehaviour
 
     }
 
-    void DisplayText()
+    public void DisplayText()
     {
         canvas.SetActive(true);
         Cursor.visible = true;

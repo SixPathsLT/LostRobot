@@ -68,8 +68,8 @@ public class ShooterManager : Puzzles
             else if (targetsQueue.Count <= 0)
             {
                 Debug.Log("You won!");
-                FindObjectOfType<PuzzleManager>().Unlock();
                 Reset();
+                FindObjectOfType<PuzzleManager>().Unlock();
             }
         }
         else

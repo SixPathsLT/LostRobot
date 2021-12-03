@@ -122,8 +122,8 @@ public class ShapesLogic : Puzzles
                 if (imageCount == correctImages.Length)
                 {
                     Debug.Log("You won!");
-                    FindObjectOfType<PuzzleManager>().Unlock();
                     Reset();
+                    FindObjectOfType<PuzzleManager>().Unlock();
                 }
             }
         }
