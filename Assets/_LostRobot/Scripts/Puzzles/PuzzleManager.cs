@@ -37,7 +37,10 @@ public class PuzzleManager : MonoBehaviour
         if (door != null)
             door.Locked = false;
         else if (pc != null)
+        {
             pc.locked = false;
+            pc.DisplayText();
+        }
         door = null;
         pc = null;
     }
