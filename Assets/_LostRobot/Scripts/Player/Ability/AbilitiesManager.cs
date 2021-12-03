@@ -19,9 +19,7 @@ public class AbilitiesManager : MonoBehaviour
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         playerAnim = player.GetComponentInChildren<Animator>();
-
         selectedAbility = abilities[0];
-
     }
     
     void Update() {

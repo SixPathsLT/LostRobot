@@ -25,12 +25,10 @@ public class CameraController : MonoBehaviour
         camDist = zoomDist;
         //Cursor.lockState = CursorLockMode.Locked;
     }
-    void Update()
-    {
-        if (CutsceneManager.GetActiveCutscene() != null)
-            return;
+    void Update() {
+        if (CutsceneManager.GetActiveCutscene() == null)
+            Movement();
 
-        Movement();
         Zoom();
         CameraCollision();
     }

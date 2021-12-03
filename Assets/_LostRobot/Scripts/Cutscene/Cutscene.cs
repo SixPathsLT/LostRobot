@@ -2,17 +2,26 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 public abstract class Cutscene : MonoBehaviour {
+    [HideInInspector]
+    public GameObject playerCam;
 
     public GameObject[] objectsToDisable;
     protected GameObject player;
     private PlayableDirector playableDirector;
     
-    public virtual void Start() {
+    public virtual void Init() {
         playableDirector = GetComponent<PlayableDirector>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        foreach (var obj in objectsToDisable)
+        foreach (var obj in objectsToDisable) {
             obj.SetActive(false);
+            if (obj.CompareTag("MainCamera"))
+                playerCam = obj;
+        }
+
+        if (playableDirector != null)
+            playableDirector.Play();
+        
     }
 
     public abstract void Process();
@@ -21,11 +30,12 @@ public abstract class Cutscene : MonoBehaviour {
         foreach (var obj in objectsToDisable)
             obj.SetActive(true);
 
-        playableDirector.Stop();
-        gameObject.SetActive(false);
+        if (playableDirector != null)
+            playableDirector.Stop();
     }
 
     public PlayableDirector GetPlayableDirector() {
         return playableDirector;
     }
+
 }

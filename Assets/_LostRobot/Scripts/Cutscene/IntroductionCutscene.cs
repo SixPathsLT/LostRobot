@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class IntroductionCutscene : Cutscene {
 
-
     public GameObject coolDown;
     public GameObject abilityIcon;
 
@@ -17,8 +16,8 @@ public class IntroductionCutscene : Cutscene {
 
     Data health, consciousness;
 
-    public override void Start() {
-        base.Start();
+    public override void Init() {
+        base.Init();
 
         health.value = 1f;
         playerData = player.GetComponent<PlayerController>().data;
@@ -75,4 +74,5 @@ public class IntroductionCutscene : Cutscene {
             yield return new WaitForSeconds(1);
         }
     }
+
 }
