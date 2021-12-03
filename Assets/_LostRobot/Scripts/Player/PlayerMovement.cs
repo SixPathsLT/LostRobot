@@ -17,8 +17,9 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 direction;
 
 
-    void Update()
-    {
+    void Update() {
+        if (CutsceneManager.GetActiveCutscene() != null)
+            return;
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 

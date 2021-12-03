@@ -8,7 +8,7 @@ public class CutsceneManager : MonoBehaviour {
     public static float timeElapsed;
     
     void Start() {
-        //PlayCutscene(DEFAULT);
+        PlayCutscene(0);
     }
     
     void Update() {

@@ -20,6 +20,15 @@ public class InvestigateBehaviour : AIBehaviour {
 
             ChangeColor(aiManager, Color.yellow);
         } else {
+            bool isHidden = AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility();
+
+            if (!isHidden && Utils.CanSeeTransform(aiManager.transform, AIManager.player.transform)) {
+                aiManager.SetBehaviour(aiManager.chaseBehaviour);
+                ChangeColor(aiManager, Color.red);
+                timeElapsed = 0;
+                return;
+            }
+
             if (aiManager.routeTiles != null) { 
                 aiManager.routeTiles = null;
                 aiManager.nextTile = null;
@@ -29,9 +38,8 @@ public class InvestigateBehaviour : AIBehaviour {
 
             if (timeElapsed > seconds) {
                 ChangeColor(aiManager, Color.cyan);
-
-                bool isHidden = AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility();
-                if (!isHidden || (isHidden && Random.Range(0, 10) == 1))
+                
+                if ((isHidden && Random.Range(0, 10) == 1))
                     AIManager.player.GetComponent<PlayerController>().HandleCapture();
                
                 aiManager.SetBehaviour(aiManager.patrolBehaviour);

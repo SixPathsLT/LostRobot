@@ -60,6 +60,7 @@ public class PlayerUIControll : MonoBehaviour
 
     private void UpdateCurrentAbility()
     {
+
         var state = AbilitiesManager.selectedAbility.state;
         switch (state)
         {
@@ -76,13 +77,18 @@ public class PlayerUIControll : MonoBehaviour
         selectedAbility = AbilitiesManager.selectedAbility.icon;
         abilityIcon.GetComponent<Renderer>().material.SetTexture("_MainTex", selectedAbility);
 
-        for (int i = 0; i < concioussnessIndicators.Length; i++)
-        {
-            coolDownIndicators[i].materials[cDIndexes[i]].color = coolDown;
-            coolDownIndicators[i].materials[cDIndexes[i]].SetColor("_EmissionColor", coolDown * 12f);
-        }
+        bool canModify = CutsceneManager.GetActiveCutscene() == null || CutsceneManager.timeElapsed > 10f;
 
-        abilityIcon.GetComponent<Renderer>().material.color = coolDown;
-        abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", coolDown);
+            for (int i = 0; i < concioussnessIndicators.Length; i++)
+            {
+                coolDownIndicators[i].materials[cDIndexes[i]].color = coolDown;
+                if (canModify)
+                    coolDownIndicators[i].materials[cDIndexes[i]].SetColor("_EmissionColor", coolDown * 12f);
+            }
+
+            abilityIcon.GetComponent<Renderer>().material.color = coolDown;
+        if (canModify)
+            abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", coolDown);
+        
     }
 }

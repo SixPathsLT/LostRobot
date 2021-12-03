@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour {
     }
     
     void Update() {
+        if (CutsceneManager.GetActiveCutscene() != null)
+            return;
+
         HandleDeath();
 
     }

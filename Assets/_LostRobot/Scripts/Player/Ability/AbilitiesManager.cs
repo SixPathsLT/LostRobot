@@ -25,6 +25,8 @@ public class AbilitiesManager : MonoBehaviour
     }
     
     void Update() {
+        if (CutsceneManager.GetActiveCutscene() != null)
+            return;
         foreach (Ability ability in abilities) {
             ability.Process();
 
@@ -45,6 +47,6 @@ public class AbilitiesManager : MonoBehaviour
         abilitySounds.Play();
     }
     internal bool UsingCloakingAbility() {
-        return selectedAbility == abilities[3] && selectedAbility.IsActive() && ((CloakingAbility)selectedAbility).hidingSpot != null && ((CloakingAbility)selectedAbility).IsActive();
+        return selectedAbility.GetType() == typeof(CloakingAbility) && selectedAbility.IsActive() && ((CloakingAbility)selectedAbility).hidingSpot != null && ((CloakingAbility)selectedAbility).hidingSpot.activeSelf;
     }
 }
