@@ -5,15 +5,17 @@ using UnityEngine;
 public class KeyCardLogic : MonoBehaviour
 {
     private bool obtainedInfo = false;
-    private bool obtainedKey = false;
+    public bool obtainedKey = false;
 
-    public Collider infoPCTrigger;
     public GameObject keyObject;
-    public DoorController door;
+    public DoorController[] doors;
 
     private void Start()
     {
-        door.Locked = true;
+        foreach (DoorController door in doors)
+        {
+            door.Locked = true;
+        }
     }
 
     public void checkInfo()
@@ -32,11 +34,17 @@ public class KeyCardLogic : MonoBehaviour
     {
         if (!obtainedKey)
         {
-            door.Close();
+            foreach (DoorController door in doors)
+            {
+                door.Close();
+            }
         }
         else
         {
-            door.Locked = false;
+            foreach (DoorController door in doors)
+            {
+                door.Locked = false;
+            }
             keyObject.GetComponent<MeshRenderer>().material.color = Color.green;
         }
     }
@@ -51,7 +59,7 @@ public class KeyCardLogic : MonoBehaviour
         if (obtainedInfo)
         {
             obtainedKey = key;
-        }            
+        }
     }
 
     private void OnTriggerStay(Collider other)
