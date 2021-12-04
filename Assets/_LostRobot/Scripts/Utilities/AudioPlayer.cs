@@ -1,47 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour {
 
-    [SerializeField] private AudioClip[] clips;
-    private AudioSource source;
-
-    static private AudioPlayer instance;
-
-    void Awake() {
-        if (instance != null)
-            Destroy(this);
-        else
-            instance = this;
+    [System.Serializable]
+    struct Data {
+        public AudioClip audio;
+        public string subtitle;
     }
+
+    [SerializeField] private Data[] audioData;
+    private AudioSource source;
 
     void Start() {
         source = gameObject.AddComponent<AudioSource>();
-        source.volume = 0.188f;
     }
 
     public void PlayClip(string name) {
         bool foundClip = false;
 
-        foreach (var clip in clips) {
-            if (clip == null)
+        foreach (var data in audioData) {
+            if (data.audio == null)
                 continue;
 
-            if (clip.name.Equals(name)) {
+            if (data.audio.name.Equals(name)) {
                 foundClip = true;
-                source.clip = clip;
+                source.clip = data.audio;
                 source.Play();
+                if (data.subtitle != null)
+                    FindObjectOfType<Notification>().SendSubtitle(data.subtitle, source.clip.length);
                 break;
             }
         }
 
         if (!foundClip)
             Debug.Log("Clip not found: " + name);
-    }
-
-    public static AudioPlayer GetInstance() {
-        return instance;
     }
 
 }

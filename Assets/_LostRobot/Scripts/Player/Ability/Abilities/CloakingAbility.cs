@@ -12,7 +12,6 @@ public class CloakingAbility : Ability
         base.Activate();
 
         hidingSpot = Instantiate(hidingPrefab);
-        FindObjectOfType<Notification>().SendNotification("You are now invisible to enemies for " + (int) durationTime + " seconds as long as you don't move.");
     }
 
     public override void StartCooldown() {

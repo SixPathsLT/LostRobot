@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutsceneManager : MonoBehaviour {
 
@@ -7,7 +8,9 @@ public class CutsceneManager : MonoBehaviour {
     public Cutscene[] cutscenes;
     private static Cutscene currentCutscene;
     public static float timeElapsed;
-    
+
+    string sceneName;
+
     void Start() {
         PlayCutscene(0);
     }
@@ -25,7 +28,7 @@ public class CutsceneManager : MonoBehaviour {
         }
     }
 
-    void PlayCutscene(int index) {
+    public void PlayCutscene(int index, string sceneName = null) {
         if (index >= cutscenes.Length) {
             Debug.Log("Cutscene #" + index + " does not exist.");
             return;
@@ -34,7 +37,7 @@ public class CutsceneManager : MonoBehaviour {
             Debug.Log("A cutscene is already playing.");
             return;
         }
-
+        this.sceneName = sceneName;
         cutsceneCam.SetActive(true);
         canvas.SetActive(true);
         currentCutscene = cutscenes[index];
@@ -46,6 +49,10 @@ public class CutsceneManager : MonoBehaviour {
         currentCutscene.Stop();
         currentCutscene = null;
         cutsceneCam.SetActive(false);
+        timeElapsed = 0f;
+
+        if (sceneName != null)
+            SceneManager.LoadScene(sceneName);
     }
 
     public static Cutscene GetActiveCutscene() {

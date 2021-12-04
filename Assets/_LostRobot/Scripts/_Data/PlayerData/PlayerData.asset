@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
-  currentConciousness: 151
+  currentConciousness: 100
   maxConciousness: 100

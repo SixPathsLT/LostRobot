@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Notification : MonoBehaviour {
     
-    public TextMeshProUGUI meshPro;
+    [SerializeField]
+    private TextMeshProUGUI notification, subtitle;
 
     public void SendNotification(string message, float time = 4, float delay = 0) {
-        StartCoroutine(ProcessNotification(message, time, delay));
+        StartCoroutine(ProcessNotification(notification, message, time, delay));
     }
 
-    IEnumerator ProcessNotification(string message, float time, float delay) {
-        yield return new WaitForSeconds(delay);
+    public void SendSubtitle(string message, float time = 4, float delay = 0) {
+        StartCoroutine(ProcessNotification(subtitle, message, time, delay));
+    }
 
-        meshPro.text = message;
+    IEnumerator ProcessNotification(TextMeshProUGUI mesh, string message, float time, float delay) {
+        yield return new WaitForSeconds(delay);
+        mesh.text = message;
         yield return new WaitForSeconds(time);
-        meshPro.text = "";
+        mesh.text = "";
     }
 
 }

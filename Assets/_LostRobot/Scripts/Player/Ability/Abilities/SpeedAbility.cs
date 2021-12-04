@@ -11,8 +11,6 @@ public class SpeedAbility : Ability
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = increasedSpeed;
 
         AbilitiesManager.playerAnim.SetBool("SpeedBoost", true);
-        
-        FindObjectOfType<Notification>().SendNotification("Speed boost activated for " + (int) durationTime + " seconds.");
     }
 
     public override void StartCooldown() {
