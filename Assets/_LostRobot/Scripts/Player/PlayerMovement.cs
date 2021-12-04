@@ -18,8 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
 
     void Update() {
-        if (CutsceneManager.GetActiveCutscene() != null)
+        if (!GameManager.GetInstance().InPlayingState()) {
+            direction = Vector3.zero;
+            anim.SetFloat("Vel", 0);
             return;
+        }
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 

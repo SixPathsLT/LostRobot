@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     }
     
     void Update() {
-        if (CutsceneManager.GetActiveCutscene() != null)
+        if (!GameManager.GetInstance().InPlayingState())
             return;
 
         HandleDeath();
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
         data.currentConciousness = checkpoint.currentConciousness;
         data.maxConciousness = checkpoint.maxConciousness;*/
         data.SetHealth(100);
+        GameManager.GetInstance().OnRespawn();
     }
 
     private void ReduceConsciousness(int amount) {

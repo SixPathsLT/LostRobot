@@ -14,12 +14,12 @@ public class PCUI : MonoBehaviour
     public Text text;
     bool textOpened = false;
     bool trigger;
-    CameraController controller;
+    //CameraController controller;
 
     private void Start()
     {
         puzzle = FindObjectOfType<PuzzleManager>();
-        controller = FindObjectOfType<CameraController>();
+        //controller = FindObjectOfType<CameraController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +32,7 @@ public class PCUI : MonoBehaviour
 
     private void KeyPressed()
     {
-        if (Input.GetKeyDown(KeyCode.E) && trigger)
+        if (Input.GetKeyDown(KeyCode.E) && trigger && GameManager.GetInstance().InPlayingState())
         {
             if (locked && triggerPuzzle)
                 puzzle.ChoosePCPUzzle(this);
@@ -46,20 +46,26 @@ public class PCUI : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player")) {
-            Close();
+            //Close();
             trigger = false;
         }
 
     }
 
+    private void OnTriggerStay(Collider other) { 
+        if (other.CompareTag("Player"))
+            trigger = true;
+    }
+
     public void DisplayText()
     {
+        GameManager.GetInstance().ChangeState(GameManager.State.Email);
         canvas.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         text.GetComponent<Text>().text = file.text;
         textOpened = true;
-        controller.enabled = false;
+        //controller.enabled = false;
     }
 
     public void Close()
@@ -69,7 +75,8 @@ public class PCUI : MonoBehaviour
         text.GetComponent<Text>().text = "";
         canvas.SetActive(false);
         textOpened = false;
-        controller.enabled = true;
+        //controller.enabled = true;
+        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
     }
 
     private void Update()

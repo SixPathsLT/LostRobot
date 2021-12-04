@@ -77,7 +77,7 @@ public class PlayerUIControll : MonoBehaviour
         selectedAbility = AbilitiesManager.selectedAbility.icon;
         abilityIcon.GetComponent<Renderer>().material.SetTexture("_MainTex", selectedAbility);
 
-        bool canModify = CutsceneManager.GetActiveCutscene() == null || CutsceneManager.timeElapsed > 10f;
+        bool canModify = !GameManager.GetInstance().InCutsceneState() || CutsceneManager.timeElapsed > 10f;
 
             for (int i = 0; i < concioussnessIndicators.Length; i++)
             {

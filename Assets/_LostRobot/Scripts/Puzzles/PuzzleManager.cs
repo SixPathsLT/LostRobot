@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    public AbilitiesManager abil;
-    public PlayerMovement movement;
+    [HideInInspector]
+    public Puzzles currentPuzzle;
+   // public AbilitiesManager abil;
+   // public PlayerMovement movement;
     public Puzzles[] puzzles;
     int puzzleType;
     DoorController door;
@@ -13,22 +15,36 @@ public class PuzzleManager : MonoBehaviour
 
     private void Start()
     {
-        abil = FindObjectOfType<AbilitiesManager>();
-        movement = FindObjectOfType<PlayerMovement>();
+        //abil = FindObjectOfType<AbilitiesManager>();
+        //movement = FindObjectOfType<PlayerMovement>();
     }
     public void ChooseDoorPuzzle(DoorController door)
     {
+        if (!GameManager.GetInstance().InPlayingState())
+            return;
+
         puzzleType = Random.Range(0, puzzles.Length);
         this.door = door;
-        puzzles[puzzleType].Activate(true);
+
+        currentPuzzle = puzzles[puzzleType];
+        currentPuzzle.Activate(true);
+        //puzzles[puzzleType].Activate(true);
+
         pc = null;
     }
 
     public void ChoosePCPUzzle(PCUI pc)
     {
+        if (!GameManager.GetInstance().InPlayingState())
+            return;
+
         puzzleType = Random.Range(0, puzzles.Length);
         this.pc = pc;
-        puzzles[puzzleType].Activate(true);
+
+        currentPuzzle = puzzles[puzzleType];
+        currentPuzzle.Activate(true);
+        //puzzles[puzzleType].Activate(true);
+
         door = null;
     }
 

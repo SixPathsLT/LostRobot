@@ -19,9 +19,10 @@ public abstract class Ability : ScriptableObject
     }
 
     public virtual void Process() {
+        
         switch (state) {
             case AbilityState.Ready:
-                if (AbilitiesManager.selectedAbility == this &&  Input.GetMouseButton(0)) {
+                if (AbilitiesManager.selectedAbility == this &&  Input.GetMouseButton(0) && GameManager.GetInstance().InPlayingState()) {
                     if (player.GetComponent<PlayerController>().data.GetConcioussness() < requiredConsciousness)
                         FindObjectOfType<Notification>().SendNotification("You need a consciousness level of " + requiredConsciousness + " to use this ability.");
                     else

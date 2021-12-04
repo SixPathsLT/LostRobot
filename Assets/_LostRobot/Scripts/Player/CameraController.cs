@@ -26,10 +26,11 @@ public class CameraController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
     }
     void Update() {
-        if (CutsceneManager.GetActiveCutscene() == null)
+        if (GameManager.GetInstance().InPlayingState())
             Movement();
+        if (!GameManager.GetInstance().InEmailState() && !GameManager.GetInstance().InPuzzleState())
+            Zoom();
 
-        Zoom();
         CameraCollision();
     }
 

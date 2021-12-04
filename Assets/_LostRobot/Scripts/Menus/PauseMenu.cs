@@ -18,7 +18,9 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GamePaused)
+
+            GameManager.GetInstance().ChangeState(GamePaused ? GameManager.State.Playing : GameManager.State.Paused);
+           /* if (GamePaused)
             {
                 ResumeGame();
 
@@ -29,8 +31,15 @@ public class PauseMenu : MonoBehaviour
                 GamePaused = true;
                 PauseGame.SetActive(true);
                 Time.timeScale = 0f;
-            }
+            }*/
         }
+    }
+
+    public void Pause()
+    {
+        GamePaused = true;
+        PauseGame.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void ResumeGame()

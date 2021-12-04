@@ -8,7 +8,7 @@ public class MeleeAbility : Ability
     public override void Activate() {
         base.Activate();
         initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
-        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = 0.1f;
+        AbilitiesManager.player.GetComponent<PlayerMovement>().speed = 0f;
         AbilitiesManager.playerAnim.SetInteger("Attack_Index", Random.Range(0, AbilitiesManager.playerAnim.GetInteger("Attack_Max_Index")));
         AbilitiesManager.playerAnim.SetTrigger("AttackTrigger");
     }

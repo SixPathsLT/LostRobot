@@ -139,7 +139,7 @@ public class ShapesLogic : Puzzles
         guesses.text = "" + remainingGuesses;
         time.maxValue = timer;        
         state = true;
-        FindObjectOfType<PuzzleManager>().abil.enabled = false;
+        //FindObjectOfType<PuzzleManager>().abil.enabled = false;
     }
 
     private void Update()
@@ -164,7 +164,7 @@ public class ShapesLogic : Puzzles
     {
         base.Reset();
         canvas.SetActive(false);
-        FindObjectOfType<PuzzleManager>().abil.enabled = true;
+        //FindObjectOfType<PuzzleManager>().abil.enabled = true;
         countDown = 0;
         imageCount = 0;
         foreach (Image image in optionsImages)

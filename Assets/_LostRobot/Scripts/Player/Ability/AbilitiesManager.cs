@@ -23,12 +23,10 @@ public class AbilitiesManager : MonoBehaviour
     }
     
     void Update() {
-        if (CutsceneManager.GetActiveCutscene() != null)
-            return;
         foreach (Ability ability in abilities) {
             ability.Process();
 
-            if (Input.GetKey(ability.keyCode)) {
+            if (Input.GetKey(ability.keyCode) && GameManager.GetInstance().InPlayingState()) {
                 if (selectedAbility != null)
                     selectedAbility.End();
 

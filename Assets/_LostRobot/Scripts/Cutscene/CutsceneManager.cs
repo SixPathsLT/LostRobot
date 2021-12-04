@@ -29,7 +29,7 @@ public class CutsceneManager : MonoBehaviour {
     }
 
     public void PlayCutscene(int index, string sceneName = null) {
-        if (index >= cutscenes.Length) {
+        if (index >= cutscenes.Length || cutscenes[index] == null) {
             Debug.Log("Cutscene #" + index + " does not exist.");
             return;
         }
@@ -55,7 +55,4 @@ public class CutsceneManager : MonoBehaviour {
             SceneManager.LoadScene(sceneName);
     }
 
-    public static Cutscene GetActiveCutscene() {
-        return currentCutscene;
-    }
 }

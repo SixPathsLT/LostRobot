@@ -39,8 +39,8 @@ public class InvestigateBehaviour : AIBehaviour {
             if (timeElapsed > seconds) {
                 ChangeColor(aiManager, Color.cyan);
                 
-                if ((isHidden && Random.Range(0, 10) == 1))
-                    AIManager.player.GetComponent<PlayerController>().HandleCapture();
+                //if ((isHidden && Random.Range(0, 10) == 1))
+                //    AIManager.player.GetComponent<PlayerController>().HandleCapture();
                
                 aiManager.SetBehaviour(aiManager.patrolBehaviour);
                 ChangeColor(aiManager, Color.red);
