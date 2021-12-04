@@ -8,13 +8,12 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         Debug.Log("Game starts");
-        /*
-         if there's another scene we  can use this code to go to the next scene
+        
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
 
-        */
+        
     }
 
 
