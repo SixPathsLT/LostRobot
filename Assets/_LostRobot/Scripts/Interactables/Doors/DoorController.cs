@@ -51,7 +51,7 @@ public class DoorController : MonoBehaviour
         if (other.GetComponent<AIManager>() != null)
             OpenDoor();
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E)) {
+        if (other.CompareTag("Player") && Input.GetKey(KeyCode.E)) {
             HandleDoor();
 
             if (Locked && triggerPuzzle)
