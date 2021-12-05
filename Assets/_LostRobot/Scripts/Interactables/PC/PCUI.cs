@@ -34,6 +34,12 @@ public class PCUI : MonoBehaviour
 
     private void KeyPressed()
     {
+
+
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.GetInstance().InEmailState()) {
+            Close();
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.E) && trigger && GameManager.GetInstance().InPlayingState())
         {
             if (locked && triggerPuzzle)
