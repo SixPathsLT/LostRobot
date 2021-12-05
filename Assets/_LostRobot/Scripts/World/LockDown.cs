@@ -7,9 +7,10 @@ public class LockDown : MonoBehaviour
     public Vector2 timerRange;
     public Vector2 intervalRange;
     public bool LockDownInitiated = false;
+
     private void Start()
     {
-        StartCoroutine(LockDownCoroutine());
+        //StartCoroutine(LockDownCoroutine());
     }
     IEnumerator LockDownCoroutine ()
     {

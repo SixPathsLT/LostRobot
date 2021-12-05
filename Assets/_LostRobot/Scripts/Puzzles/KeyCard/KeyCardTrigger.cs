@@ -8,9 +8,11 @@ public class KeyCardTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && !main.obtainedKey)
         {
             main.gotKey(true);
+            GetComponent<AudioSource>().Play();
+            GetComponentInChildren<Renderer>().enabled = false;
             main.checkKey();
         }                
     }

@@ -16,4 +16,4 @@ MonoBehaviour:
   maxHealth: 100
   currentConciousness: 50
   maxConciousness: 100
-  interactedPCs: 9
+  interactedPCs: 0

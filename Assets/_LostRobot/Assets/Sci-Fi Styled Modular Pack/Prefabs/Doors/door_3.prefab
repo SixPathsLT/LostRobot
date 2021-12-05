@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 6161845607925392967}
   - component: {fileID: 1373628253339190860}
   m_Layer: 0
-  m_Name: Text
+  m_Name: SignText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
