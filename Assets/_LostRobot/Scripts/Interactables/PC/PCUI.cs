@@ -34,9 +34,8 @@ public class PCUI : MonoBehaviour
 
     private void KeyPressed()
     {
-
-
-        if (Input.GetKeyDown(KeyCode.E) && GameManager.GetInstance().InEmailState()) {
+        
+        if (Input.GetKeyDown(KeyCode.E) && textOpened && GameManager.GetInstance().InEmailState()) {
             Close();
             return;
         }
