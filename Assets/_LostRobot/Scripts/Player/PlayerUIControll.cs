@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIControll : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerUIControll : MonoBehaviour
     public Renderer[] healthIndicators;
     public int[] hIndexes;
     public Renderer[] concioussnessIndicators;
+    public Text pcCounter;
     public int[] cIndexes;
     public Renderer[] coolDownIndicators;
     public int[] cDIndexes;
@@ -56,6 +58,9 @@ public class PlayerUIControll : MonoBehaviour
             concioussnessIndicators[i].materials[cIndexes[i]].color = conciousness;
             concioussnessIndicators[i].materials[cIndexes[i]].SetColor("_EmissionColor", conciousness * 4f);
         }
+        pcCounter.text = "" + data.interactedPCs;
+        pcCounter.material.color = conciousness;
+        pcCounter.material.SetColor("_EmissionColor", conciousness * 4f);
     }
 
     private void UpdateCurrentAbility()

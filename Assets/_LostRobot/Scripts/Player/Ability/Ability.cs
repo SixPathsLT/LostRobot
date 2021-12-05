@@ -15,6 +15,7 @@ public abstract class Ability : ScriptableObject
     protected float elapsedTime;
 
     public virtual void Activate() {
+        AbilitiesManager.player.GetComponent<AbilitiesManager>().PlayAudio(0);
         SetState(AbilityState.Active);
     }
 
@@ -33,7 +34,10 @@ public abstract class Ability : ScriptableObject
                 if (state == AbilityState.Active && elapsedTime >= durationTime)
                     StartCooldown();                
                 else if (state == AbilityState.Cooldown && elapsedTime >= coolDownTime)
+                {
+                    AbilitiesManager.player.GetComponent<AbilitiesManager>().PlayAudio(1);
                     SetState(AbilityState.Ready);
+                }                    
                 else
                     elapsedTime += Time.deltaTime;
                 break;

@@ -10,16 +10,23 @@ public class DoorController : MonoBehaviour
     public bool triggerPuzzle;
     LockDown LockDown;
     public PuzzleManager puzzle;
+
+    private AudioPlayer audio;
     private void Awake()
     {
         LockDown = FindObjectOfType<LockDown>();
+        puzzle = FindObjectOfType<PuzzleManager>();
         _doorAnim = GetComponentInParent<Animator>();
+        audio = GetComponent<AudioPlayer>();
+        audio.source.spatialBlend = 1;
+        audio.source.volume = .3f;
     }
 
     internal void Close()
     {
         _doorAnim.SetBool("Open", false);
-
+        if (_doorAnim.GetCurrentAnimatorStateInfo(0).IsName("door_3_opened"))
+            audio.PlayClip("Door_Close_SFX");
         //Commented to prevent doors from locking when walking away
         //Locked = true;
     }
@@ -35,21 +42,24 @@ public class DoorController : MonoBehaviour
         if (!LockDown.LockDownInitiated && !Locked)
         {
             _doorAnim.SetBool("Open", true);
-
+            audio.PlayClip("Door_Open_SFX");
             Locked = false;
 
         }
         else if (LockDown.LockDownInitiated && !Locked)
         {
             _doorAnim.SetBool("Open", true);
-
+            //audio.PlayClip("Door_Open_SFX");
         }
     }
    
 
     private void OnTriggerStay(Collider other) {
         if (other.GetComponent<AIManager>() != null)
+        {
+            _doorAnim.SetBool("AIinRange", true);
             OpenDoor();
+        }            
 
         if (other.CompareTag("Player") && Input.GetKey(KeyCode.E)) {
             HandleDoor();
@@ -62,6 +72,11 @@ public class DoorController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Close();
+
+        if (other.GetComponent<AIManager>() != null)
+        {
+            _doorAnim.SetBool("AIinRange", false);
+        }
     }
     public void Start()
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject {
 
     public event Action<int> UIUpdater;
-    public int currentHealth, maxHealth, currentConciousness, maxConciousness;
+    public int currentHealth, maxHealth, currentConciousness, maxConciousness, interactedPCs;
 
     public void SetHealth(int health) {
         this.currentHealth = health;
@@ -17,6 +17,11 @@ public class PlayerData : ScriptableObject {
     public void SetConciousness(int value) {
         this.currentConciousness = value;
         UIUpdater?.Invoke(currentConciousness);
+    }
+
+    public void IncreasePCCount()
+    {
+        interactedPCs++;
     }
 
     public int GetHealth()

@@ -16,6 +16,14 @@ public class RoomInstancing : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("Player") && room == null)
+        {
+            room = Instantiate<GameObject>(roomPrefab, gameObject.transform) as GameObject;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag.Equals("Player"))

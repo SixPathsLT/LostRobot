@@ -36,6 +36,7 @@ public class ShooterManager : Puzzles
             }
             else
             {
+                GetComponent<PuzzleManager>().fail.Play();
                 Debug.Log("Time's up!");
                 Reset();
             }
@@ -67,6 +68,7 @@ public class ShooterManager : Puzzles
                 ActiveTarget();
             else if (targetsQueue.Count <= 0)
             {
+                GetComponent<PuzzleManager>().win.Play();
                 Debug.Log("You won!");
                 Reset();
                 FindObjectOfType<PuzzleManager>().Unlock();
@@ -74,6 +76,7 @@ public class ShooterManager : Puzzles
         }
         else
         {
+            GetComponent<PuzzleManager>().fail.Play();
             Debug.Log("Wrong target hit");
             Reset();
         }

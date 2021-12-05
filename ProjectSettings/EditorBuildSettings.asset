@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_LostRobot/Scenes/_GameMenu.unity
+    guid: a4293c222248c054d943cedf65538e8b
+  - enabled: 1
     path: Assets/_LostRobot/Scenes/_GameLvl_1.unity
     guid: 3f715d93845388c48a4acaf81d9ca2ad
   - enabled: 1
-    path: Assets/_LostRobot/Scenes/_GameLvl_2.unity
+    path: Assets/_LostRobot/Scenes/_GameLvl_2_BK.unity
     guid: ba2abe93f3a848b4494cf474d5293d7f
   m_configObjects: {}

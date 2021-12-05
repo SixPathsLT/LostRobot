@@ -9,7 +9,7 @@ public class AudioPlayer : MonoBehaviour {
     }
 
     [SerializeField] private Data[] audioData;
-    private AudioSource source;
+    public AudioSource source;
 
     void Start() {
         source = gameObject.AddComponent<AudioSource>();

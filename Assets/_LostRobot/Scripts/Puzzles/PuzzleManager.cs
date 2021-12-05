@@ -13,6 +13,9 @@ public class PuzzleManager : MonoBehaviour
     DoorController door;
     PCUI pc;
 
+    public AudioSource win;
+    public AudioSource fail;
+
     private void Start()
     {
         //abil = FindObjectOfType<AbilitiesManager>();

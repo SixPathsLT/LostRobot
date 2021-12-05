@@ -116,12 +116,14 @@ public class ShapesLogic : Puzzles
                 }
                 if (remainingGuesses <= 0)
                 {
+                    GetComponent<PuzzleManager>().fail.Play();
                     FindObjectOfType<Notification>().SendNotification("You Ran out of Guesses");
                     Reset();
                 }
                 if (imageCount == correctImages.Length)
                 {
                     Debug.Log("You won!");
+                    GetComponent<PuzzleManager>().win.Play();
                     Reset();
                     FindObjectOfType<PuzzleManager>().Unlock();
                 }
@@ -146,10 +148,11 @@ public class ShapesLogic : Puzzles
     {
         if (state)
         {
-            time.value = countDown;
+            time.value = timer - countDown;
             countDown += Time.deltaTime;
             if (countDown > timer)
             {
+                GetComponent<PuzzleManager>().fail.Play();
                 Debug.Log("Time's up!");
                 Reset();
             }

@@ -14,6 +14,8 @@ public class PCUI : MonoBehaviour
     public Text text;
     bool textOpened = false;
     bool trigger;
+
+    bool read = false;
     //CameraController controller;
 
     private void Start()
@@ -59,6 +61,11 @@ public class PCUI : MonoBehaviour
 
     public void DisplayText()
     {
+        if (!read)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data.IncreasePCCount();
+            read = true;
+        }        
         GameManager.GetInstance().ChangeState(GameManager.State.Email);
         canvas.SetActive(true);
         Cursor.visible = true;
