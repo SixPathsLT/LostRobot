@@ -13,6 +13,7 @@ public class ShooterManager : Puzzles
     bool state = false;
     public float timer;
     float countDown = 0;
+    public bool hasTimer;
     public override void Activate(bool showMouse)
     {
         base.Activate(false);
@@ -25,8 +26,24 @@ public class ShooterManager : Puzzles
     {
         if (state)
         {
-            countDown += Time.deltaTime;
-            if (countDown <= timer)
+            if (hasTimer)
+            {
+                countDown += Time.deltaTime;
+                if (countDown <= timer)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        GameObject projectile = Instantiate(bullet, ship.transform.position, Quaternion.identity);
+                        projectile.transform.SetParent(ship.transform);
+                    }
+                }
+                else if (countDown > timer)
+                {
+                    GetComponent<PuzzleManager>().fail.Play();
+                    Reset();
+                }
+            }
+            else if (!hasTimer)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -34,12 +51,7 @@ public class ShooterManager : Puzzles
                     projectile.transform.SetParent(ship.transform);
                 }
             }
-            else
-            {
-                GetComponent<PuzzleManager>().fail.Play();
-                Debug.Log("Time's up!");
-                Reset();
-            }
+
         }
         
     }
@@ -69,7 +81,6 @@ public class ShooterManager : Puzzles
             else if (targetsQueue.Count <= 0)
             {
                 GetComponent<PuzzleManager>().win.Play();
-                Debug.Log("You won!");
                 Reset();
                 FindObjectOfType<PuzzleManager>().Unlock();
             }

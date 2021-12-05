@@ -1896,10 +1896,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 044539660424eca459510e4db3a34fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abil: {fileID: 0}
-  movement: {fileID: 0}
+  currentPuzzle: {fileID: 0}
   puzzles:
   - {fileID: 1222481752}
+  win: {fileID: 0}
+  fail: {fileID: 0}
 --- !u!114 &1222481752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1919,7 +1920,8 @@ MonoBehaviour:
   - {fileID: 1833140040}
   - {fileID: 498876894}
   canvas: {fileID: 2108870832}
-  timer: 45
+  timer: 10
+  hasTimer: 1
 --- !u!1 &1251806052
 GameObject:
   m_ObjectHideFlags: 0
