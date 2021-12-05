@@ -26,10 +26,12 @@ public class IntroductionCutscene : Cutscene {
         playerData.SetConciousness(0);
         playerData.SetHealth(1);
         StartCoroutine(StartWakeup());
+
+        GetComponent<AudioPlayer>().source.volume = 0.4f;
+        GetComponent<AudioPlayer>().PlayAllClips();
+
     }
 
-    
-    Color startColor = Color.black;
     public override void Process(){
         float speed = 10;
         if (consciousness.canGain) {
@@ -45,7 +47,7 @@ public class IntroductionCutscene : Cutscene {
             if (health.value > 100)
                 health.value = 100;
 
-            Color lerpedColor = Color.Lerp(startColor, player.GetComponent<PlayerUIControll>().coolDown, (health.value * 1.5f) * Time.deltaTime);
+            Color lerpedColor = Color.Lerp(Color.black, player.GetComponent<PlayerUIControll>().coolDown, (health.value * 1.5f) * Time.deltaTime);
 
             coolDown.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 12f);
             abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 6f);

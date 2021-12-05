@@ -6,6 +6,10 @@ public class SpeedAbility : Ability
     float initialSpeed;
     float increasedSpeed = 10f;
     public override void Activate() {
+        if (AbilitiesManager.player.GetComponent<PlayerController>().data.interactedPCs < 6) {
+            FindObjectOfType<Notification>().SendNotification("You haven't unlocked this ability yet.");
+            return;
+        }
         base.Activate();
         initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = increasedSpeed;

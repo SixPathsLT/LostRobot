@@ -22,6 +22,20 @@ public class PlayerData : ScriptableObject {
     public void IncreasePCCount()
     {
         interactedPCs++;
+        switch (interactedPCs) {
+            case 3:
+                FindObjectOfType<Notification>().SendNotification("Unlocked Cloaking Ability!");
+                break;
+            case 6:
+                FindObjectOfType<Notification>().SendNotification("Unlocked Speed Ability!");
+                break;
+            case 9:
+                FindObjectOfType<Notification>().SendNotification("Unlocked Stun Ability!");
+                break;
+            case 12:
+                FindObjectOfType<Notification>().SendNotification("Unlocked Melee Ability!");
+                break;
+        }
     }
 
     public int GetHealth()

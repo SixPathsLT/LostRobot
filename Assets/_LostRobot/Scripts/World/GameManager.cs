@@ -16,20 +16,25 @@ public class GameManager : MonoBehaviour
             instance = this;
     }
 
+    public State GetCurrentState()
+    {
+        return currentState;
+    }
+
     public void ChangeState(State requestedState) {
         bool approveChange = false;
 
         if (InPlayingState()) {
             switch (requestedState) {
-                case State.Paused:
-                    PauseGame();
-                    break;
+                /*case State.Paused:
+                    //PauseGame();
+                    break;*/
             }
             approveChange = true;
         } else if (InPausedState()) {
             switch (requestedState) {
                 case State.Playing:
-                    ResumeGame();
+                    //ResumeGame();
                     approveChange = true;
                     break;
             }
@@ -53,10 +58,8 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-
         if (approveChange)
             currentState = requestedState;
-
     }
 
     public void OnRespawn() {
@@ -69,14 +72,14 @@ public class GameManager : MonoBehaviour
             puzzle.Reset();
     }
 
-    void PauseGame() {
+    /*void PauseGame() {
         FindObjectOfType<PauseMenu>().Pause();
     }
     void ResumeGame() {
         FindObjectOfType<PauseMenu>().ResumeGame();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-    }
+    }*/
 
     public bool InPlayingState() { return currentState == State.Playing; }
     public bool InPausedState() { return currentState == State.Paused; }

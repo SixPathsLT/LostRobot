@@ -11,6 +11,11 @@ public class CutsceneManager : MonoBehaviour {
 
     string sceneName;
 
+    private void Awake() {
+        canvas.SetActive(false);
+        cutsceneCam.SetActive(false);
+    }
+
     void Start() {
         PlayCutscene(0);
     }
@@ -37,6 +42,7 @@ public class CutsceneManager : MonoBehaviour {
             Debug.Log("A cutscene is already playing.");
             return;
         }
+        GameManager.GetInstance().ChangeState(GameManager.State.Cutscene);
         this.sceneName = sceneName;
         cutsceneCam.SetActive(true);
         canvas.SetActive(true);
@@ -50,7 +56,7 @@ public class CutsceneManager : MonoBehaviour {
         currentCutscene = null;
         cutsceneCam.SetActive(false);
         timeElapsed = 0f;
-
+        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
         if (sceneName != null)
             SceneManager.LoadScene(sceneName);
     }

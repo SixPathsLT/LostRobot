@@ -25,6 +25,11 @@ public class CameraController : MonoBehaviour
         camDist = zoomDist;
         //Cursor.lockState = CursorLockMode.Locked;
     }
+
+    public void ChangeSensitivity(float value)
+    {
+        mouseSensitivity = value * 2f;
+    }
     void Update() {
         if (GameManager.GetInstance().InPlayingState())
             Movement();

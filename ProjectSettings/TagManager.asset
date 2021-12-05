@@ -10,6 +10,8 @@ TagManager:
   - Incorrect
   - Solution
   - Solved
+  - DialLock
+  - DoorLight
   layers:
   - Default
   - TransparentFX

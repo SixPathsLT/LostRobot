@@ -18,14 +18,11 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
-            GameManager.GetInstance().ChangeState(GamePaused ? GameManager.State.Playing : GameManager.State.Paused);
+            Toggle();
            /* if (GamePaused)
-            {
+            * {
                 ResumeGame();
-
-            }
-
+            } 
             else
             {
                 GamePaused = true;
@@ -37,6 +34,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        if (!GameManager.GetInstance().InPlayingState())
+            return;
+        GameManager.GetInstance().ChangeState(GameManager.State.Paused);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GamePaused = true;
@@ -46,6 +46,9 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (!GameManager.GetInstance().InPausedState() || !PauseGame.activeSelf)
+            return;
+        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
         GamePaused = false;
@@ -53,12 +56,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Toggle()
-    {
-        GameManager.GetInstance().ChangeState(GamePaused ? GameManager.State.Playing : GameManager.State.Paused);
+    public void Toggle(){
+        if (GamePaused)
+            ResumeGame();
+        else
+            Pause();
     }
-
-
 
 
     public void LeaveGame()

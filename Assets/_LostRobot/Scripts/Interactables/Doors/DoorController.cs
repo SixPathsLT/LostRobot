@@ -12,6 +12,7 @@ public class DoorController : MonoBehaviour
     public PuzzleManager puzzle;
 
     private AudioPlayer audio;
+    static GameObject[] doorsLights;
     private void Awake()
     {
         LockDown = FindObjectOfType<LockDown>();
@@ -20,7 +21,15 @@ public class DoorController : MonoBehaviour
         audio = GetComponent<AudioPlayer>();
         audio.source.spatialBlend = 1;
         audio.source.volume = .3f;
+
     }
+
+    public void Start()
+    {
+        _doorAnim = this.transform.parent.GetComponent<Animator>();
+        //puzzle = FindObjectOfType<PuzzleManager>();
+    }
+
 
     internal void Close()
     {
@@ -78,22 +87,30 @@ public class DoorController : MonoBehaviour
             _doorAnim.SetBool("AIinRange", false);
         }
     }
-    public void Start()
-    {
-        _doorAnim = this.transform.parent.GetComponent<Animator>();
-        puzzle = FindObjectOfType<PuzzleManager>();
-    }
 
     public void Lock()
     {
         _doorAnim.SetBool("Lockdown", true);
-        transform.parent.GetComponentInParent<Renderer>().material.color = Color.red;
+        // transform.parent.GetComponentInParent<Renderer>().material.color = Color.red;
+        if (doorsLights == null)
+            doorsLights = GameObject.FindGameObjectsWithTag("DoorLight");
+        foreach (var door in doorsLights) {
+            door.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", Color.red * 6f);
+            door.GetComponentInChildren<Light>().color = Color.red;
+        }
+
     }
 
     public void Unlock()
     {
+        if (doorsLights == null)
+            doorsLights = GameObject.FindGameObjectsWithTag("DoorLight");
         _doorAnim.SetBool("Lockdown", false);
-        transform.parent.GetComponentInParent<Renderer>().material.color = Color.white;
+        //transform.parent.GetComponentInParent<Renderer>().material.color = Color.white;
+        foreach (var door in doorsLights) {
+            door.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", Color.white * 6f);
+            door.GetComponentInChildren<Light>().color = Color.white;
+        }
 
     }
 }

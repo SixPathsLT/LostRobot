@@ -10,7 +10,6 @@ public abstract class Cutscene : MonoBehaviour {
     private PlayableDirector playableDirector;
     
     public virtual void Init() {
-        GameManager.GetInstance().ChangeState(GameManager.State.Cutscene);
         playableDirector = GetComponent<PlayableDirector>();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -33,8 +32,6 @@ public abstract class Cutscene : MonoBehaviour {
 
         if (playableDirector != null)
             playableDirector.Stop();
-
-        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
     }
 
     public PlayableDirector GetPlayableDirector() {
