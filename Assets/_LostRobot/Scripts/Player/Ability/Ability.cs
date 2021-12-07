@@ -7,7 +7,7 @@ public abstract class Ability : ScriptableObject
 {
     [SerializeField] public KeyCode keyCode;
     [SerializeField] protected float durationTime, coolDownTime;
-    public float requiredConsciousness = 0f;
+    public int requiredReadEmails;
     [SerializeField] public Texture icon;
 
     [HideInInspector]
@@ -24,8 +24,10 @@ public abstract class Ability : ScriptableObject
         switch (state) {
             case AbilityState.Ready:
                 if (AbilitiesManager.selectedAbility == this &&  Input.GetMouseButton(0) && GameManager.GetInstance().InPlayingState()) {
-                    if (player.GetComponent<PlayerController>().data.GetConcioussness() < requiredConsciousness)
-                        FindObjectOfType<Notification>().SendNotification("You need a consciousness level of " + requiredConsciousness + " to use this ability.");
+                    if (player.GetComponent<PlayerController>().data.GetConcioussness() < 1)
+                        FindObjectOfType<Notification>().SendNotification("You need to increase your consciousness to be able to use abilities.");
+                    else if (player.GetComponent<PlayerController>().data.GetEmailsCount() < requiredReadEmails)
+                        FindObjectOfType<Notification>().SendNotification("You need to read " + requiredReadEmails+ " emails to unlock this ability.");
                     else
                         Activate();
                 }

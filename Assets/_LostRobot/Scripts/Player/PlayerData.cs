@@ -4,39 +4,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class PlayerData : ScriptableObject {
+public class PlayerData : ScriptableObject
+{
 
     public event Action<int> UIUpdater;
-    public int currentHealth, maxHealth, currentConciousness, maxConciousness, interactedPCs;
+    public int currentHealth, maxHealth, currentConciousness, maxConciousness;//, interactedPCs;
 
-    public void SetHealth(int health) {
+    public List<string> obtainedKeyInfo = new List<string>();
+    public List<string> obtainedKeyCards = new List<string>();
+    public List<string> readEmails = new List<string>();
+    public int level = 1;
+
+    public void SetHealth(int health)
+    {
         this.currentHealth = health;
         UIUpdater?.Invoke(health);
     }
 
-    public void SetConciousness(int value) {
+    public void SetConciousness(int value)
+    {
         this.currentConciousness = value;
         UIUpdater?.Invoke(currentConciousness);
     }
 
-    public void IncreasePCCount()
+    /*public void IncreasePCCount()
     {
         interactedPCs++;
-        switch (interactedPCs) {
-            case 3:
-                FindObjectOfType<Notification>().SendNotification("Unlocked Cloaking Ability!");
-                break;
-            case 6:
-                FindObjectOfType<Notification>().SendNotification("Unlocked Speed Ability!");
-                break;
-            case 9:
-                FindObjectOfType<Notification>().SendNotification("Unlocked Stun Ability!");
-                break;
-            case 12:
-                FindObjectOfType<Notification>().SendNotification("Unlocked Melee Ability!");
-                break;
-        }
-    }
+    }*/
 
     public int GetHealth()
     {
@@ -57,4 +51,46 @@ public class PlayerData : ScriptableObject {
     {
         return maxConciousness;
     }
+
+    public void AddEmail(string id) {
+        if (readEmails == null)
+            readEmails = new List<string>();
+
+        readEmails.Add(id);
+
+        foreach (var ability in GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitiesManager>().abilities) {
+            if (GetEmailsCount() == ability.requiredReadEmails)
+                FindObjectOfType<Notification>().SendNotification(ability.name.Replace("Ability", "").Replace("Data", "") + " Ability Unlocked!");
+        }
+
+        GameManager.GetInstance().Save();
+    }
+
+    public void CompletedLevel() {
+        level++;
+        GameManager.GetInstance().Save();
+    }
+    public void AddKeyCard(string id) {
+        if (obtainedKeyCards == null)
+            obtainedKeyCards = new List<string>();
+
+        obtainedKeyCards.Add(id);
+        GameManager.GetInstance().Save();
+    }
+
+    public void AddObtainedInfo(string id)
+    {
+        if (obtainedKeyInfo == null)
+            obtainedKeyInfo = new List<string>();
+
+        obtainedKeyInfo.Add(id);
+
+        GameManager.GetInstance().Save();
+    }
+
+
+    public int GetEmailsCount() {
+        return readEmails.Count;
+    }
+
 }

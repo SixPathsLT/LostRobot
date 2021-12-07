@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,10 +15,18 @@ public class PCUI : MonoBehaviour
     bool read = false;
     //CameraController controller;
 
+    [SerializeField] string id = Utils.GetUniqueId();
+
+    PlayerData data;
     private void Start()
     {
         puzzle = FindObjectOfType<PuzzleManager>();
         //controller = FindObjectOfType<CameraController>();
+        data = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data;
+        if (data.readEmails.Contains(id)) {
+            read = true;
+            locked = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,7 +73,8 @@ public class PCUI : MonoBehaviour
     {
         if (!read)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data.IncreasePCCount();
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data.IncreasePCCount();
+            data.AddEmail(id);
             read = true;
         }        
         GameManager.GetInstance().ChangeState(GameManager.State.Email);

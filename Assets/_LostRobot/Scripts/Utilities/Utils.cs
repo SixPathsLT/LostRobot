@@ -1,3 +1,5 @@
+using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class Utils {
@@ -31,6 +33,10 @@ public static class Utils {
                 return true;
         }
         return false;
+    }
+
+    public static string GetUniqueId() {
+        return Guid.NewGuid().ToString();
     }
 
 }

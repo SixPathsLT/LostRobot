@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
 
     public void ChangeSensitivity(float value)
     {
-        mouseSensitivity = value * 2f;
+        mouseSensitivity = value * 3f;
     }
     void Update() {
         if (GameManager.GetInstance().InPlayingState())

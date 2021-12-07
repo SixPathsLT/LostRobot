@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         data.maxHealth = checkpoint.maxHealth;
         data.currentConciousness = checkpoint.currentConciousness;
         data.maxConciousness = checkpoint.maxConciousness;*/
-        data.SetHealth(100);
+        //data.SetHealth(100);
         GameManager.GetInstance().OnRespawn();
     }
 

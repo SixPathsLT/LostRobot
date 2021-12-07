@@ -180,6 +180,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: af84b8fd044f98441a72317f5a5cc6d3, type: 3}
   canvas: {fileID: 1009051853}
   text: {fileID: 1158701567}
+  id: d284cd98-c82f-4d23-a6d6-cc056a8169fd
 --- !u!114 &801575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,6 +3089,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: aec15a41f2d69704cb64cb319b8aa0a6, type: 3}
   canvas: {fileID: 1009051853}
   text: {fileID: 1158701567}
+  id: 19b727c7-06a6-4773-95bb-89a36ef02dc3
 --- !u!65 &275134121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4003,9 +4005,9 @@ MonoBehaviour:
   focus: {fileID: 301015268}
   yOffset: 0
   zOffset: 4
-  mouseSensitivity: 0.93
+  mouseSensitivity: 1.395
   cam: {fileID: 362439683}
-  scrollSensitivity: 0.465
+  scrollSensitivity: 2
   scrollDamp: 6
   zoomMinMax: {x: 2, y: 4}
   collisionSensitivity: 0.5
@@ -4722,6 +4724,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: 8a2d6f726936d1f488dee35acdc5a3f0, type: 3}
   canvas: {fileID: 1009051853}
   text: {fileID: 1158701567}
+  id: f05333f3-339f-4318-bda5-3480ca99b107
 --- !u!65 &438964768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4783,7 +4786,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443117448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.9, y: 2.358621, z: 36.9}
+  m_LocalPosition: {x: 62.9, y: 1.4, z: 36.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1120116624}
@@ -5899,6 +5902,7 @@ MonoBehaviour:
   Locked: 0
   triggerPuzzle: 0
   puzzle: {fileID: 0}
+  cardRequired: 0
 --- !u!23 &557788844
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8075,6 +8079,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: 355e866a9102ad646bc2b39aff4b7a2a, type: 3}
   canvas: {fileID: 1009051853}
   text: {fileID: 1158701567}
+  id: 436df2c0-0eda-48a0-8d20-7f4ba75ac503
 --- !u!65 &778507314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11393,6 +11398,7 @@ MonoBehaviour:
   Locked: 1
   triggerPuzzle: 0
   puzzle: {fileID: 0}
+  cardRequired: 0
 --- !u!23 &1038007824
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12363,9 +12369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
+  - {fileID: 11400000, guid: 5bd39877dbb163a4aadbbab5cfc7c529, type: 2}
   - {fileID: 11400000, guid: 3cb6b22a2c1034d45ab40cf57518ddca, type: 2}
   - {fileID: 11400000, guid: 93376e1a09feeff4ab1cff2c851bfc0f, type: 2}
-  - {fileID: 11400000, guid: 5bd39877dbb163a4aadbbab5cfc7c529, type: 2}
   - {fileID: 11400000, guid: eeba5d5f0f613394195e334d36daadac, type: 2}
   abilitySounds: {fileID: 649297327}
   audioClips:
@@ -13555,7 +13561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261967627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.699974, y: 1.1800537, z: 41.5}
+  m_LocalPosition: {x: 45.699974, y: 1.3, z: 41.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14505,6 +14511,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: 22ba7aa6e9972c44eac391f4aee55557, type: 3}
   canvas: {fileID: 1009051853}
   text: {fileID: 1158701567}
+  id: 05490527-68df-4658-9693-27831bd8fcf7
 --- !u!65 &1380323172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14825,7 +14832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8fe355e4b8138354597cef6e83242850, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.0000001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8fe355e4b8138354597cef6e83242850, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16932,6 +16939,7 @@ MonoBehaviour:
   Locked: 0
   triggerPuzzle: 0
   puzzle: {fileID: 0}
+  cardRequired: 0
 --- !u!23 &1585858646
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17782,6 +17790,7 @@ MonoBehaviour:
   keyObject: {fileID: 107020419}
   doors:
   - {fileID: 1980526934}
+  id: 6a165097-870c-4f15-bbb2-aae64ce8fc56
 --- !u!1001 &1691468630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19985,6 +19994,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: d42a0817c1df0f24dbbdcc1cff9f6b7f, type: 3}
   canvas: {fileID: 1009051853}
   text: {fileID: 1158701567}
+  id: 78a4b713-7479-4816-80ce-009823b60fa4
 --- !u!65 &1893813238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20452,6 +20462,7 @@ MonoBehaviour:
   obtainedKey: 0
   keyObject: {fileID: 1178990625}
   doors: []
+  id: 262287aa-c676-41f3-b4ce-7f1da141c5f6
 --- !u!65 &1960483008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22232,7 +22243,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104579214}
-  m_LocalRotation: {x: 0.74363214, y: 0.010013067, z: -0.03727526, w: 0.66747403}
+  m_LocalRotation: {x: 0.74363214, y: 0.010013099, z: -0.03727535, w: 0.66747403}
   m_LocalPosition: {x: 0.030170448, y: 0.09066397, z: -0.07360326}
   m_LocalScale: {x: 0.13000001, y: 0.0009999999, z: 0.13000001}
   m_Children: []

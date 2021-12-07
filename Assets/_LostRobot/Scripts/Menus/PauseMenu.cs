@@ -63,7 +63,6 @@ public class PauseMenu : MonoBehaviour
             Pause();
     }
 
-
     public void LeaveGame()
     {
         Time.timeScale = 1f;

@@ -1,40 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State { Playing, Paused, Puzzle, Email, Cutscene }
+    public enum State { Menu, Loading, Playing, Paused, Puzzle, Email, Cutscene }
     State currentState;
 
     static private GameManager instance;
+    private string SAVE_PATH;
+    private GameObject player;
+    public PlayerData data;
 
     void Awake() {
-        if (instance != null)
+        if (instance != null) {
             Destroy(this);
-        else
+            return;
+        } else
             instance = this;
+
+        DontDestroyOnLoad(this);
+
+        SAVE_PATH = Application.persistentDataPath + "/player.data";
+        Load();
     }
 
-    public State GetCurrentState()
-    {
-        return currentState;
+    public void StartGame() {
+        SceneManager.LoadScene(data.level);
+        currentState = State.Loading;
+
+        Debug.Log("Started game");
+    }
+
+    private void LateUpdate() {
+        if (currentState != State.Loading)
+            return;
+
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+           return;
+        currentState = State.Playing;
+
+        if (data.GetEmailsCount() < 1)
+            FindObjectOfType<CutsceneManager>().PlayCutscene(0);
+
     }
 
     public void ChangeState(State requestedState) {
         bool approveChange = false;
 
-        if (InPlayingState()) {
-            switch (requestedState) {
-                /*case State.Paused:
-                    //PauseGame();
-                    break;*/
-            }
+        if (InPlayingState())
             approveChange = true;
-        } else if (InPausedState()) {
+        else if (InPausedState()) {
             switch (requestedState) {
                 case State.Playing:
-                    //ResumeGame();
                     approveChange = true;
                     break;
             }
@@ -72,14 +96,51 @@ public class GameManager : MonoBehaviour
             puzzle.Reset();
     }
 
-    /*void PauseGame() {
-        FindObjectOfType<PauseMenu>().Pause();
+    [System.Serializable]
+    public struct SaveableData {
+        public int level;
+        public int consciousness;
+        public int health;
+        public List<string> readEmails;
+        public List<string> obtainedKeyCards;
+        public List<string> obtainedKeyInfo;
+
+        public SaveableData(PlayerData data) {
+            level = data.level;
+            consciousness = data.currentConciousness;
+            health = data.currentHealth;
+            readEmails = data.readEmails;
+            obtainedKeyCards = data.obtainedKeyCards;
+            obtainedKeyInfo = data.obtainedKeyInfo;
+        }
     }
-    void ResumeGame() {
-        FindObjectOfType<PauseMenu>().ResumeGame();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }*/
+
+    public void Save() {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(SAVE_PATH, FileMode.Create);
+        formatter.Serialize(stream, new SaveableData(data));
+        stream.Close();
+    }
+
+    public void Load() {
+        if (!File.Exists(SAVE_PATH))
+            return;
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(SAVE_PATH, FileMode.Open);
+        SaveableData savedData = (SaveableData) formatter.Deserialize(stream);
+
+        data.level = savedData.level;
+        data.currentConciousness = savedData.consciousness;
+        data.currentHealth = savedData.health;
+        data.readEmails = savedData.readEmails;
+        data.obtainedKeyCards = savedData.obtainedKeyCards;
+        data.obtainedKeyInfo = savedData.obtainedKeyInfo;
+
+        stream.Close();
+    }
+
+    public State GetCurrentState() { return currentState; }
 
     public bool InPlayingState() { return currentState == State.Playing; }
     public bool InPausedState() { return currentState == State.Paused; }
@@ -92,4 +153,5 @@ public class GameManager : MonoBehaviour
             instance = new GameObject().AddComponent<GameManager>();
         return instance;
     }
+
 }

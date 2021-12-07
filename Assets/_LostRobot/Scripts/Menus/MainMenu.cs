@@ -10,13 +10,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Game starts");
         
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.GetInstance().StartGame();
 
         
     }
-
-
 
     public void Quit()
     {

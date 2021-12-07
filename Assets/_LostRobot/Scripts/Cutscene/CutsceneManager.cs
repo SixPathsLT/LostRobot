@@ -16,10 +16,6 @@ public class CutsceneManager : MonoBehaviour {
         cutsceneCam.SetActive(false);
     }
 
-    void Start() {
-        PlayCutscene(0);
-    }
-    
     void Update() {
         if (currentCutscene != null) {
             currentCutscene.Process();

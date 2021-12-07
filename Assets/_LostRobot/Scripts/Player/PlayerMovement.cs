@@ -41,10 +41,12 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
             Controller.Move(direction * speed * Time.deltaTime);
-
+            
         }
 
         if (transform.position.y > 1)
             Controller.Move(Vector3.down * gravity * Time.deltaTime);
+
+
     }
 }

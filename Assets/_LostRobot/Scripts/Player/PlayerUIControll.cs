@@ -58,7 +58,7 @@ public class PlayerUIControll : MonoBehaviour
             concioussnessIndicators[i].materials[cIndexes[i]].color = conciousness;
             concioussnessIndicators[i].materials[cIndexes[i]].SetColor("_EmissionColor", conciousness * 4f);
         }
-        pcCounter.text = "" + data.interactedPCs;
+        pcCounter.text = "" + data.GetEmailsCount();//.interactedPCs;
         pcCounter.material.color = conciousness;
         pcCounter.material.SetColor("_EmissionColor", conciousness * 4f);
     }

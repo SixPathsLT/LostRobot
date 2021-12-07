@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class KeyCardLogic : MonoBehaviour
@@ -10,12 +9,17 @@ public class KeyCardLogic : MonoBehaviour
     public GameObject keyObject;
     public DoorController[] doors;
 
-    private void Start()
-    {
-        foreach (DoorController door in doors)
-        {
-            door.Locked = true;
-            door.cardRequired = true;
+    [SerializeField] string id = Utils.GetUniqueId();
+    PlayerData data;
+
+    private void Start() {
+        data = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data;
+        obtainedKey = data.obtainedKeyCards.Contains(id);
+        obtainedInfo = data.obtainedKeyInfo.Contains(id);
+        
+        foreach (DoorController door in doors) {
+            door.Locked = !obtainedKey || !obtainedInfo;//true;
+            door.cardRequired = !obtainedKey || !obtainedInfo;//true;
         }
     }
 
@@ -61,6 +65,7 @@ public class KeyCardLogic : MonoBehaviour
         if (obtainedInfo)
         {
             obtainedKey = key;
+            data.AddKeyCard(id);
         }
     }
 
@@ -71,6 +76,7 @@ public class KeyCardLogic : MonoBehaviour
             if (!obtainedInfo)
             {
                 obtainedInfo = true;
+                data.AddObtainedInfo(id);
             }
             checkInfo();
         }
