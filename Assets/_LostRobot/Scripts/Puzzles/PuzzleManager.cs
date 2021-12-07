@@ -6,8 +6,6 @@ public class PuzzleManager : MonoBehaviour
 {
     [HideInInspector]
     public Puzzles currentPuzzle;
-   // public AbilitiesManager abil;
-   // public PlayerMovement movement;
     public Puzzles[] puzzles;
     int puzzleType;
     DoorController door;
@@ -16,11 +14,6 @@ public class PuzzleManager : MonoBehaviour
     public AudioSource win;
     public AudioSource fail;
 
-    private void Start()
-    {
-        //abil = FindObjectOfType<AbilitiesManager>();
-        //movement = FindObjectOfType<PlayerMovement>();
-    }
     public void ChooseDoorPuzzle(DoorController door)
     {
         if (!GameManager.GetInstance().InPlayingState())
@@ -31,8 +24,6 @@ public class PuzzleManager : MonoBehaviour
 
         currentPuzzle = puzzles[puzzleType];
         currentPuzzle.Activate(true);
-        //puzzles[puzzleType].Activate(true);
-
         pc = null;
     }
 
@@ -46,8 +37,6 @@ public class PuzzleManager : MonoBehaviour
 
         currentPuzzle = puzzles[puzzleType];
         currentPuzzle.Activate(true);
-        //puzzles[puzzleType].Activate(true);
-
         door = null;
     }
 

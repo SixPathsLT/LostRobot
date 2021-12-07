@@ -88,7 +88,6 @@ public class ShooterManager : Puzzles
         else
         {
             GetComponent<PuzzleManager>().fail.Play();
-            Debug.Log("Wrong target hit");
             Reset();
         }
     }
@@ -110,6 +109,9 @@ public class ShooterManager : Puzzles
         targetsQueue.Clear();
         state = false;
         countDown = 0;
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets)
+            Destroy(bullet);
         canvas.SetActive(false);
     }
 }
