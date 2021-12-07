@@ -15,6 +15,7 @@ public class KeyCardLogic : MonoBehaviour
         foreach (DoorController door in doors)
         {
             door.Locked = true;
+            door.cardRequired = true;
         }
     }
 
@@ -36,6 +37,7 @@ public class KeyCardLogic : MonoBehaviour
         {
             foreach (DoorController door in doors)
             {
+                
                 door.Close();
             }
         }

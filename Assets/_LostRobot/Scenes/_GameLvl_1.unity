@@ -1122,7 +1122,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 100f44930b2097a48b8696d3b89f17e9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1284,6 +1284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 1687599313}
+  mesh: {fileID: 1373791346}
 --- !u!65 &107020425
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6247,10 +6248,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1556670448}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
+      - m_Target: {fileID: 665327436}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: LeaveGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7079,6 +7080,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &654577327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cc137c66e1b755d488d15ff3d7408405, type: 3}
+  m_PrefabInstance: {fileID: 1769035102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &656484363
 GameObject:
   m_ObjectHideFlags: 0
@@ -11522,7 +11528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2895638859217930380, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
       propertyPath: m_Range
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2895638859217930380, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
       propertyPath: m_Color.b
@@ -11538,11 +11544,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2895638859217930380, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
       propertyPath: m_Intensity
-      value: 2.59
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2895638859217930380, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
       propertyPath: m_SpotAngle
-      value: 138.1
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895638859217930380, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2895638859217930380, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
       propertyPath: m_BounceIntensity
@@ -12872,6 +12882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 1960483007}
+  mesh: {fileID: 654577327}
 --- !u!65 &1178990627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12896,8 +12907,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 100f44930b2097a48b8696d3b89f17e9, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_PlayOnAwake: 0
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -14353,6 +14364,11 @@ Transform:
   m_Father: {fileID: 977439513}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1373791346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cc137c66e1b755d488d15ff3d7408405, type: 3}
+  m_PrefabInstance: {fileID: 348172363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1376939518
 GameObject:
   m_ObjectHideFlags: 0
@@ -17219,7 +17235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -898.2904, y: -334.4585}
+  m_AnchoredPosition: {x: -898.2904, y: -341}
   m_SizeDelta: {x: 1692.1973, y: 334.4584}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1617045069
@@ -17305,7 +17321,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 26.500696, y: 0, z: -0.92767334, w: 0}
+  m_margin: {x: 26.500696, y: 0, z: -0.92767334, w: 198.51788}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -19036,6 +19052,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 207350489}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

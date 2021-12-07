@@ -10,6 +10,7 @@ public class DoorController : MonoBehaviour
     public bool triggerPuzzle;
     LockDown LockDown;
     public PuzzleManager puzzle;
+    public bool cardRequired;
 
     private AudioPlayer audio;
     static GameObject[] doorsLights;
@@ -20,7 +21,7 @@ public class DoorController : MonoBehaviour
         _doorAnim = GetComponentInParent<Animator>();
         audio = GetComponent<AudioPlayer>();
         audio.source.spatialBlend = 1;
-        audio.source.volume = .3f;
+        audio.source.volume = .1f;
 
     }
 
@@ -75,6 +76,8 @@ public class DoorController : MonoBehaviour
 
             if (Locked && triggerPuzzle)
                 puzzle.ChooseDoorPuzzle(this);
+            else if (Locked && cardRequired)
+                FindObjectOfType<Notification>().SendNotification("Access Card Required");
         }
     }
 

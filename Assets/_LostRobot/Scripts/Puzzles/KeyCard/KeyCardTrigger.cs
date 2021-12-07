@@ -5,6 +5,7 @@ using UnityEngine;
 public class KeyCardTrigger : MonoBehaviour
 {
     public KeyCardLogic main;
+    public GameObject mesh;
 
     private void OnTriggerStay(Collider other)
     {
@@ -12,8 +13,10 @@ public class KeyCardTrigger : MonoBehaviour
         {
             main.gotKey(true);
             GetComponent<AudioSource>().Play();
-            GetComponentInChildren<Renderer>().enabled = false;
+            FindObjectOfType<Notification>().SendNotification("Access Card Acquired");            
             main.checkKey();
+
+            mesh.SetActive(false);
         }                
     }
 }
