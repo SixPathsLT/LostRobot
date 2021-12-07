@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class KeyCardLogic : MonoBehaviour
 {
-    private bool obtainedInfo = false;
+    public bool obtainedInfo = false;
     public bool obtainedKey = false;
 
     public GameObject keyObject;

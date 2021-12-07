@@ -5,6 +5,7 @@ using UnityEngine;
 public class RadioTrigger : MonoBehaviour
 {
     AudioPlayer audio;
+    bool played;
 
     private void Start()
     {
@@ -14,8 +15,9 @@ public class RadioTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals("Player") && Input.GetKey(KeyCode.E))
+        if (other.tag.Equals("Player") && Input.GetKey(KeyCode.E) && !played)
         {
+            played = true;
             audio.PlayAllClips();
         }
     }

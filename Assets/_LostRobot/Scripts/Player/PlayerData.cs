@@ -56,6 +56,9 @@ public class PlayerData : ScriptableObject
         if (readEmails == null)
             readEmails = new List<string>();
 
+        if (readEmails.Contains(id))
+            return;
+
         readEmails.Add(id);
 
         foreach (var ability in GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitiesManager>().abilities) {
@@ -70,18 +73,24 @@ public class PlayerData : ScriptableObject
         level++;
         GameManager.GetInstance().Save();
     }
+
     public void AddKeyCard(string id) {
         if (obtainedKeyCards == null)
             obtainedKeyCards = new List<string>();
+
+        if (obtainedKeyCards.Contains(id))
+            return;
 
         obtainedKeyCards.Add(id);
         GameManager.GetInstance().Save();
     }
 
-    public void AddObtainedInfo(string id)
-    {
+    public void AddObtainedInfo(string id) {
         if (obtainedKeyInfo == null)
             obtainedKeyInfo = new List<string>();
+
+        if (obtainedKeyInfo.Contains(id))
+            return;
 
         obtainedKeyInfo.Add(id);
 

@@ -16,6 +16,7 @@ public class PCUI : MonoBehaviour
     //CameraController controller;
 
     [SerializeField] string id = Utils.GetUniqueId();
+    public string ID { get { return id; } }
 
     PlayerData data;
     private void Start()
@@ -76,7 +77,8 @@ public class PCUI : MonoBehaviour
             //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data.IncreasePCCount();
             data.AddEmail(id);
             read = true;
-        }        
+            FindObjectOfType<Journal>(true).CreateEntry(this);
+        }
         GameManager.GetInstance().ChangeState(GameManager.State.Email);
         canvas.SetActive(true);
         Cursor.visible = true;
