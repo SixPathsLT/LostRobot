@@ -19,6 +19,7 @@ public class AIManager : MonoBehaviour {
     [HideInInspector]
     public int currentNode = 0;
 
+    public Animator _anim;
     public static GameObject player;
     public AIBehaviour investigateBehaviour, patrolBehaviour, chaseBehaviour, combatBehaviour, captureBehaviour;
    // [HideInInspector]
@@ -36,6 +37,7 @@ public class AIManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         SetBehaviour(patrolBehaviour);
         pathfinding = FindObjectOfType<Pathfinding>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     public void SetBehaviour(AIBehaviour aiBehaviour) {
@@ -58,8 +60,8 @@ public class AIManager : MonoBehaviour {
 
         if (currentBehaviour != null && !isStunned)
             currentBehaviour.Process(this);
+        else _anim.SetTrigger("stun");
 
-        
         if (routeTiles == null) {
             nextTile = null;
             //example :)
@@ -75,6 +77,7 @@ public class AIManager : MonoBehaviour {
             else
                 nextTile = routeTiles.Pop();
         } else if (nextTile != null) {
+            _anim.SetBool("Walking", true);
             float aiSpeed = speed;
             float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
             Vector3 aheadPos = (toPosition - transform.position).normalized * tileMultiplier;
@@ -99,9 +102,11 @@ public class AIManager : MonoBehaviour {
                     rotation = Quaternion.LookRotation(lookDirection);
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+
             } else if (OBJECT_REQUIRED_REPATH == null && RePath(false))
                 StartCoroutine(ResetRePath());
         }
+        else _anim.SetBool("Walking", false);
     }
 
     bool RePath(bool reduceNodes) {
@@ -155,8 +160,10 @@ public class AIManager : MonoBehaviour {
         nextTile = null;
         routeTiles = null;
         isStunned = true;
+        _anim.SetTrigger("stun");
         yield return new WaitForSeconds(duration);
         isStunned = false;
+        _anim.SetBool("S", false);
     }
 
 }

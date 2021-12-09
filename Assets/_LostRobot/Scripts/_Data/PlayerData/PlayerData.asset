@@ -14,9 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
-  currentConciousness: 20
+  currentConciousness: 40
   maxConciousness: 100
-  obtainedKeyInfo: []
-  obtainedKeyCards: []
-  readEmails: []
-  level: 2
+  obtainedKeyInfo:
+  - 6a165097-870c-4f15-bbb2-aae64ce8fc56
+  obtainedKeyCards:
+  - 6a165097-870c-4f15-bbb2-aae64ce8fc56
+  readEmails:
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - stste
+  - 436df2c0-0eda-48a0-8d20-7f4ba75ac503
+  level: 1
