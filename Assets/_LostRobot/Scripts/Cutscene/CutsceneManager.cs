@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,10 +7,11 @@ public class CutsceneManager : MonoBehaviour {
     public GameObject canvas;
     public GameObject cutsceneCam;
     public Cutscene[] cutscenes;
-    private static Cutscene currentCutscene;
+
     public static float timeElapsed;
 
-    string sceneName;
+    private static Cutscene currentCutscene;
+    private static string sceneName = "";
 
     private void Awake() {
         canvas.SetActive(false);
@@ -22,14 +24,15 @@ public class CutsceneManager : MonoBehaviour {
 
             if (currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration)
                 StopCutscene();
-            else if (currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 1f)
-                currentCutscene.playerCam.SetActive(true);
+            else if (!RequestedSceneChange() && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 1f) 
+                    currentCutscene.playerCam.SetActive(true);
+            
           
             timeElapsed += Time.deltaTime;
         }
     }
 
-    public void PlayCutscene(int index, string sceneName = null) {
+    public void PlayCutscene(int index, string nextScene = "") {
         if (index >= cutscenes.Length || cutscenes[index] == null) {
             Debug.Log("Cutscene #" + index + " does not exist.");
             return;
@@ -39,7 +42,7 @@ public class CutsceneManager : MonoBehaviour {
             return;
         }
         GameManager.GetInstance().ChangeState(GameManager.State.Cutscene);
-        this.sceneName = sceneName;
+        sceneName = nextScene;
         cutsceneCam.SetActive(true);
         canvas.SetActive(true);
         currentCutscene = cutscenes[index];
@@ -47,14 +50,21 @@ public class CutsceneManager : MonoBehaviour {
     }
 
     void StopCutscene() {
-        canvas.SetActive(false);
+        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
         currentCutscene.Stop();
         currentCutscene = null;
         cutsceneCam.SetActive(false);
+        canvas.SetActive(false);
         timeElapsed = 0f;
-        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
-        if (sceneName != null)
+        if (RequestedSceneChange())
             SceneManager.LoadScene(sceneName);
+
+        sceneName = "";
+
     }
+
+
+
+    internal static bool RequestedSceneChange() { return sceneName.Length > 0; }
 
 }

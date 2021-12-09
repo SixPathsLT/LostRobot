@@ -1,5 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class Utils {
@@ -14,29 +13,23 @@ public static class Utils {
                 if (hit.collider.transform == target)
                     return true;
             }
-        } else if (degree < 90 && Vector3.Distance(viewer.position, target.position) < 4f  && Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance)) {
+        } else if (degree < 360 && Vector3.Distance(viewer.position, target.position) < 4f  && Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance)) {
             if (hit.collider.transform == target)
                 return true;
         }
         return false;
     }
 
-    public static bool IsDiagonal(WorldTile a, WorldTile b) {
-        return a.position.x != b.position.x && a.position.z != b.position.z;
-    }
-
-    public static bool HasAI(Vector3 position, float radius = 1f) {
+    public static bool HasEntity(Vector3 position, float radius = 1f) {
         Collider[] colliders = Physics.OverlapSphere(position, radius, 1, QueryTriggerInteraction.Ignore);
-
-        foreach (var collider in colliders){
-            if (collider.GetComponent<AIManager>() != null)
+        foreach (var collider in colliders) {
+            if (collider.GetComponent<AIManager>() != null || collider.CompareTag("Player"))
                 return true;
         }
         return false;
     }
 
-    public static string GetUniqueId() {
-        return Guid.NewGuid().ToString();
-    }
+    public static bool IsDiagonal(WorldTile a, WorldTile b) { return a.position.x != b.position.x && a.position.z != b.position.z; }
+    public static string GetUniqueId() { return Guid.NewGuid().ToString(); }
 
 }

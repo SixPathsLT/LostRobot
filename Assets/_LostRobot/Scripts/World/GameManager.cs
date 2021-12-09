@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         } else if (InEmailState()) {
             switch (requestedState) {
                 case State.Playing:
+                case State.Cutscene:
                     approveChange = true;
                     break;
             }

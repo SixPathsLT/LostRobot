@@ -72,13 +72,6 @@ public class PCUI : MonoBehaviour
 
     public void DisplayText()
     {
-        if (!read)
-        {
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data.IncreasePCCount();
-            data.AddEmail(id);
-            read = true;
-            FindObjectOfType<Journal>(true).CreateEntry(this);
-        }
         GameManager.GetInstance().ChangeState(GameManager.State.Email);
         canvas.SetActive(true);
         Cursor.visible = true;
@@ -86,6 +79,14 @@ public class PCUI : MonoBehaviour
         text.GetComponent<Text>().text = file.text;
         textOpened = true;
         //controller.enabled = false;
+
+        if (!read)
+        {
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data.IncreasePCCount();
+            data.AddEmail(id);
+            read = true;
+            FindObjectOfType<Journal>(true).CreateEntry(this);
+        }
     }
 
     public void Close()

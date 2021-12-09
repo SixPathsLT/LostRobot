@@ -97,10 +97,26 @@ public class CameraController : MonoBehaviour
     
     private void CameraCollision() {
 
-       if (cam.transform.localPosition.y < 1f)
+        if (cam.transform.localPosition.y < 1f)
             cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, 1f, cam.transform.localPosition.z), 50f * Time.deltaTime);
 
         // cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, new Vector3(cam.transform.localPosition.x, 1f, camDist), 5f * Time.deltaTime);
+
+
+        float maxDist = Mathf.Abs(camDist);
+        Vector3 checkVector = (cam.transform.position - focus.transform.position).normalized * maxDist;
+
+        bool collided = Physics.Raycast(cam.transform.position, checkVector, out hit, maxDist, 1);
+        if (collided) {
+            string collisionName = hit.collider.name.ToLower();
+            if (collisionName.Contains("door")) {
+                var desiredCamPos = cam.transform.localPosition;
+                float z = focus.transform.InverseTransformPoint(hit.point).z / 1.3f;
+                z = Mathf.Clamp(z, camDist, -1f);
+                desiredCamPos = new Vector3(desiredCamPos.x, desiredCamPos.y, z);
+                cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, desiredCamPos, 300 * Time.deltaTime);
+            }
+        }
 
         if (cam.transform.localPosition.z != -1 && Physics.Linecast(focus.transform.position, cam.transform.position, out hit)) {
             if (hit.collider.gameObject.CompareTag("Player"))

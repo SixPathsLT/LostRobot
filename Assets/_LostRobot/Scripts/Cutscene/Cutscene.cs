@@ -27,8 +27,11 @@ public abstract class Cutscene : MonoBehaviour {
     public abstract void Process();
 
     public virtual void Stop() {
-        foreach (var obj in objectsToDisable)
+        foreach (var obj in objectsToDisable) {
+            if (obj == playerCam)
+                continue;
             obj.SetActive(true);
+        }
 
         if (playableDirector != null)
             playableDirector.Stop();

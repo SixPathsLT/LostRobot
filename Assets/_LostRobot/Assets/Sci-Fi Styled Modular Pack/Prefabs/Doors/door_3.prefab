@@ -479,6 +479,8 @@ GameObject:
   - component: {fileID: 2326234}
   - component: {fileID: 9573410}
   - component: {fileID: 6473736}
+  - component: {fileID: 7104474532112985147}
+  - component: {fileID: 8350006682802008496}
   m_Layer: 0
   m_Name: door_3
   m_TagString: Untagged
@@ -597,6 +599,32 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e497b40124d368543a1971d44952f2d5, type: 3}
+--- !u!65 &7104474532112985147
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7858589, y: 2.9412608, z: 0.85641885}
+  m_Center: {x: 1.6070641, y: 2.57693, z: 0}
+--- !u!65 &8350006682802008496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.76771194, y: 3.0475059, z: 0.85641885}
+  m_Center: {x: -1.6161525, y: 2.5238075, z: 0}
 --- !u!1 &3196725620977244145
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +795,7 @@ MonoBehaviour:
   Locked: 1
   triggerPuzzle: 0
   puzzle: {fileID: 0}
+  cardRequired: 0
 --- !u!114 &7933682143429967337
 MonoBehaviour:
   m_ObjectHideFlags: 0

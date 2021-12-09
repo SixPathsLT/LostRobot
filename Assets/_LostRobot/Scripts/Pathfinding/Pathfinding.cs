@@ -92,13 +92,14 @@ public class Pathfinding : MonoBehaviour {
         List<Node> unCheckedNodes = new List<Node>() { startNode };
         checkedTiles = new HashSet<WorldTile>();
         
-        /*Vector3 rayStartPos = gameObject.transform.position;
+        Vector3 rayStartPos = gameObject.transform.position;
         bool quickFind = false;
         RaycastHit hit;
 
         Vector3 targetDirection = (endPosition - rayStartPos);
-
-        if (Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition))) {
+        rayStartPos.y = 0.5f;
+        targetDirection.y = 0.5f;
+        if (Physics.Raycast(rayStartPos, targetDirection.normalized * Vector3.Distance(rayStartPos, endPosition), out hit, Vector3.Distance(rayStartPos, endPosition))) {
             if (hit.collider.CompareTag("Player")) {
                 foundNode = endNode;
                 //foundNode.previousNode = startNode;
@@ -108,7 +109,7 @@ public class Pathfinding : MonoBehaviour {
             foundNode = endNode;
             //foundNode.previousNode = startNode;
             quickFind = true;
-        }*/
+        }
 
         while (foundNode == null && unCheckedNodes.Count > 0) {
             Node current = GetBestNode(unCheckedNodes);
@@ -143,8 +144,8 @@ public class Pathfinding : MonoBehaviour {
         }
 
         if (foundNode != null) {
-            //if (quickFind)
-             //   reduceNodes = false;
+            if (quickFind)
+                reduceNodes = false;
 
             gameObject.GetComponent<AIManager>().routeTiles = TracePath(startNode, foundNode, gameObject, reduceNodes);
             gameObject.GetComponent<AIManager>().nextTile = null;
@@ -243,7 +244,7 @@ public class Pathfinding : MonoBehaviour {
 
    readonly int rows = 3;
    readonly int columns = 3;
-    WorldTile[] GetNeighbours(WorldTile tile) {
+   public WorldTile[] GetNeighbours(WorldTile tile) {
         WorldTile[] foundTiles = new WorldTile[rows * columns];
         Vector3 startPosition = tile.position - new Vector3(TILE_SIZE, tile.position.y, TILE_SIZE);
 

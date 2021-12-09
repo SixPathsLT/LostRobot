@@ -62,8 +62,10 @@ public class PlayerData : ScriptableObject
         readEmails.Add(id);
 
         foreach (var ability in GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitiesManager>().abilities) {
-            if (GetEmailsCount() == ability.requiredReadEmails)
-                FindObjectOfType<Notification>().SendNotification(ability.name.Replace("Ability", "").Replace("Data", "") + " Ability Unlocked!");
+            if (GetEmailsCount() == ability.requiredReadEmails) {
+                FindObjectOfType<CutsceneManager>().PlayCutscene(2);
+                //FindObjectOfType<Notification>().SendNotification(ability.name.Replace("Ability", "").Replace("Data", "") + " Ability Unlocked!");
+            }
         }
 
         GameManager.GetInstance().Save();
