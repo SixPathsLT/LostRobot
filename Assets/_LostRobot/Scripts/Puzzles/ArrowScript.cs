@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ArrowScript : MonoBehaviour
+
+public class ArrowScript : Puzzles
 {
+    
     public GameObject center;
     public float rotationSpeed;
     public RectTransform indicator;
     bool inLock = false;
     bool spin = true;
+    
     void Update()
     {
+      
+    
         if (spin)
         {
             transform.RotateAround(center.transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
@@ -46,7 +51,7 @@ public class ArrowScript : MonoBehaviour
             inLock = false;
         }
     }
-
+    
     public void CheckIfInLock()
     {
         if (inLock)
