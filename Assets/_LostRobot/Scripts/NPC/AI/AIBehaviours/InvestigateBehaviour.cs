@@ -10,6 +10,7 @@ public class InvestigateBehaviour : AIBehaviour {
 
     public override void Init(AIManager aiManager) {
         Reset();
+
     }
 
     public override void Process(AIManager aiManager) {
@@ -28,13 +29,19 @@ public class InvestigateBehaviour : AIBehaviour {
                 timeElapsed = 0;
                 return;
             }
-
+            
             if (aiManager.routeTiles != null) { 
                 aiManager.routeTiles = null;
                 aiManager.nextTile = null;
+                aiManager.invIndex = Random.Range(0, aiManager._anim.GetInteger("Inv_Max"));
+                aiManager._anim.SetInteger("Inv_Index", aiManager.invIndex);
+                aiManager._anim.SetTrigger("Investigate");
             }
-            float seconds = Random.Range(3, 5);
-            aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, Quaternion.LookRotation(aiManager.gameObject.transform.right), (seconds / 2) * Time.deltaTime);
+            
+            float seconds = aiManager.invIndex == 0 ? 6.5f : aiManager.invIndex == 1 ? 4.5f : 8.5f;     //Random.Range(3, 5);
+            //aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, Quaternion.LookRotation(aiManager.gameObject.transform.right), (seconds / 2) * Time.deltaTime);
+            
+
 
             if (timeElapsed > seconds) {
                 ChangeColor(aiManager, Color.cyan);

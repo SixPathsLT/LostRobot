@@ -20,7 +20,7 @@ public class StunAbility : Ability
         foreach (var collider in colliders) {
             AIManager aiManager  = collider.GetComponent<AIManager>();
             if (aiManager != null)
-                aiManager.StartCoroutine("Stun", durationTime * 2f);
+                aiManager.StartCoroutine("Stun", stunTime);
         }
 
     }

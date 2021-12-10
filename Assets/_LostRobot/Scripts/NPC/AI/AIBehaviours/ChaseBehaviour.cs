@@ -11,6 +11,7 @@ public class ChaseBehaviour : AIBehaviour {
     Rigidbody rbd;
     public override void Init(AIManager aiManager) {
         // rbd = gameObject.GetComponent<Rigidbody>();
+        aiManager._anim.SetBool("Run", true);
     }
 
     public override void Process(AIManager aiManager) {
@@ -52,7 +53,7 @@ public class ChaseBehaviour : AIBehaviour {
     }
 
     public override void End(AIManager aiManager) {
-       
+        aiManager._anim.SetBool("Run", false);
     }
 
 }

@@ -25,6 +25,8 @@ public class AIManager : MonoBehaviour {
    // [HideInInspector]
     public AIBehaviour currentBehaviour;
 
+    public int invIndex;
+
     [HideInInspector]
     public Stack<WorldTile> routeTiles;
     [HideInInspector]
@@ -60,7 +62,6 @@ public class AIManager : MonoBehaviour {
 
         if (currentBehaviour != null && !isStunned)
             currentBehaviour.Process(this);
-        else _anim.SetTrigger("stun");
 
         if (routeTiles == null) {
             nextTile = null;
@@ -77,8 +78,10 @@ public class AIManager : MonoBehaviour {
             else
                 nextTile = routeTiles.Pop();
         } else if (nextTile != null) {
-            _anim.SetBool("Walking", true);
+            _anim.SetBool("Walking", true);            
             float aiSpeed = speed;
+            if (_anim.GetBool("Run"))
+                aiSpeed *= 2.5f;
             float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
             Vector3 aheadPos = (toPosition - transform.position).normalized * tileMultiplier;
             WorldTile tile = pathfinding.GetTile(transform.position + aheadPos);
@@ -160,10 +163,11 @@ public class AIManager : MonoBehaviour {
         nextTile = null;
         routeTiles = null;
         isStunned = true;
-        _anim.SetTrigger("stun");
-        yield return new WaitForSeconds(duration);
-        isStunned = false;
+        _anim.SetBool("S", true);
+        yield return new WaitForSeconds(duration);        
         _anim.SetBool("S", false);
+        yield return new WaitForSeconds(3);
+        isStunned = false;
     }
 
 }

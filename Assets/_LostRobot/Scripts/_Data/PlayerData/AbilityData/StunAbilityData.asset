@@ -18,4 +18,4 @@ MonoBehaviour:
   requiredReadEmails: 9
   icon: {fileID: 2800000, guid: 30b199ea7e528144f91981b0746cbfcb, type: 3}
   state: 0
-  stunTime: 5
+  stunTime: 8
