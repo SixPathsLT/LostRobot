@@ -73,11 +73,11 @@ public class Pathfinding : MonoBehaviour {
 
     public IEnumerator ProcessPath(GameObject gameObject, Vector3 endPosition, bool reduceNodes = false) {
         WorldTile startTile = GetTile(gameObject.transform.position);
-        WorldTile endTile = GetTile(endPosition, true);
+        WorldTile endTile = GetTile(endPosition);
         //if (startTile != null && !startTile.canWalk)
         //    startTile = GetNeighbours(startTile)[0];
-        if (endTile != null && !endTile.canWalk)
-           endTile = GetNeighbours(endTile)[0];
+        //if (endTile != null && !endTile.canWalk)
+        //   endTile = GetNeighbours(endTile)[0];
                 
         if (startTile == null || endTile == null) {
             Debug.Log(this + " Failed to find start/end tile. ");
@@ -92,20 +92,20 @@ public class Pathfinding : MonoBehaviour {
         List<Node> unCheckedNodes = new List<Node>() { startNode };
         checkedTiles = new HashSet<WorldTile>();
         
-        Vector3 rayStartPos = gameObject.transform.position;
+        Vector3 rayStartPos = startTile.position;
         bool quickFind = false;
         RaycastHit hit;
 
         Vector3 targetDirection = (endPosition - rayStartPos);
-        rayStartPos.y = 0.5f;
-        targetDirection.y = 0.5f;
-        if (Physics.Raycast(rayStartPos, targetDirection.normalized * Vector3.Distance(rayStartPos, endPosition), out hit, Vector3.Distance(rayStartPos, endPosition))) {
+        //rayStartPos.y = 0.5f;
+        //targetDirection.y = 0.5f;
+        if (endTile.canWalk && Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition))) {
             if (hit.collider.CompareTag("Player")) {
                 foundNode = endNode;
                 //foundNode.previousNode = startNode;
                 quickFind = true;
             }
-        } else {
+        } else if (endTile.canWalk) {
             foundNode = endNode;
             //foundNode.previousNode = startNode;
             quickFind = true;
@@ -127,7 +127,7 @@ public class Pathfinding : MonoBehaviour {
                 break;
             }
 
-            foreach (var tile in GetNeighbours(current.tile)) {
+            foreach (var tile in GetNeighbours(current.tile, endTile)) {
                 if (tile == null || checkedTiles.Contains(tile))
                     continue;
 
@@ -244,7 +244,7 @@ public class Pathfinding : MonoBehaviour {
 
    readonly int rows = 3;
    readonly int columns = 3;
-   public WorldTile[] GetNeighbours(WorldTile tile) {
+   public WorldTile[] GetNeighbours(WorldTile tile, WorldTile endTile = null) {
         WorldTile[] foundTiles = new WorldTile[rows * columns];
         Vector3 startPosition = tile.position - new Vector3(TILE_SIZE, tile.position.y, TILE_SIZE);
 
@@ -254,7 +254,7 @@ public class Pathfinding : MonoBehaviour {
                 Vector3 nextPosition = new Vector3(startPosition.x + x * TILE_SIZE, tile.position.y, startPosition.z + z * TILE_SIZE);
 
                 WorldTile neighbourTile = GetTile(nextPosition);
-                if (neighbourTile == null || neighbourTile == tile || !neighbourTile.canWalk)
+                if (neighbourTile == null || neighbourTile == tile || (endTile != neighbourTile && !neighbourTile.canWalk))
                     continue;
 
                 foundTiles[index] = neighbourTile;

@@ -20,10 +20,10 @@ public static class Utils {
         return false;
     }
 
-    public static bool HasEntity(Vector3 position, float radius = 1f) {
+    public static bool HasEntity(Vector3 position, bool includePlayer = true, float radius = 1f) {
         Collider[] colliders = Physics.OverlapSphere(position, radius, 1, QueryTriggerInteraction.Ignore);
         foreach (var collider in colliders) {
-            if (collider.GetComponent<AIManager>() != null || collider.CompareTag("Player"))
+            if (collider.GetComponent<AIManager>() != null || includePlayer && collider.CompareTag("Player"))
                 return true;
         }
         return false;
