@@ -29,12 +29,14 @@ public class AIManager : MonoBehaviour {
     [HideInInspector]
     public Pathfinding pathfinding;
 
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         SetBehaviour(patrolBehaviour);
         pathfinding = FindObjectOfType<Pathfinding>();
         _anim = GetComponentInChildren<Animator>();
     }
+
 
     public void SetBehaviour(AIBehaviour aiBehaviour) {
         if (currentBehaviour != null)
@@ -84,7 +86,7 @@ public class AIManager : MonoBehaviour {
                 aiSpeed *= 2.5f;
             float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
             Vector3 aheadPos = (toPosition - transform.position).normalized * tileMultiplier;
-            WorldTile tile = pathfinding.GetTile(transform.position + aheadPos);
+            WorldTile tile = Pathfinding.GetTile(transform.position + aheadPos);
 
             if (tile != null)
                 tile.canWalk = false;
@@ -125,7 +127,7 @@ public class AIManager : MonoBehaviour {
         if (Physics.Raycast(toPos, Vector3.back + Vector3.left, out hit, 2))
             toPos += (toPos - hit.point).normalized * 1.6f;
     
-        correctedTile = pathfinding.GetTile(toPos);
+        correctedTile = Pathfinding.GetTile(toPos);
         if (correctedTile != null && correctedTile.canWalk)
             nextTile = correctedTile;
 
@@ -145,8 +147,8 @@ public class AIManager : MonoBehaviour {
             leftPos = hit.point + (transform.right / 2) + (transform.forward * tileMultiplier);
         
 
-        WorldTile rightTile = pathfinding.GetTile(rightPos);
-        WorldTile leftTile = pathfinding.GetTile(leftPos);
+        WorldTile rightTile = Pathfinding.GetTile(rightPos);
+        WorldTile leftTile = Pathfinding.GetTile(leftPos);
 
         if (leftTile != null && rightTile != null) {
             WorldTile toTile = Vector3.Distance(rightTile.position, transform.position) > Vector3.Distance(leftTile.position, transform.position) ? rightTile : leftTile;

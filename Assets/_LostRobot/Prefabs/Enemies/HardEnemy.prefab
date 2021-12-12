@@ -553,7 +553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStunned: 0
-  speed: 5
+  speed: 3
   nodes:
   - {fileID: 0}
   - {fileID: 0}

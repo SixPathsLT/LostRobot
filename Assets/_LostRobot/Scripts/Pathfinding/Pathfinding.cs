@@ -13,7 +13,7 @@ public class Pathfinding : MonoBehaviour {
     public static readonly float TILE_SIZE = 1.4f;
     public static readonly float OFFSET = 0.5f;
 
-    WorldTile[,] tiles = new WorldTile[GRID_SIZE_X, GRID_SIZE_Y];
+    public static WorldTile[,] tiles = new WorldTile[GRID_SIZE_X, GRID_SIZE_Y];
     HashSet<GameObject> requests = new HashSet<GameObject>();
 
     public Stack<WorldTile> routeTiles;
@@ -35,7 +35,9 @@ public class Pathfinding : MonoBehaviour {
         }
     }
 
-    void Start() {
+    private void Start() {
+        tiles = new WorldTile[GRID_SIZE_X, GRID_SIZE_Y];
+
         for (int x = 0; x < GRID_SIZE_X; x++) {
             for (int z = 0; z < GRID_SIZE_Y; z++) {
                 Vector3 position = Vector3.right * (x * TILE_SIZE + OFFSET) + Vector3.forward * (z * TILE_SIZE + OFFSET);
@@ -242,9 +244,9 @@ public class Pathfinding : MonoBehaviour {
         return distance * (Utils.IsDiagonal(a.tile, b.tile) ? DIAGONAL_COST : STRAIGHT_COST);
     }
 
-   readonly int rows = 3;
-   readonly int columns = 3;
-   public WorldTile[] GetNeighbours(WorldTile tile, WorldTile endTile = null) {
+   readonly static int rows = 3;
+   readonly static int columns = 3;
+   public static WorldTile[] GetNeighbours(WorldTile tile, WorldTile endTile = null) {
         WorldTile[] foundTiles = new WorldTile[rows * columns];
         Vector3 startPosition = tile.position - new Vector3(TILE_SIZE, tile.position.y, TILE_SIZE);
 
@@ -264,17 +266,17 @@ public class Pathfinding : MonoBehaviour {
         return foundTiles;
     }
 
-    private bool IsOutOfBounds(int x, int z) {
+    private static bool IsOutOfBounds(int x, int z) {
         if (x < 0 || z < 0 || x >= tiles.GetLength(0) || z >= tiles.GetLength(1))
             return true;
         return false;
     }
 
-    private Vector3 GetTilePosition(Vector3 position) {
+    private static Vector3 GetTilePosition(Vector3 position) {
         return (position - (Vector3.zero * TOTAL_GRID_SIZE)) / TILE_SIZE;
     }
 
-    public WorldTile GetTile(Vector3 position, bool retry = false) {
+    public static WorldTile GetTile(Vector3 position, bool retry = false) {
 
         Vector3 tilePosition = GetTilePosition(position);
         int x = (int) tilePosition.x;
