@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_LostRobot/Scenes/_GameLvl_2.unity
     guid: 86221b3dc18e4004e92ced7868cf6490
+  - enabled: 1
+    path: Assets/_LostRobot/Scenes/_GameLvl_3.unity
+    guid: 8e04033fc9b3f434ab35c77ae55cc595
+  - enabled: 1
+    path: Assets/_LostRobot/Scenes/_GameLvl_4.unity
+    guid: 23130421dadb54342bc87e3185718d21
+  - enabled: 1
+    path: Assets/_LostRobot/Scenes/_GameLvl_5.unity
+    guid: 8925fd128297df1419520f7d8a3f1a6a
+  - enabled: 1
+    path: Assets/_LostRobot/Scenes/_GameLvl_6.unity
+    guid: bf8fc64228ac671428f6c00a5f642fb4
   m_configObjects: {}

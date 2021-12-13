@@ -9,10 +9,11 @@ public class KeyCardLogic : MonoBehaviour
     public GameObject keyObject;
     public DoorController[] doors;
 
-    [SerializeField] string id = Utils.GetUniqueId();
+    [SerializeField] string id;
     PlayerData data;
 
     private void Start() {
+        id = name;
         data = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data;
         obtainedKey = data.obtainedKeyCards.Contains(id);
         obtainedInfo = data.obtainedKeyInfo.Contains(id);

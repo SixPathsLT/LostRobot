@@ -15,12 +15,13 @@ public class PCUI : MonoBehaviour
     bool read = false;
     //CameraController controller;
 
-    [SerializeField] string id = Utils.GetUniqueId();
+    [SerializeField] string id;
     public string ID { get { return id; } }
 
     PlayerData data;
     private void Start()
     {
+        id = name;
         puzzle = FindObjectOfType<PuzzleManager>();
         //controller = FindObjectOfType<CameraController>();
         data = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().data;

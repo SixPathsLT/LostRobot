@@ -16,22 +16,9 @@ MonoBehaviour:
   maxHealth: 100
   currentConciousness: 50
   maxConciousness: 100
-  obtainedKeyInfo:
-  - 6a165097-870c-4f15-bbb2-aae64ce8fc56
-  obtainedKeyCards:
-  - 6a165097-870c-4f15-bbb2-aae64ce8fc56
+  obtainedKeyInfo: []
+  obtainedKeyCards: []
   readEmails:
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - stste
-  - 436df2c0-0eda-48a0-8d20-7f4ba75ac503
+  - Lv_1_PC_1
+  - Lv_1_PC_2
   level: 1
