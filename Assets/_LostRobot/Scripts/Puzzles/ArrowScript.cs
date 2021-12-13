@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
-
 public class ArrowScript : Puzzles
 {
     
@@ -12,19 +7,26 @@ public class ArrowScript : Puzzles
     public RectTransform indicator;
     bool inLock = false;
     bool spin = true;
-    
+
+    RectTransform rect;
+    ArrowManager arrowManager;
+
+    private void Start() {
+        arrowManager = FindObjectOfType<ArrowManager>();
+        rect = GetComponent<RectTransform>();
+    }
+
     void Update()
     {
       
-    
         if (spin)
         {
             transform.RotateAround(center.transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
         }
         else
         {
-            GetComponent<RectTransform>().localPosition = new Vector3(50, 0, 0);
-            GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 0);
+            rect.localPosition = new Vector3(50, 0, 0);
+            rect.localRotation = Quaternion.Euler(0, 0, 0);
         }
         
         if (inLock)
@@ -39,24 +41,25 @@ public class ArrowScript : Puzzles
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("DialLock"))
+        if (collision.CompareTag("DialLock") && !inLock)
         {
             inLock = true;
+            arrowManager.IncrementDials();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("DialLock"))
+        if (collision.CompareTag("DialLock") && inLock)
         {
             inLock = false;
         }
     }
     
-    public void CheckIfInLock()
+    /*public void CheckIfInLock()
     {
         if (inLock)
         {
             spin = false;
         }
-    }
+    }*/
 }

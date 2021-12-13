@@ -7,6 +7,11 @@ public class KeyCardTrigger : MonoBehaviour
     public GameObject mesh;
 
 
+    public void Start()
+    { 
+        mesh.SetActive(false);
+    }
+
     public void Update()
     {
         if (main.obtainedKey)

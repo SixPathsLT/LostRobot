@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,10 +7,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseGame;
     public bool GamePaused;
     public string mainMenu;
-    void Start()
-    {
-        
-    }
 
     
     void Update()

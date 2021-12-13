@@ -5,20 +5,25 @@ public class ChaseBehaviour : AIBehaviour {
 
     public int chaseDistance = 50;
 
-    float maxForce = 10;
-    float maxSpeed = 50;
-    float frames = 5;
-    Rigidbody rbd;
+    /* float maxForce = 10;
+     float maxSpeed = 50;
+     float frames = 5;
+     Rigidbody rbd;*/
+
+    AbilitiesManager abilitiesManager;
     public override void Init(AIManager aiManager) {
         // rbd = gameObject.GetComponent<Rigidbody>();
         aiManager._anim.SetBool("Run", true);
+
+        if (abilitiesManager == null)
+            abilitiesManager = AIManager.player.GetComponent<AbilitiesManager>();
     }
 
     public override void Process(AIManager aiManager) {
 
         Transform player = AIManager.player.transform;
 
-        if (player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
+        if (abilitiesManager.UsingCloakingAbility()) {
             aiManager.SetBehaviour(aiManager.investigateBehaviour);
             return;
         }

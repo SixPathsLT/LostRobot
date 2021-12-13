@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArrowManager : Puzzles
 {
+    [HideInInspector]
+   public int completedDials = 0;
     
-    public GameObject canvas;
-    bool state = false;
-
     public override void Activate(bool showMouse)
     {
         base.Activate(true);
@@ -15,17 +12,19 @@ public class ArrowManager : Puzzles
         state = true;
        
     }
-    void Update()
-    {
-
-
-
+    
+    public void IncrementDials(){
+        completedDials++;
+        if (completedDials >= 3) {
+            puzzleManager.win.Play();
+            Reset();
+            puzzleManager.Unlock();
+        }
     }
 
     public override void Reset()
     {
         base.Reset();
-        FindObjectOfType<ArrowScript>();
         
         
         state = false;

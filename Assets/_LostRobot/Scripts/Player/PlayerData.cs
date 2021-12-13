@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,13 +16,13 @@ public class PlayerData : ScriptableObject
 
     public void SetHealth(int health)
     {
-        this.currentHealth = health;
+        currentHealth = health;
         UIUpdater?.Invoke(health);
     }
 
     public void SetConciousness(int value)
     {
-        this.currentConciousness = value;
+        currentConciousness = value;
         UIUpdater?.Invoke(currentConciousness);
     }
 
@@ -32,25 +31,6 @@ public class PlayerData : ScriptableObject
         interactedPCs++;
     }*/
 
-    public int GetHealth()
-    {
-        return currentHealth;
-    }
-
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
-    public int GetConcioussness()
-    {
-        return currentConciousness;
-    }
-
-    public int GetMaxConcioussness()
-    {
-        return maxConciousness;
-    }
 
     public void AddEmail(string id) {
         if (readEmails == null)
@@ -63,8 +43,9 @@ public class PlayerData : ScriptableObject
 
         foreach (var ability in GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitiesManager>().abilities) {
             if (GetEmailsCount() == ability.requiredReadEmails) {
-                FindObjectOfType<CutsceneManager>().PlayCutscene(2);
+                FindObjectOfType<CutsceneManager>().PlayCutscene(CutsceneManager.ABILITY_UNLOCKED_CUTSCENE);
                 //FindObjectOfType<Notification>().SendNotification(ability.name.Replace("Ability", "").Replace("Data", "") + " Ability Unlocked!");
+                break;
             }
         }
 
@@ -100,8 +81,10 @@ public class PlayerData : ScriptableObject
     }
 
 
-    public int GetEmailsCount() {
-        return readEmails.Count;
-    }
+    public int GetEmailsCount() { return readEmails.Count; }
+    public int GetHealth() { return currentHealth; }
+    public int GetMaxHealth() { return maxHealth; }
+    public int GetConcioussness() { return currentConciousness; }
+    public int GetMaxConcioussness() { return maxConciousness; }
 
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using static AbilitiesManager;
 
@@ -15,15 +14,14 @@ public abstract class Ability : ScriptableObject
     protected float elapsedTime;
 
     public virtual void Activate() {
-        AbilitiesManager.player.GetComponent<AbilitiesManager>().PlayAudio(0);
+        player.GetComponent<AbilitiesManager>().PlayAudio(0);
         SetState(AbilityState.Active);
     }
 
     public virtual void Process() {
-        
         switch (state) {
             case AbilityState.Ready:
-                if (AbilitiesManager.selectedAbility == this &&  Input.GetMouseButton(0) && GameManager.GetInstance().InPlayingState()) {
+                if (selectedAbility == this &&  Input.GetMouseButton(0) && GameManager.GetInstance().InPlayingState()) {
                     if (player.GetComponent<PlayerController>().data.GetConcioussness() < 1)
                         FindObjectOfType<Notification>().SendNotification("You need to increase your consciousness to be able to use abilities.");
                     else if (player.GetComponent<PlayerController>().data.GetEmailsCount() < requiredReadEmails)
@@ -37,7 +35,7 @@ public abstract class Ability : ScriptableObject
                     StartCooldown();                
                 else if (state == AbilityState.Cooldown && elapsedTime >= coolDownTime)
                 {
-                    AbilitiesManager.player.GetComponent<AbilitiesManager>().PlayAudio(1);
+                    player.GetComponent<AbilitiesManager>().PlayAudio(1);
                     SetState(AbilityState.Ready);
                 }                    
                 else
@@ -57,8 +55,6 @@ public abstract class Ability : ScriptableObject
         this.state = state;
     }
 
-    public bool IsActive() {
-        return state == AbilityState.Active;
-    }
+    public bool IsActive() { return state == AbilityState.Active; }
 
 }

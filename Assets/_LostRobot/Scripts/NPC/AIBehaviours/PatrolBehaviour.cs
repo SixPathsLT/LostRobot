@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AIBehaviours/PatrolBehaviour")]
@@ -7,21 +6,24 @@ public class PatrolBehaviour : AIBehaviour {
 
     public float maxVisionDistance = 15f;
     public float maxVisionDegrees = 45f;
-    Rigidbody rbd;
+    //Rigidbody rbd;
 
     /*List<Vector3> path;
     float maxForce = 10;
     float maxSpeed = 30;
     int dir = 1;*/
+    AbilitiesManager abilitiesManager;
     public override void Init(AIManager aiManager) {
         Reset();
         //rbd = gameObject.GetComponent<Rigidbody>();
         //for (int i = 0; i < aiManager.nodes.Count; i++)
-         //   path.Add(aiManager.nodes[i].transform.position);
+        //   path.Add(aiManager.nodes[i].transform.position);
+        if (abilitiesManager == null)
+            abilitiesManager = AIManager.player.GetComponent<AbilitiesManager>();
     }
 
     public override void Process(AIManager aiManager) {
-        if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform, maxVisionDegrees, maxVisionDistance) && !AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility()) {
+        if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform, maxVisionDegrees, maxVisionDistance) && !abilitiesManager.UsingCloakingAbility()) {
             aiManager.routeTiles = null;
             aiManager.nextTile = null;
             aiManager.SetBehaviour(aiManager.chaseBehaviour);

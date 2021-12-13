@@ -1,34 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomInstancing : MonoBehaviour
 {
     public GameObject roomPrefab;
-
     private GameObject room;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Player"))
-        {
-            room = Instantiate<GameObject>(roomPrefab, gameObject.transform) as GameObject;
-        }
+        if (other.CompareTag("Player"))
+            room = Instantiate(roomPrefab, gameObject.transform) as GameObject;
+        
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag.Equals("Player") && room == null)
-        {
-            room = Instantiate<GameObject>(roomPrefab, gameObject.transform) as GameObject;
-        }
+        if (other.CompareTag("Player") && room == null)
+            room = Instantiate(roomPrefab, gameObject.transform) as GameObject; 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag.Equals("Player"))
-        {
+        if (other.CompareTag("Player"))
             Destroy(room);
-        }
+        
     }
 }

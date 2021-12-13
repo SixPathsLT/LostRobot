@@ -5,8 +5,12 @@ public class SpeedAbility : Ability
 { 
     float initialSpeed;
     float increasedSpeed = 10f;
+
+    PlayerMovement playerMovement;
+
     public override void Activate() {
         base.Activate();
+        playerMovement = AbilitiesManager.player.GetComponent<PlayerMovement>();
         initialSpeed = AbilitiesManager.player.GetComponent<PlayerMovement>().speed;
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = increasedSpeed;
 
@@ -16,7 +20,6 @@ public class SpeedAbility : Ability
     public override void StartCooldown() {
         base.StartCooldown();
         AbilitiesManager.player.GetComponent<PlayerMovement>().speed = initialSpeed;
-
         AbilitiesManager.playerAnim.SetBool("SpeedBoost", false);
     }
 
@@ -24,7 +27,7 @@ public class SpeedAbility : Ability
         base.Process();
         if (state != AbilitiesManager.AbilityState.Active)
             return;
-        AbilitiesManager.playerAnim.SetBool("SpeedBoost", AbilitiesManager.player.GetComponent<PlayerMovement>().direction.magnitude > 0.1f);
+        AbilitiesManager.playerAnim.SetBool("SpeedBoost", playerMovement.direction.magnitude > 0.1f);
     }
 
 }

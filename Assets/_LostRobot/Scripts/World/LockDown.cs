@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LockDown : MonoBehaviour
@@ -8,35 +7,27 @@ public class LockDown : MonoBehaviour
     public Vector2 intervalRange;
     public bool LockDownInitiated = false;
 
-    private void Start()
-    {
-        //StartCoroutine(LockDownCoroutine());
+    DoorManager doorManager;
+
+    private void Start() {
+        StartCoroutine(LockDownCoroutine());
+        doorManager = FindObjectOfType<DoorManager>();
     }
-    IEnumerator LockDownCoroutine ()
-    {
+
+    IEnumerator LockDownCoroutine() {
         var timer = Random.Range(intervalRange.x, intervalRange.y);
         yield return new WaitForSeconds(timer);
         LockDownInitiated = true;
 
-        FindObjectOfType<DoorManager>().LockDownEnter();
-        //Debug.Log(LockDownInitiated);
-
+        doorManager.LockDownEnter();
         timer = Random.Range(timerRange.x, timerRange.y);
-
 
         yield return new WaitForSeconds(timer);
 
         LockDownInitiated = false;
-        FindObjectOfType<DoorManager>().LockDownExit();
-       // Debug.Log(LockDownInitiated);
+        doorManager.LockDownExit();
 
         StartCoroutine(LockDownCoroutine());
-
     }
-    void Update()
-    {
-            
 
-        
-    }
 }

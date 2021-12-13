@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class LightSaber : MonoBehaviour
 {
     public AIBehaviour combat;
+    public AIManager aiManager;
+
+    private void Start()
+    {
+        aiManager = transform.root.GetComponent<AIManager>();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && combat == transform.root.GetComponent<AIManager>().currentBehaviour) 
+        if (other.CompareTag("Player") && combat == aiManager.currentBehaviour) 
         {
             other.GetComponent<PlayerController>().data.SetHealth(0);
             Debug.Log("Damage player");
-
-
         }
     }
 
-    void Update()
-    {
-        
-    }
 }

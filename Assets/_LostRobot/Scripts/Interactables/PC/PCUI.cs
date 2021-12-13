@@ -38,7 +38,7 @@ public class PCUI : MonoBehaviour
         }
     }
 
-    private void KeyPressed()
+    private void Update()
     {
         
         if (Input.GetKeyDown(KeyCode.E) && textOpened && GameManager.GetInstance().InEmailState()) {
@@ -100,8 +100,4 @@ public class PCUI : MonoBehaviour
         GameManager.GetInstance().ChangeState(GameManager.State.Playing);
     }
 
-    private void Update()
-    {
-        KeyPressed();
-    }
 }

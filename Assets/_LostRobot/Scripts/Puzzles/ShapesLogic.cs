@@ -14,15 +14,11 @@ public class ShapesLogic : Puzzles
     PointerEventData pointerData;
     EventSystem eventSystem;
     private int imageCount = 0;
-    public float timer;
-    float countDown;
     public int maxGuesses;
     private int remainingGuesses;
-    bool state = false;
     public Text guesses;
     public Slider time;
-
-    public GameObject canvas;
+    
     public Image[] optionsImages;
     public Image[] displayImages;
 
@@ -116,16 +112,16 @@ public class ShapesLogic : Puzzles
                 }
                 if (remainingGuesses <= 0)
                 {
-                    GetComponent<PuzzleManager>().fail.Play();
+                    puzzleManager.fail.Play();
                     FindObjectOfType<Notification>().SendNotification("You Ran out of Guesses");
                     Reset();
                 }
                 if (imageCount == correctImages.Length)
                 {
-                    Debug.Log("You won!");
-                    GetComponent<PuzzleManager>().win.Play();
+                    //Debug.Log("You won!");
+                    puzzleManager.win.Play();
                     Reset();
-                    FindObjectOfType<PuzzleManager>().Unlock();
+                    puzzleManager.Unlock();
                 }
             }
         }
@@ -141,7 +137,6 @@ public class ShapesLogic : Puzzles
         guesses.text = "" + remainingGuesses;
         time.maxValue = timer;        
         state = true;
-        //FindObjectOfType<PuzzleManager>().abil.enabled = false;
     }
 
     private void Update()
@@ -152,8 +147,8 @@ public class ShapesLogic : Puzzles
             countDown += Time.deltaTime;
             if (countDown > timer)
             {
-                GetComponent<PuzzleManager>().fail.Play();
-                Debug.Log("Time's up!");
+                puzzleManager.fail.Play();
+                //Debug.Log("Time's up!");
                 Reset();
             }
             else
@@ -167,7 +162,6 @@ public class ShapesLogic : Puzzles
     {
         base.Reset();
         canvas.SetActive(false);
-        //FindObjectOfType<PuzzleManager>().abil.enabled = true;
         countDown = 0;
         imageCount = 0;
         foreach (Image image in optionsImages)

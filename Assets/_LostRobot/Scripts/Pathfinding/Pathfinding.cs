@@ -27,7 +27,6 @@ public class Pathfinding : MonoBehaviour {
     public class Node {
         public WorldTile tile;
         public Node previousNode;
-
         public int gCost, hCost, fCost;
 
         public Node(WorldTile tile) {
@@ -99,8 +98,6 @@ public class Pathfinding : MonoBehaviour {
         RaycastHit hit;
 
         Vector3 targetDirection = (endPosition - rayStartPos);
-        //rayStartPos.y = 0.5f;
-        //targetDirection.y = 0.5f;
         if (endTile.canWalk && Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition))) {
             if (hit.collider.CompareTag("Player")) {
                 foundNode = endNode;
@@ -240,8 +237,7 @@ public class Pathfinding : MonoBehaviour {
     }
 
     int GetDistanceCost(Node a, Node b) {
-        int distance = (int) Vector3.Distance(a.tile.position, b.tile.position);
-        return distance * (Utils.IsDiagonal(a.tile, b.tile) ? DIAGONAL_COST : STRAIGHT_COST);
+        return (int)Vector3.Distance(a.tile.position, b.tile.position) * (Utils.IsDiagonal(a.tile, b.tile) ? DIAGONAL_COST : STRAIGHT_COST);
     }
 
    readonly static int rows = 3;
@@ -272,9 +268,7 @@ public class Pathfinding : MonoBehaviour {
         return false;
     }
 
-    private static Vector3 GetTilePosition(Vector3 position) {
-        return (position - (Vector3.zero * TOTAL_GRID_SIZE)) / TILE_SIZE;
-    }
+    private static Vector3 GetTilePosition(Vector3 position) { return (position - (Vector3.zero * TOTAL_GRID_SIZE)) / TILE_SIZE; }
 
     public static WorldTile GetTile(Vector3 position, bool retry = false) {
 

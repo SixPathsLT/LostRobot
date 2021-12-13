@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
@@ -18,12 +17,8 @@ public class PuzzleManager : MonoBehaviour
     {
         if (!GameManager.GetInstance().InPlayingState())
             return;
-
-        puzzleType = Random.Range(0, puzzles.Length);
         this.door = door;
-
-        currentPuzzle = puzzles[puzzleType];
-        currentPuzzle.Activate(true);
+        OpenPuzzle();
         pc = null;
     }
 
@@ -31,13 +26,15 @@ public class PuzzleManager : MonoBehaviour
     {
         if (!GameManager.GetInstance().InPlayingState())
             return;
-
-        puzzleType = Random.Range(0, puzzles.Length);
         this.pc = pc;
+        OpenPuzzle();
+        door = null;
+    }
 
+    private void OpenPuzzle() {
+        puzzleType = Random.Range(0, puzzles.Length);
         currentPuzzle = puzzles[puzzleType];
         currentPuzzle.Activate(true);
-        door = null;
     }
 
     public void Unlock()

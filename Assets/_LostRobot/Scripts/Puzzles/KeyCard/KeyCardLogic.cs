@@ -25,33 +25,26 @@ public class KeyCardLogic : MonoBehaviour
 
     public void checkInfo()
     {
-        if (!obtainedInfo)
+       /* if (!obtainedInfo)
         {
             keyObject.GetComponent<MeshRenderer>().material.color = Color.red;       //For Testing Purposes
         }
         else
         {
             keyObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
+        }*/
     }
 
     public void checkKey()
     {
-        if (!obtainedKey)
-        {
+        if (!obtainedKey) {
             foreach (DoorController door in doors)
-            {
-                
                 door.Close();
-            }
-        }
-        else
-        {
+        } else { 
             foreach (DoorController door in doors)
-            {
                 door.Locked = false;
-            }
-            keyObject.GetComponent<MeshRenderer>().material.color = Color.green;
+
+            // keyObject.GetComponent<MeshRenderer>().material.color = Color.green;
         }
     }
 

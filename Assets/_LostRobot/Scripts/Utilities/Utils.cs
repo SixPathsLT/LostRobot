@@ -13,7 +13,7 @@ public static class Utils {
                 if (hit.collider.transform == target)
                     return true;
             }
-        } else if (degree < 360 && Vector3.Distance(viewer.position, target.position) < 4f  && Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance)) {
+        } else if (degree < 360 && Vector3.Distance(viewer.position, target.position) < 4f && Physics.Raycast(viewer.position, targetDirection, out hit, maxDistance)) {
             if (hit.collider.transform == target)
                 return true;
         }

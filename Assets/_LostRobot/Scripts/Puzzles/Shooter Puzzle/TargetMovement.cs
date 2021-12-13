@@ -1,27 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TargetMovement : MonoBehaviour
 {
     public float speed = 3f;
     Vector3 movePos = new Vector3(1, 0, 0);
-    float pos;
+    RectTransform rect;
+
+    public void Start() {
+        rect = GetComponent<RectTransform>();
+    }
 
     private void Update()
     {
-        if (GetComponent<RectTransform>().offsetMin.x >= 750 || GetComponent<RectTransform>().offsetMax.x <= -750)
+        if (rect.offsetMin.x >= 750 || GetComponent<RectTransform>().offsetMax.x <= -750)
         {
             movePos *= -1;
         }
             
-        if (GetComponent<RectTransform>().anchoredPosition.x > 801)
+        if (rect.anchoredPosition.x > 801)
         {
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(800, 0);
+            rect.anchoredPosition = new Vector2(800, 0);
         }
-        else if (GetComponent<RectTransform>().anchoredPosition.x < -801)
+        else if (rect.anchoredPosition.x < -801)
         {
-            GetComponent<RectTransform>().anchoredPosition = new Vector2(-800, 0);
+            rect.anchoredPosition = new Vector2(-800, 0);
 
         }
         transform.Translate(movePos * speed * Time.deltaTime);

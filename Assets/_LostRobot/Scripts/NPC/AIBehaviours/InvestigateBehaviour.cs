@@ -8,8 +8,11 @@ public class InvestigateBehaviour : AIBehaviour {
 
     public int chanceOfDetection = 0;
 
+    AbilitiesManager abilitiesManager;
     public override void Init(AIManager aiManager) {
         Reset();
+        if (abilitiesManager == null)
+            abilitiesManager = AIManager.player.GetComponent<AbilitiesManager>();
 
     }
 
@@ -21,7 +24,7 @@ public class InvestigateBehaviour : AIBehaviour {
 
             ChangeColor(aiManager, Color.yellow);
         } else {
-            bool isHidden = AIManager.player.GetComponent<AbilitiesManager>().UsingCloakingAbility();
+            bool isHidden = abilitiesManager.UsingCloakingAbility();
 
             if (!isHidden && Utils.CanSeeTransform(aiManager.transform, AIManager.player.transform)) {
                 aiManager.SetBehaviour(aiManager.chaseBehaviour);
@@ -41,8 +44,6 @@ public class InvestigateBehaviour : AIBehaviour {
             float seconds = aiManager.invIndex == 0 ? 6.5f : aiManager.invIndex == 1 ? 4.5f : 8.5f;     //Random.Range(3, 5);
             //aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, Quaternion.LookRotation(aiManager.gameObject.transform.right), (seconds / 2) * Time.deltaTime);
             
-
-
             if (timeElapsed > seconds) {
                 ChangeColor(aiManager, Color.cyan);
                 

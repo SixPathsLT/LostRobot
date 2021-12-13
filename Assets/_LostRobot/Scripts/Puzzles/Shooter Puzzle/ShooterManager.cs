@@ -9,10 +9,6 @@ public class ShooterManager : Puzzles
     public GameObject bullet;
     public GameObject[] targetsArray;
     Queue<GameObject> targetsQueue = new Queue<GameObject>();
-    public GameObject canvas;
-    bool state = false;
-    public float timer;
-    float countDown = 0;
     public bool hasTimer;
     public override void Activate(bool showMouse)
     {
@@ -39,7 +35,7 @@ public class ShooterManager : Puzzles
                 }
                 else if (countDown > timer)
                 {
-                    GetComponent<PuzzleManager>().fail.Play();
+                    puzzleManager.fail.Play();
                     Reset();
                 }
             }
@@ -80,14 +76,14 @@ public class ShooterManager : Puzzles
                 ActiveTarget();
             else if (targetsQueue.Count <= 0)
             {
-                GetComponent<PuzzleManager>().win.Play();
+                puzzleManager.win.Play();
                 Reset();
-                FindObjectOfType<PuzzleManager>().Unlock();
+                puzzleManager.Unlock();
             }
         }
         else
         {
-            GetComponent<PuzzleManager>().fail.Play();
+            puzzleManager.fail.Play();
             Reset();
         }
     }

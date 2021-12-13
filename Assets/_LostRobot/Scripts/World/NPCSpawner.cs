@@ -29,6 +29,11 @@ public class NPCSpawner : MonoBehaviour
         spawnedNPCs.Add(npc);
     }
 
+    public void DespawnNPCS(){
+        foreach (var npc in spawnedNPCs)
+            Destroy(npc);
+    }
+
     public static NPCSpawner GetInstance() {
         return instance;
     }

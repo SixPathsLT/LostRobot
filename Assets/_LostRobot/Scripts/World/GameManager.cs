@@ -31,8 +31,6 @@ public class GameManager : MonoBehaviour
     public void StartGame() {
         SceneManager.LoadScene(data.level);
         currentState = State.Loading;
-
-        Debug.Log("Started game");
     }
 
     private void LateUpdate() {
@@ -47,8 +45,7 @@ public class GameManager : MonoBehaviour
         currentState = State.Playing;
 
         if (data.GetEmailsCount() < 1)
-            FindObjectOfType<CutsceneManager>().PlayCutscene(0);
-
+            FindObjectOfType<CutsceneManager>().PlayCutscene(CutsceneManager.INTRODUCTION_CUTSCENE);
     }
 
     public void ChangeState(State requestedState) {

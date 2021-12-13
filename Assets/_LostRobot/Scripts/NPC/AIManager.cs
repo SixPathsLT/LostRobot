@@ -29,6 +29,7 @@ public class AIManager : MonoBehaviour {
     [HideInInspector]
     public Pathfinding pathfinding;
 
+    readonly float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -84,7 +85,7 @@ public class AIManager : MonoBehaviour {
             float aiSpeed = speed;
             if (_anim.GetBool("Run"))
                 aiSpeed *= 2.5f;
-            float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
+
             Vector3 aheadPos = (toPosition - transform.position).normalized * tileMultiplier;
             WorldTile tile = Pathfinding.GetTile(transform.position + aheadPos);
 

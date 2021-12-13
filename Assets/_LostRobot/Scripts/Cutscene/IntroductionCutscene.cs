@@ -8,6 +8,7 @@ public class IntroductionCutscene : Cutscene {
     public GameObject abilityIcon;
 
     PlayerData playerData;
+    PlayerUIControll uiController;
 
     struct Data {
         public bool canGain;
@@ -18,6 +19,7 @@ public class IntroductionCutscene : Cutscene {
 
     public override void Init() {
         base.Init();
+        uiController = player.GetComponent<PlayerUIControll>();
 
         health.value = 1f;
         playerData = player.GetComponent<PlayerController>().data;
@@ -47,7 +49,7 @@ public class IntroductionCutscene : Cutscene {
             if (health.value > 100)
                 health.value = 100;
 
-            Color lerpedColor = Color.Lerp(Color.black, player.GetComponent<PlayerUIControll>().coolDown, (health.value * 1.5f) * Time.deltaTime);
+            Color lerpedColor = Color.Lerp(Color.black, uiController.coolDown, (health.value * 1.5f) * Time.deltaTime);
 
             coolDown.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 12f);
             abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 6f);

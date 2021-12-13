@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    int maxPos = 750;
-    int minPos = -750;
+    readonly int maxPos = 750;
+    readonly int minPos = -750;
     public float speed;
     RectTransform rectMove;
     Vector3 initialPos;

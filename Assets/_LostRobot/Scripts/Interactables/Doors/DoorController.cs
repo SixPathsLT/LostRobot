@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
@@ -14,7 +12,8 @@ public class DoorController : MonoBehaviour
 
     private AudioPlayer audio;
     static GameObject[] doorsLights;
-    private void Awake()
+
+    public void Start()
     {
         LockDown = FindObjectOfType<LockDown>();
         puzzle = FindObjectOfType<PuzzleManager>();
@@ -22,11 +21,6 @@ public class DoorController : MonoBehaviour
         audio = GetComponent<AudioPlayer>();
         audio.source.spatialBlend = 1;
         audio.source.volume = .1f;
-
-    }
-
-    public void Start()
-    {
         _doorAnim = this.transform.parent.GetComponent<Animator>();
         //puzzle = FindObjectOfType<PuzzleManager>();
     }

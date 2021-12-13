@@ -1,11 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public abstract class Puzzles : MonoBehaviour
 {
+    public float timer;
+    public GameObject canvas;
+    protected bool state = false;
+    protected float countDown = 0;
+
+    protected PuzzleManager puzzleManager;
+
     public virtual void Activate(bool showMouse)
     {
+        puzzleManager = GetComponent<PuzzleManager>();
         GameManager.GetInstance().ChangeState(GameManager.State.Puzzle);
         if (showMouse){
             Cursor.visible = true;
