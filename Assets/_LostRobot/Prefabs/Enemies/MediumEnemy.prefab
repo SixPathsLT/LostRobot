@@ -480,44 +480,6 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 1390984332306486299}
     weight: 1
---- !u!1818360609 &6635602543164316177
-RotationConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4608511239616110304}
-  m_Enabled: 1
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 1390984332306486299}
-    weight: 1
---- !u!114 &3662313126923109165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4608511239616110304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fee8012ff5ab0f4488db180f1f4f548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: f6319efd60596454b9bc64ce98b55231, type: 3}
-  - {fileID: 8300000, guid: 156c5b0986a203240aaa6b671b3a4325, type: 3}
-  - {fileID: 8300000, guid: 1a3d9004f88f0c0438fc8b21b6dcca4e, type: 3}
-  - {fileID: 8300000, guid: 9702cc36e39a7b44d95ff4c6cee47ec2, type: 3}
-  - {fileID: 8300000, guid: 6f2b1b3dc0cdf834a9886cd5784243aa, type: 3}
-  - {fileID: 8300000, guid: 6528125c85e0f2a468d2c80dbd3a4665, type: 3}
 --- !u!82 &4506943219301664300
 AudioSource:
   m_ObjectHideFlags: 0
@@ -527,7 +489,7 @@ AudioSource:
   m_GameObject: {fileID: 4608511239616110304}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 419713512205906723, guid: 524a834ef0999e44fa99d4f766072b16, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
@@ -614,6 +576,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1818360609 &6635602543164316177
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4608511239616110304}
+  m_Enabled: 1
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1390984332306486299}
+    weight: 1
+--- !u!114 &3662313126923109165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4608511239616110304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fee8012ff5ab0f4488db180f1f4f548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: f6319efd60596454b9bc64ce98b55231, type: 3}
+  - {fileID: 8300000, guid: 156c5b0986a203240aaa6b671b3a4325, type: 3}
+  - {fileID: 8300000, guid: 1a3d9004f88f0c0438fc8b21b6dcca4e, type: 3}
+  - {fileID: 8300000, guid: 9702cc36e39a7b44d95ff4c6cee47ec2, type: 3}
+  - {fileID: 8300000, guid: 6f2b1b3dc0cdf834a9886cd5784243aa, type: 3}
+  - {fileID: 8300000, guid: 6528125c85e0f2a468d2c80dbd3a4665, type: 3}
 --- !u!1 &8573657186955053350
 GameObject:
   m_ObjectHideFlags: 0

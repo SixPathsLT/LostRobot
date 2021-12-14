@@ -1,8 +1,17 @@
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start()
+    {
+        GameObject.FindGameObjectWithTag("SensitivitySlider").GetComponent<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+
+        if (PlayerPrefs.GetInt("Subtitles") == 0)
+            GameObject.FindGameObjectWithTag("Subtitle_Buttons").transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+    }
+
     public void LoadGame()
     {
         //Debug.Log("Game starts");
@@ -21,5 +30,15 @@ public class MainMenu : MonoBehaviour
        // Debug.Log("Quit Game");
         Application.Quit();
 
+    }
+
+    public void Subtitles(int state)
+    {
+        PlayerPrefs.SetInt("Subtitles", state);
+    }
+
+    public void ChangeSensitivity(float value)
+    {
+        PlayerPrefs.SetFloat("Sensitivity", value);
     }
 }
