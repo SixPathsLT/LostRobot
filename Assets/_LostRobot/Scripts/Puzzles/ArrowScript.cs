@@ -1,5 +1,5 @@
 using UnityEngine;
-public class ArrowScript : Puzzles
+public class ArrowScript : MonoBehaviour
 {
     
     public GameObject center;
@@ -11,9 +11,11 @@ public class ArrowScript : Puzzles
     RectTransform rect;
     ArrowManager arrowManager;
 
-    private void Start() {
+    private void OnEnable() {
         arrowManager = FindObjectOfType<ArrowManager>();
         rect = GetComponent<RectTransform>();
+        spin = true;
+        inLock = false;
     }
 
     void Update()
@@ -37,29 +39,34 @@ public class ArrowScript : Puzzles
         {
             indicator.sizeDelta = new Vector2(15, indicator.rect.height);
         }
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("DialLock") && !inLock)
+        if (collision.CompareTag("DialLock"))
         {
             inLock = true;
-            arrowManager.IncrementDials();
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("DialLock") && inLock)
+        if (collision.CompareTag("DialLock"))
         {
             inLock = false;
         }
     }
     
-    /*public void CheckIfInLock()
+    public void CheckIfInLock()
     {
-        if (inLock)
+
+        if (inLock && spin)
         {
+            Debug.Log("clicked");
             spin = false;
+            arrowManager.IncrementDials();
         }
-    }*/
+    }
 }

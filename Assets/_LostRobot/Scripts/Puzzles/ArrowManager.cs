@@ -10,7 +10,8 @@ public class ArrowManager : Puzzles
         base.Activate(true);
         canvas.SetActive(true);
         state = true;
-       
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     
     public void IncrementDials(){
@@ -19,15 +20,20 @@ public class ArrowManager : Puzzles
             puzzleManager.win.Play();
             Reset();
             puzzleManager.Unlock();
+           
+
         }
     }
 
     public override void Reset()
     {
         base.Reset();
-        
-        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
         state = false;
+        completedDials = 0;
+        canvas.SetActive(false);
         
         
     }

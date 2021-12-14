@@ -12,7 +12,7 @@ public abstract class Puzzles : MonoBehaviour
 
     public virtual void Activate(bool showMouse)
     {
-        puzzleManager = GetComponent<PuzzleManager>();
+        puzzleManager = FindObjectOfType<PuzzleManager>();
         GameManager.GetInstance().ChangeState(GameManager.State.Puzzle);
         if (showMouse){
             Cursor.visible = true;
