@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(data.level);
     }
 
+    public void forcestart()
+    {
+        currentState = State.Playing;
+    }
     private void LateUpdate() {
         if (currentState != State.Loading) 
             return;
