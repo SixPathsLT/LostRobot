@@ -1,7 +1,7 @@
-From		:	M. Smith
+From	:	M. Smith
 To		:	T. Scott
 Subject	:	Facility Staff Meeting
-Date		:	10/08/2098
+Date	:	10/08/2098
 
 Good day Ms Scott
 I would just like to inform you that recently strange events have been said to take place on the upper floors. After some investigation we found that the Facility Management AI appears to be showing some worrying signs. I would just like to warn you to take precautions as well as try to inform those under you. Thankfully the facility management does not include our staff communications network but I would still suggest that you be careful with your actions until we are able to resolve this matter. Make sure that you have measures in place should something go wrong

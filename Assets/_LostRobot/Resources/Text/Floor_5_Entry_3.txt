@@ -1,0 +1,10 @@
+From	:	C. Pennington 
+To		:	N. Turner, M. Smith 
+Subject	:	Notice Regarding Management AI 
+Date	:	17/9/2098 
+
+Good day, 
+I’ve recently picked up that the Management AI has been accessing files & information regarding Project Uniek. At first, I didn’t see anything wrong with that as the AI is set to regularly sweep through the servers for any unwanted data or security risks however it seems to be particularly focused regarding the Units that apparently began acting strange recently. The access logs seem to increase after the information regarding the decommission of 2 of the outlier Units. If possible, please take note of this and consider looking into the issue. 
+ 
+Regards 
+-[Head of IT] Christian Pennington 

@@ -1,0 +1,10 @@
+From	:	C. Martinez
+To		:	S. Kim
+Subject :   AI System Check
+Date	:	23/8/2098
+
+Hello Candice,
+Do you think you could make some time to check up on the Facility Management AI? It’s been acting strange lately. I had to try three times before it granted me access to information about that HK unit Ben’s been experimenting with, and it’s been sending security bots to some weird places lately. I know our goal here is to integrate intelligence within robots but maybe we’ve been discounting the AI we already have because it’s been acting a bit too… human lately.
+
+Regards,
+-[Mechanical Engineer] Spencer Kim

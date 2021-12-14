@@ -1,7 +1,7 @@
-From		:	M. Smith
+From	:	M. Smith
 To		:	K. Diaz
-Subject		:	Facility Staff Meeting
-Date		:	12/08/2098
+Subject	:	Facility Staff Meeting
+Date	:	12/08/2098
 
 Attention all Staff
 As a result of recent events all staff are requested to gather at Common Area B on floor 5 for a facility wide meeting regarding future actions. The exact date and time will be decided on at a later date. In the meantime please make sure to follow your department Standard Operating Procedures to avoid any mishaps. Once the scheduling has been sorted please make sure that you are in attendance for the meeting.

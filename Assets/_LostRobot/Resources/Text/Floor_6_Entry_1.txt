@@ -1,0 +1,10 @@
+From	:	M. Smith
+To		:	All employees
+Subject	:	Evacuation Notice
+Date	:	19/09/2098
+
+Attention all Staff,
+Please be advised that on account of the Facility Management AI's recent behavior, we are ordering the evacuation of all non-essential personnel from Wintech premises. Contact your supervisors for further details. We hope to have this issue resolved as soon as possible.
+
+Regards,
+-[Director] Martin Smith

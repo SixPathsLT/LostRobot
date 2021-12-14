@@ -179,6 +179,7 @@ public class AIManager : MonoBehaviour {
         routeTiles = null;
         isStunned = true;
         _anim.SetBool("S", true);
+        GetComponentInChildren<EnemyAudioControl>().Stun();
         yield return new WaitForSeconds(duration);        
         _anim.SetBool("S", false);
         yield return new WaitForSeconds(3);

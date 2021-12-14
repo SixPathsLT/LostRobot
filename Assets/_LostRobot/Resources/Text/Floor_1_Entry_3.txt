@@ -1,7 +1,7 @@
-From		:	N. Turner
+From	:	N. Turner
 To		:	K. Diaz, B. Rice
 Subject	:	Project Uniek, Anomalies
-Date		:	02/08/2098
+Date	:	02/08/2098
 
 Good Day Nicole,
 For a while now I’ve started noticing some abnormalities regarding the Units part of the Uniek protocol. It would appear that a few have recently developed a habit of activating on their own without any outside assistance. There might be an issue in their firmware that might need some adjustment considering that they were supposed to be in deep sleep at the time of activation. If needed I can send it up to floor 3 for further diagnosis should it be necessary. I will also continue to observe if any of the other shelved units have similar behaviours. For now it only seems to be 3 of the units that were acting up.
@@ -9,10 +9,10 @@ For a while now I’ve started noticing some abnormalities regarding the Units p
 Regards
 -[Maintenance Mechanic] Kevin Diaz
 
-From		:	N. Turner
+From	:	N. Turner
 To		:	K. Diaz, B. Rice
 Subject	:	RE; Project Uniek, Anomalies
-Date		:	05/08/2098
+Date	:	05/08/2098
 
 Hi Keven, Ben
 We’ve been working on trying to fix the issue causing them to wake up on their own while in deep sleep, along with that I’ve noticed that the Neural Network template seems to have been adjusting itself in the Units affected by the Anomaly, for now keep me posted on any more changes, we might have ourselves a breakthrough with this soon!

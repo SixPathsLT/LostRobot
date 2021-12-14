@@ -1,0 +1,10 @@
+From	:	J. Fernandez
+To		:	D. Kemp
+Subject	:	Network Logs
+Date	:	09/9/2098
+
+Good day Ms Kemp,
+I would just like to update you regarding the strange activity regarding our internal communication network. We've noticed that there are records showing a few of the staff's accounts at odd times. To make matters more confusing the logs are unable to specify which terminal in the building was used to access the network. For now we would like to put up precautionary measures in place to monitor this for the next week and see what we find. Along with this I would like to request that the security staff do the same in monitoring for any strange or unconventional behaviour
+
+Regards
+-[IT Technician] Jonathan Fernandez

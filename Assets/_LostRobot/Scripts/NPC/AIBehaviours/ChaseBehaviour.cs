@@ -14,6 +14,7 @@ public class ChaseBehaviour : AIBehaviour {
     public override void Init(AIManager aiManager) {
         // rbd = gameObject.GetComponent<Rigidbody>();
         aiManager._anim.SetBool("Run", true);
+        aiManager.GetComponentInChildren<EnemyAudioControl>().Found();
 
         if (abilitiesManager == null)
             abilitiesManager = AIManager.player.GetComponent<AbilitiesManager>();
