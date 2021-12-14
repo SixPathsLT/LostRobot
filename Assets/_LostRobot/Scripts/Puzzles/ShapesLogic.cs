@@ -102,7 +102,7 @@ public class ShapesLogic : Puzzles
                     {
                         imageCount++;
                         result.gameObject.tag = "Solved";
-                        result.gameObject.GetComponent<Image>().color = Color.gray;
+                        result.gameObject.GetComponent<Image>().color = new Color(0, 0.36f, 0);
                     }
                     else if (result.gameObject.tag == "Incorrect")
                     {
