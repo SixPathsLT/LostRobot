@@ -16,9 +16,28 @@ MonoBehaviour:
   maxHealth: 100
   currentConciousness: 50
   maxConciousness: 100
-  obtainedKeyInfo: []
+  obtainedKeyInfo:
+  - Lv_1_AC_1
   obtainedKeyCards: []
   readEmails:
   - Lv_1_PC_1
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
+  - Lv_1_PC_2
   - Lv_1_PC_2
   level: 1

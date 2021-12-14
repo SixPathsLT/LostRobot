@@ -54,19 +54,19 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
+      keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
-      heightFromFeet: 1
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
       maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      maskSource: {fileID: 31900000, guid: 16a7d5ebb55763140a5bd94190fb4a40, type: 2}
+      additiveReferencePoseFrame: 0.72
     isReadable: 0
   meshes:
     lODScreenPercentages: []
