@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_LostRobot/Scenes/_GameLvl_6.unity
     guid: bf8fc64228ac671428f6c00a5f642fb4
+  - enabled: 1
+    path: Assets/_LostRobot/Scenes/EndingScene.unity
+    guid: 6f34da084dcfade43afc6e11ec2810b8
   m_configObjects: {}

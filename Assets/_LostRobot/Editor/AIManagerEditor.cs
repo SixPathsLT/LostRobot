@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEditor;
 [CustomEditor(typeof(AIManager))]
 public class AIManagerEditor : Editor
@@ -17,7 +16,7 @@ public class AIManagerEditor : Editor
             selectedIndex = index;
             manager.SetBehaviour(behaviours[selectedIndex]);
         }
- 
+
     }
-    
+
 }

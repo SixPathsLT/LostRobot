@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State { Menu, Loading, Playing, Paused, Puzzle, Email, Cutscene }
+    public enum State { Menu, Loading, Playing, Paused, Puzzle, Email, Cutscene, Captured }
     State currentState;
 
     static private GameManager instance;
@@ -25,16 +25,16 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         SAVE_PATH = Application.persistentDataPath + "/player.data";
-        Load();
+        //Load();
     }
 
     public void StartGame() {
-        SceneManager.LoadScene(data.level);
         currentState = State.Loading;
+        SceneManager.LoadScene(data.level);
     }
 
     private void LateUpdate() {
-        if (currentState != State.Loading)
+        if (currentState != State.Loading) 
             return;
 
         if (player == null)
@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
         } else if (InCutsceneState()) {
             switch (requestedState) {
                 case State.Playing:
+                case State.Captured:
                     approveChange = true;
                     break;
             }
@@ -76,6 +77,12 @@ public class GameManager : MonoBehaviour
             switch (requestedState) {
                 case State.Playing:
                 case State.Cutscene:
+                    approveChange = true;
+                    break;
+            }
+        } else if (InCapturedState()) {
+            switch (requestedState) {
+                case State.Playing:
                     approveChange = true;
                     break;
             }
@@ -136,6 +143,16 @@ public class GameManager : MonoBehaviour
         data.obtainedKeyInfo = savedData.obtainedKeyInfo;
 
         stream.Close();
+
+        StartGame();
+    }
+
+    public void NewGame() {
+        if (File.Exists(SAVE_PATH))
+            File.Delete(SAVE_PATH);
+
+        data.Reset();
+        StartGame();
     }
 
     public State GetCurrentState() { return currentState; }
@@ -145,6 +162,7 @@ public class GameManager : MonoBehaviour
     public bool InCutsceneState() { return currentState == State.Cutscene; }
     public bool InPuzzleState() { return currentState == State.Puzzle; }
     public bool InEmailState() { return currentState == State.Email; }
+    public bool InCapturedState() { return currentState == State.Captured; }
 
     public static GameManager GetInstance() {
         if (instance == null)

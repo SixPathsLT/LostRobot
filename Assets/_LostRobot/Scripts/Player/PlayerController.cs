@@ -21,12 +21,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void HandleCapture() {
-
         ReduceConsciousness(10);
         Respawn();
         FindObjectOfType<Notification>().SendNotification("You were detected by the AI. Your consciousness level is now " + data.GetConcioussness() + ".");
+        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
 
-       
     }
 
     private void HandleDeath() {

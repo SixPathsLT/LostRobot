@@ -7,6 +7,8 @@ public class CutsceneManager : MonoBehaviour {
     public static int INTRODUCTION_CUTSCENE = 0;
     public static int ELEVATOR_CUTSCENE = 1;
     public static int ABILITY_UNLOCKED_CUTSCENE = 2;
+    public static int CAPTURED_CUTSCENE = 3;
+    public static int ENDING_CUTSCENE = 4;
 
     public GameObject canvas;
     public GameObject cutsceneCam;
@@ -24,15 +26,17 @@ public class CutsceneManager : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.P))
-            PlayCutscene(ELEVATOR_CUTSCENE);
+            PlayCutscene(ENDING_CUTSCENE);
         if (currentCutscene != null) {
             currentCutscene.Process();
 
             if (currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration)
                 StopCutscene();
-            else if (!RequestedSceneChange() && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 1f) 
-                    currentCutscene.playerCam.SetActive(true);
-            
+            else if (currentCutscene.playerCam != null && !RequestedSceneChange() && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 1f) 
+                currentCutscene.playerCam.SetActive(true);
+            else if (RequestedSceneChange() && sceneName.Contains("EndingScene") && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 3f)
+                StopCutscene(true);
+
             timeElapsed += Time.deltaTime;
         }
     }
@@ -54,15 +58,23 @@ public class CutsceneManager : MonoBehaviour {
         currentCutscene.Init();
     }
 
-    void StopCutscene() {
-        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
+    void StopCutscene(bool ending = false) {
+
         currentCutscene.Stop();
         currentCutscene = null;
         cutsceneCam.SetActive(false);
         canvas.SetActive(false);
         timeElapsed = 0f;
-        if (RequestedSceneChange())
+        if (!GameManager.GetInstance().InCapturedState())
+            GameManager.GetInstance().ChangeState(GameManager.State.Playing);
+        if (RequestedSceneChange()) {
             SceneManager.LoadScene(sceneName);
+            if (ending) {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+                
+        }
 
         sceneName = "";
 

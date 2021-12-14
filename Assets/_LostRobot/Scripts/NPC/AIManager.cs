@@ -54,7 +54,7 @@ public class AIManager : MonoBehaviour {
     static GameObject OBJECT_REQUIRED_REPATH = null;
 
     void FixedUpdate() {
-        if (!GameManager.GetInstance().InPlayingState() && !Utils.CanSeeTransform(transform, player.transform, 360))
+        if (!GameManager.GetInstance().InPlayingState() && !Utils.CanSeeTransform(transform, player.transform, 360) || GameManager.GetInstance().InCapturedState())
             return;
 
         if (currentBehaviour != null && !isStunned)

@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
         mouseSensitivity = value * 3f;
     }
     void Update() {
-        if (GameManager.GetInstance().InPlayingState())
+        if (GameManager.GetInstance().InPlayingState() || GameManager.GetInstance().InCapturedState())
             Movement();
         if (!GameManager.GetInstance().InEmailState() && !GameManager.GetInstance().InPuzzleState())
             Zoom();

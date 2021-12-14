@@ -80,6 +80,14 @@ public class PlayerData : ScriptableObject
         GameManager.GetInstance().Save();
     }
 
+    internal void Reset() {
+        currentHealth = 1;
+        currentConciousness = 0;
+        obtainedKeyInfo.Clear();
+        obtainedKeyCards.Clear();
+        readEmails.Clear();
+        level = 1;
+    }
 
     public int GetEmailsCount() { return readEmails.Count; }
     public int GetHealth() { return currentHealth; }

@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public void LoadGame()
     {
         //Debug.Log("Game starts");
         
 
        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        GameManager.GetInstance().StartGame();
+        GameManager.GetInstance().Load(); 
+    }
 
-        
+    public void NewGame() {
+        GameManager.GetInstance().NewGame();
     }
 
     public void Quit()

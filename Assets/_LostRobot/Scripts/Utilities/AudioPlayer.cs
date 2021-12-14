@@ -12,10 +12,20 @@ public class AudioPlayer : MonoBehaviour
     }
 
     [SerializeField] AudioData[] audioData;
+    [HideInInspector]
     public AudioSource source;
 
     void Awake() {
         source = gameObject.AddComponent<AudioSource>();
+    }
+
+    public void PlayClip(int index) {
+        if (index >= audioData.Length) {
+            Debug.Log("Clip #" + index + " does not exist.");
+            return;
+        }
+        AudioData data = audioData[index];
+        Play(data, false);
     }
 
     public void PlayClip(string name) {
@@ -23,8 +33,9 @@ public class AudioPlayer : MonoBehaviour
         foreach (var data in audioData){
             if (data.audio == null)
                 continue;
-
+            
             if (data.audio.name.Equals(name)) {
+                foundClip = true;
                 Play(data, false);
                 break;
             }
