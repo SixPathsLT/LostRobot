@@ -9,7 +9,7 @@ public class AIManager : MonoBehaviour {
 
     public float speed = 4.5f;
 
-    public List<GameObject> nodes;
+    public Transform[] nodes;
     [HideInInspector]
     public int currentNode = 0;
 
@@ -179,7 +179,7 @@ public class AIManager : MonoBehaviour {
 
         routeTiles = null;
         nextTile = null;
-        currentNode = Random.Range(0, nodes.Count);
+        currentNode = Random.Range(0, nodes.Length);
         return false;
     }
 

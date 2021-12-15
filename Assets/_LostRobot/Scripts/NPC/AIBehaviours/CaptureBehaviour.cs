@@ -30,7 +30,7 @@ public class CaptureBehaviour : AIBehaviour {
     }
 
     public override void End(AIManager aiManager) {
-        aiManager.transform.position = aiManager.nodes[Random.Range(0, aiManager.nodes.Count)].transform.position;
+        aiManager.transform.position = aiManager.nodes[Random.Range(0, aiManager.nodes.Length)].position;
     }
 
 }

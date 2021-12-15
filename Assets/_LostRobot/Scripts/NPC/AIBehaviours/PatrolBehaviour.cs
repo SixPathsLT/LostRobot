@@ -46,10 +46,10 @@ public class PatrolBehaviour : AIBehaviour {
         */
 
         if (aiManager.routeTiles == null) {
-            Vector3 desiredPos = aiManager.nodes[aiManager.currentNode].transform.position;
+            Vector3 desiredPos = aiManager.nodes[aiManager.currentNode].position;
             float distance = Vector3.Distance(aiManager.gameObject.transform.position, desiredPos);
             if (distance <= 3)
-                aiManager.currentNode = Random.Range(0, aiManager.nodes.Count);
+                aiManager.currentNode = Random.Range(0, aiManager.nodes.Length);
             else
                 aiManager.pathfinding.FindPath(aiManager.gameObject, desiredPos, distance > 20 ? true : false);
         }

@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcPrefabs:
   - {fileID: 6719148343987687753, guid: 817d3e4aa660d194cbfd2d5b0c4af300, type: 3}
+  - {fileID: 1390984332306486294, guid: 5cec4afa6acb13a4f85e1d2f5421547d, type: 3}
+  - {fileID: 8771332428715186839, guid: 0ce7a95acd8e1994b81ba07952c3d913, type: 3}

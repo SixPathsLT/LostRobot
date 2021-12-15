@@ -21,12 +21,13 @@ public class LockDown : MonoBehaviour
 
         doorManager.LockDownEnter();
         timer = Random.Range(timerRange.x, timerRange.y);
+        NPCSpawner.GetInstance().SpawnNPCS();
 
         yield return new WaitForSeconds(timer);
 
         LockDownInitiated = false;
         doorManager.LockDownExit();
-
+        NPCSpawner.GetInstance().DespawnNPCS();
         StartCoroutine(LockDownCoroutine());
     }
 
