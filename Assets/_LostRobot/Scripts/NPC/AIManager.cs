@@ -39,6 +39,11 @@ public class AIManager : MonoBehaviour {
         pathfinding = FindObjectOfType<Pathfinding>();
         _anim = GetComponentInChildren<Animator>();
         health = 100f;
+        Transform[] patrolPoints;
+
+        patrolPoints = GameObject.Find("PatrolPoints").GetComponentsInChildren<Transform>();
+        patrolPoints[0] = patrolPoints[patrolPoints.Length - 1];
+        nodes = patrolPoints;
     }
 
 

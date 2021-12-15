@@ -43,7 +43,7 @@ public class NPCSpawner : MonoBehaviour
 
         for (int i = 0; i < floor; i++) {
             Vector3 spawnPosition = patrolPoints[Random.Range(0, patrolPoints.Length)].position;
-            if (Vector3.Distance(spawnPosition, AbilitiesManager.player.transform.position) < 10)
+            if (Vector3.Distance(spawnPosition, AbilitiesManager.player.transform.position) < 20)
                 continue;
 
             SpawnNPC(npcId, spawnPosition);
