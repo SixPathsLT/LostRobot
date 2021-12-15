@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,10 +11,16 @@ public class PlayerMovement : MonoBehaviour
 
     public float turnSmoothTime = 0.1f;
    public float turnSmoothVelocity;
+    AbilitiesManager abilitiesManager;
 
     [HideInInspector]
     public Vector3 direction;
+    internal bool inCombat;
 
+    private void Start()
+    {
+        abilitiesManager = GetComponent<AbilitiesManager>();
+    }
 
     void Update() {
         if (!GameManager.GetInstance().InPlayingState()) {
@@ -39,9 +44,17 @@ public class PlayerMovement : MonoBehaviour
             float targetAngle = (Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg);
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            
-            Controller.Move(direction * speed * Time.deltaTime);
-            
+
+            float movementSpeed = speed;
+            if (inCombat) {
+                if (Utils.HasEntity(transform.position, false, 6)) {
+                    if (!abilitiesManager.UsingSpeedAbility())
+                        movementSpeed /= 2f;
+                } else
+                    inCombat = false;
+            }
+
+            Controller.Move(direction * movementSpeed * Time.deltaTime);
         }
 
         if (transform.position.y > 1)

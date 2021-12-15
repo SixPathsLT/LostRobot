@@ -30,12 +30,15 @@ public class AIManager : MonoBehaviour {
     public Pathfinding pathfinding;
 
     readonly float tileMultiplier = (Pathfinding.TILE_SIZE + Pathfinding.OFFSET);
+    [HideInInspector]
+    public float lastPunch, health;
 
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         SetBehaviour(patrolBehaviour);
         pathfinding = FindObjectOfType<Pathfinding>();
         _anim = GetComponentInChildren<Animator>();
+        health = 100f;
     }
 
 
@@ -53,13 +56,25 @@ public class AIManager : MonoBehaviour {
     }
     static GameObject OBJECT_REQUIRED_REPATH = null;
 
-    void FixedUpdate() {
-        if (!GameManager.GetInstance().InPlayingState() && !Utils.CanSeeTransform(transform, player.transform, 360) || GameManager.GetInstance().InCapturedState())
+    internal void TakeDamage()
+    {
+        if (isStunned)
             return;
+
+        health -= 30f;//instant 
+        if (health < 0)
+            StartCoroutine(Stun(20));
+    }
+
+    void FixedUpdate() {
+        if (!GameManager.GetInstance().InPlayingState() && !Utils.CanSeeTransform(transform, player.transform, 360) || GameManager.GetInstance().InCutsceneState() || GameManager.GetInstance().InCapturedState())
+            return;
+        if (lastPunch > 0f)
+            lastPunch -= Time.deltaTime;
 
         if (currentBehaviour != null && !isStunned)
             currentBehaviour.Process(this);
-
+        
         if (routeTiles == null) {
             nextTile = null;
             //example :)
@@ -179,11 +194,13 @@ public class AIManager : MonoBehaviour {
         routeTiles = null;
         isStunned = true;
         _anim.SetBool("S", true);
+        SetBehaviour(patrolBehaviour);
         GetComponentInChildren<EnemyAudioControl>().Stun();
         yield return new WaitForSeconds(duration);        
         _anim.SetBool("S", false);
         yield return new WaitForSeconds(3);
         isStunned = false;
+        health = 100f;
     }
 
 }

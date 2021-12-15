@@ -19,10 +19,10 @@ public class CaptureBehaviour : AIBehaviour {
             Vector3 lookDirection = (aiManager.transform.position - AIManager.player.transform.position).normalized;
             if (lookDirection != Vector3.zero)
                 AIManager.player.transform.rotation = Quaternion.LookRotation(lookDirection);
-           
 
-            //AIManager.player.GetComponent<PlayerController>().HandleCapture();
-            //aiManager.transform.position = aiManager.nodes[Random.Range(0, aiManager.nodes.Count)].transform.position;
+            lookDirection = (AIManager.player.transform.position - aiManager.transform.position).normalized;
+            if (lookDirection != Vector3.zero)
+                aiManager.transform.rotation = Quaternion.LookRotation(lookDirection);
             return;
         }
 

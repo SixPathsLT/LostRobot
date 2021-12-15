@@ -38,14 +38,12 @@ public class GameManager : MonoBehaviour
         currentState = State.Playing;
     }
     private void LateUpdate() {
-        if (currentState != State.Loading) 
-            return;
-
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
 
-        if (player == null)
-           return;
+        if (currentState != State.Loading || player == null) 
+            return;
+
         currentState = State.Playing;
 
         if (data.GetEmailsCount() < 1)
@@ -55,9 +53,9 @@ public class GameManager : MonoBehaviour
     public void ChangeState(State requestedState) {
         bool approveChange = false;
 
-        if (InPlayingState())
+        if (InPlayingState()) {
             approveChange = true;
-        else if (InPausedState()) {
+        } else if (InPausedState())  {
             switch (requestedState) {
                 case State.Playing:
                     approveChange = true;
@@ -65,8 +63,9 @@ public class GameManager : MonoBehaviour
             }
         } else if (InPuzzleState()) {
             switch (requestedState) {
+                case State.Cutscene:
                 case State.Playing:
-                    ClosePuzzle();
+                    CloseInterfaces();
                     approveChange = true;
                     break;
             }
@@ -81,6 +80,7 @@ public class GameManager : MonoBehaviour
             switch (requestedState) {
                 case State.Playing:
                 case State.Cutscene:
+                    CloseInterfaces();
                     approveChange = true;
                     break;
             }
@@ -96,13 +96,16 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnRespawn() {
-        ClosePuzzle();
+        CloseInterfaces();
     }
 
-    void ClosePuzzle() {
+    void CloseInterfaces() {
         Puzzles puzzle = FindObjectOfType<PuzzleManager>().currentPuzzle;
         if (puzzle != null)
             puzzle.Reset();
+
+        if (PCUI.current != null)
+            PCUI.current.Close();
     }
 
     [System.Serializable]

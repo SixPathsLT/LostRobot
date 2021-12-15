@@ -12,7 +12,7 @@ public class Elevator : MonoBehaviour {
             other.transform.parent.position = other.transform.position;
             other.transform.localRotation = Quaternion.identity;
             other.transform.localPosition = new Vector3(0, 1.3f, 0);
-            FindObjectOfType<CutsceneManager>().PlayCutscene(CutsceneManager.ELEVATOR_CUTSCENE, sceneName);
+            FindObjectOfType<CutsceneManager>().PlayCutscene(sceneName.Equals("Ending") ? CutsceneManager.ENDING_CUTSCENE : CutsceneManager.ELEVATOR_CUTSCENE, sceneName);
             other.GetComponent<PlayerController>().data.CompletedLevel();
         } else
             FindObjectOfType<Notification>().SendNotification("Access Card Required");

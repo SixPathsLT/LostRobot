@@ -12,9 +12,12 @@ public class Notification : MonoBehaviour {
     }
 
     public void SendSubtitle(string message, bool reset = false) {
-        subtitle.text = message;
-        if (reset)
-            StartCoroutine(Reset(subtitle));
+        int setting = PlayerPrefs.GetInt("Subtitles");
+        if (setting == 0) {
+            subtitle.text = message;
+            if (reset)
+                StartCoroutine(Reset(subtitle));
+        }        
     }
 
     IEnumerator ProcessNotification(TextMeshProUGUI mesh, string message, float time, float delay) {

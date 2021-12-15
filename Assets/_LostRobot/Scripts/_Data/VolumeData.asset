@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0815d9daff75d924289e74958effbd03, type: 3}
+  m_Name: VolumeData
+  m_EditorClassIdentifier: 
+  prefPrefix: Volume_
+  mixer: {fileID: 24100000, guid: 524a834ef0999e44fa99d4f766072b16, type: 2}
+  volumeControl:
+  - name: Master
+    volume: 0.55261153
+    tempVol: 0.55261153
+  - name: Music
+    volume: 0.55261153
+    tempVol: 0.55261153
+  - name: UI
+    volume: 0.55261153
+    tempVol: 0.55261153
+  - name: Puzzles
+    volume: 0.55261153
+    tempVol: 0.55261153
+  - name: Player
+    volume: 0.55261153
+    tempVol: 0.55261153
+  - name: Enemies
+    volume: 0.55261153
+    tempVol: 0.55261153

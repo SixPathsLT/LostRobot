@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour
     public float collisionSensitivity = 2.5f;
     void Start()
     {
+        float sen = PlayerPrefs.GetFloat("Sensitivity");
+        ChangeSensitivity(sen);
         //camDist = cam.transform.localPosition.z;
         zoomDist = zOffset;
         camDist = zoomDist;
@@ -30,12 +32,19 @@ public class CameraController : MonoBehaviour
         mouseSensitivity = value * 3f;
     }
     void Update() {
+               
+
         if (GameManager.GetInstance().InPlayingState() || GameManager.GetInstance().InCapturedState())
             Movement();
         if (!GameManager.GetInstance().InEmailState() && !GameManager.GetInstance().InPuzzleState())
             Zoom();
 
         CameraCollision();
+    }
+
+    private void LateUpdate()
+    {
+        mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
     }
 
     private void Movement()

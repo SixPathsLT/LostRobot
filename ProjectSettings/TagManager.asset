@@ -12,6 +12,8 @@ TagManager:
   - Solved
   - DialLock
   - DoorLight
+  - SensitivitySlider
+  - Subtitle_Buttons
   layers:
   - Default
   - TransparentFX

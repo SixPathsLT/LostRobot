@@ -19,16 +19,16 @@ public class AudioPlayer : MonoBehaviour
         source = gameObject.AddComponent<AudioSource>();
     }
 
-    public void PlayClip(int index) {
+    public void PlayClip(int index, bool reset = false) {
         if (index >= audioData.Length) {
             Debug.Log("Clip #" + index + " does not exist.");
             return;
         }
         AudioData data = audioData[index];
-        Play(data, false);
+        Play(data, reset);
     }
 
-    public void PlayClip(string name) {
+    public void PlayClip(string name, bool reset = false) {
         bool foundClip = false;
         foreach (var data in audioData){
             if (data.audio == null)
@@ -36,7 +36,7 @@ public class AudioPlayer : MonoBehaviour
             
             if (data.audio.name.Equals(name)) {
                 foundClip = true;
-                Play(data, false);
+                Play(data, reset);
                 break;
             }
         }

@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class PCUI : MonoBehaviour
 {
+
+    public static PCUI current;
     public bool locked;
     public bool triggerPuzzle;
     public TextAsset file;
@@ -73,6 +75,7 @@ public class PCUI : MonoBehaviour
 
     public void DisplayText()
     {
+        current = this;
         GameManager.GetInstance().ChangeState(GameManager.State.Email);
         canvas.SetActive(true);
         Cursor.visible = true;
@@ -92,13 +95,15 @@ public class PCUI : MonoBehaviour
 
     public void Close()
     {
+        current = null;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         text.GetComponent<Text>().text = "";
         canvas.SetActive(false);
         textOpened = false;
         //controller.enabled = true;
-        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
+        if (!GameManager.GetInstance().InCapturedState())
+            GameManager.GetInstance().ChangeState(GameManager.State.Playing);
     }
 
 }

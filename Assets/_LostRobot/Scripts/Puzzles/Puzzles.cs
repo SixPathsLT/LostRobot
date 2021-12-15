@@ -33,6 +33,7 @@ public abstract class Puzzles : MonoBehaviour
         //<PuzzleManager>().abil.enabled = true;
         FindObjectOfType<PuzzleManager>().currentPuzzle = null;
 
-        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
+        if (!GameManager.GetInstance().InCapturedState())
+            GameManager.GetInstance().ChangeState(GameManager.State.Playing);
     }
 }

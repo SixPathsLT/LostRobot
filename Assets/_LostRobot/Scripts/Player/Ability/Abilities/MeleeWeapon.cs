@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class MeleeWeapon : MonoBehaviour
 {
 
-   public MeleeAbility meleeAbility;
+   MeleeAbility meleeAbility;
+   CapsuleCollider weapon;
 
-    void Update()
-    { 
-       GetComponent<BoxCollider>().isTrigger = meleeAbility.IsActive(); 
-    }
+   private void Start() {
+        weapon = GetComponent<CapsuleCollider>();
+        meleeAbility = FindObjectOfType<AbilitiesManager>().abilities[3] as MeleeAbility;//AbilitiesManager.player.GetComponent<AbilitiesManager>().abilities[3] as MeleeAbility;
+   }
 
-    private void OnTriggerEnter(Collider other)
-    {
+
+    private void OnTriggerStay(Collider other) {
+        if (!meleeAbility.IsActive())
+            return;
         AIManager enemy = other.GetComponent<AIManager>();
 
         if (enemy != null)
-        {
-            //damage enemy
-        }
-
+            enemy.TakeDamage();
+       
     }
 }

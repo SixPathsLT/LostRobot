@@ -11,6 +11,7 @@ public class ChaseBehaviour : AIBehaviour {
      Rigidbody rbd;*/
 
     AbilitiesManager abilitiesManager;
+    PlayerData data;
     public override void Init(AIManager aiManager) {
         // rbd = gameObject.GetComponent<Rigidbody>();
         aiManager._anim.SetBool("Run", true);
@@ -18,6 +19,9 @@ public class ChaseBehaviour : AIBehaviour {
 
         if (abilitiesManager == null)
             abilitiesManager = AIManager.player.GetComponent<AbilitiesManager>();
+
+        if (data == null)
+            data = AIManager.player.GetComponent<PlayerController>().data;
     }
 
     public override void Process(AIManager aiManager) {
@@ -38,11 +42,11 @@ public class ChaseBehaviour : AIBehaviour {
 
         if (Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform, 360f))
             aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, rotation, 4f * Time.deltaTime);
-
+        bool aggressive = data.GetConcioussness() > 0 && data.GetEmailsCount() >= 12 ? true : false;
         if (range > chaseDistance)
             aiManager.SetBehaviour(aiManager.patrolBehaviour);
-        else if (Utils.CanSeeTransform(aiManager.gameObject.transform, player) && range < 4f)
-            aiManager.SetBehaviour(aiManager.captureBehaviour);
+        else if (Utils.CanSeeTransform(aiManager.gameObject.transform, player) && range < (aggressive ? 3f : 4f))
+            aiManager.SetBehaviour(aggressive ? aiManager.combatBehaviour : aiManager.captureBehaviour);
         else {
             if (aiManager.routeTiles == null )
                 //|| (!Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform) && range < 20f && Utils.CanSeeTransform(aiManager.gameObject.transform, player.transform, 360f)))

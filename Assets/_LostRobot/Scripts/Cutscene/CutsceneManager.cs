@@ -26,7 +26,12 @@ public class CutsceneManager : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.P))
+        {
+            AbilitiesManager.player.transform.parent.position = AbilitiesManager.player.transform.position;
+            AbilitiesManager.player.transform.localRotation = Quaternion.identity;
+            AbilitiesManager.player.transform.localPosition = new Vector3(0, 1.3f, 0);
             PlayCutscene(ENDING_CUTSCENE);
+        }
         if (currentCutscene != null) {
             currentCutscene.Process();
 
@@ -59,7 +64,6 @@ public class CutsceneManager : MonoBehaviour {
     }
 
     void StopCutscene(bool ending = false) {
-
         currentCutscene.Stop();
         currentCutscene = null;
         cutsceneCam.SetActive(false);
