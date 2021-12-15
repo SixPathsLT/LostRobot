@@ -19,6 +19,7 @@ public class CaptureCutscene : Cutscene {
 
     public override void Process()
     {
+
     }
 
     public override void Stop()

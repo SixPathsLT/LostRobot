@@ -45,4 +45,8 @@ public class AbilitiesManager : MonoBehaviour
     internal bool UsingCloakingAbility() {
         return selectedAbility.GetType() == typeof(CloakingAbility) && selectedAbility.IsActive() && ((CloakingAbility)selectedAbility).hidingSpot != null && ((CloakingAbility)selectedAbility).hidingSpot.activeSelf;
     }
+    internal bool UsingSpeedAbility()
+    {
+        return selectedAbility.GetType() == typeof(SpeedAbility) && selectedAbility.IsActive();
+    }
 }

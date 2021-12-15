@@ -1,37 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "AIBehaviours/CombatBehaviour")]
 public class CombatBehaviour : AIBehaviour {
 
-    Transform player;
 
-    public override void Init(AIManager aiManager)
-    {
+    public override void Init(AIManager aiManager) {
+        AIManager.player.GetComponent<PlayerMovement>().inCombat = true;
     }
 
     public override void Process(AIManager aiManager) {
+        float distance = Vector3.Distance(AIManager.player.transform.position, aiManager.gameObject.transform.position);
+        if (distance > 3) {
+            aiManager.SetBehaviour(aiManager.chaseBehaviour);
+            return;
+        }
+        if (GameManager.GetInstance().InPuzzleState() || GameManager.GetInstance().InEmailState()) {
+            aiManager.SetBehaviour(aiManager.captureBehaviour);
+            return;
+        }
 
+        Quaternion rotation = aiManager.gameObject.transform.rotation;
+        Vector3 lookDirection = (AIManager.player.transform.position - aiManager.gameObject.transform.position).normalized;
+        if (lookDirection != Vector3.zero)
+            rotation = Quaternion.LookRotation(lookDirection);
 
+        if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform, 360f))
+            aiManager.gameObject.transform.rotation = Quaternion.Slerp(aiManager.gameObject.transform.rotation, rotation, 4f * Time.deltaTime);
 
-        /*
-         animator.transform.LookAt(player);
-         float distance = Vector3.Distance(animator.transform.position, player.position);
-         if (distance > ?)
-         */
+        if (aiManager.lastPunch > 0)
+            return;
 
-         
-        /*
-        player = GameObject.FindGameObjectsWithTag("Player").transform;
-        */
+        aiManager.lastPunch = 1f;
+        aiManager._anim.SetTrigger("AttackTrigger");
+        aiManager._anim.SetInteger("Attack_Index", Random.Range(0, aiManager._anim.GetInteger("Attack_Max_Index")));
+
     }
    
-    
-
-    public override void End(AIManager aiManager) 
-{
-    
+  
+    public override void End(AIManager aiManager) {
     }
 
 

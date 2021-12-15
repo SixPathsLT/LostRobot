@@ -3,20 +3,27 @@ using UnityEngine;
 
 public class LightSaber : MonoBehaviour
 {
-    public AIBehaviour combat;
-    public AIManager aiManager;
+    AIManager aiManager;
+    CapsuleCollider weapon;
 
-    private void Start()
-    {
+    bool inCombat;
+    private void Start() {
         aiManager = transform.root.GetComponent<AIManager>();
+        weapon = GetComponent<CapsuleCollider>();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && combat == aiManager.currentBehaviour) 
-        {
-            other.GetComponent<PlayerController>().data.SetHealth(0);
-            Debug.Log("Damage player");
-        }
+
+    void Update() {
+        if (aiManager == null)
+            return;
+
+        inCombat = !aiManager.isStunned && (aiManager.combatBehaviour == aiManager.currentBehaviour || aiManager.chaseBehaviour == aiManager.currentBehaviour);
     }
+
+    private void OnTriggerStay(Collider other) {
+        if (inCombat && other.CompareTag("Player"))
+            other.GetComponent<PlayerController>().data.SetHealth(other.GetComponent<PlayerController>().data.GetHealth() - 2);
+
+    }
+
 
 }

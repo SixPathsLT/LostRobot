@@ -79,7 +79,7 @@ public class Pathfinding : MonoBehaviour {
         //    startTile = GetNeighbours(startTile)[0];
         //if (endTile != null && !endTile.canWalk)
         //   endTile = GetNeighbours(endTile)[0];
-                
+
         if (startTile == null || endTile == null) {
             Debug.Log(this + " Failed to find start/end tile. ");
             requests.Remove(gameObject);
@@ -92,22 +92,29 @@ public class Pathfinding : MonoBehaviour {
         Node foundNode = null;
         List<Node> unCheckedNodes = new List<Node>() { startNode };
         checkedTiles = new HashSet<WorldTile>();
-        
+
         Vector3 rayStartPos = startTile.position;
         bool quickFind = false;
         RaycastHit hit;
 
         Vector3 targetDirection = (endPosition - rayStartPos);
-        if (endTile.canWalk && Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition))) {
-            if (hit.collider.CompareTag("Player")) {
+        if (Vector3.Distance(gameObject.transform.position, endPosition) > 10)
+        {
+            if (endTile.canWalk && Physics.Raycast(rayStartPos, targetDirection, out hit, Vector3.Distance(rayStartPos, endPosition)))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    foundNode = endNode;
+                    //foundNode.previousNode = startNode;
+                    quickFind = true;
+                }
+            }
+            else if (endTile.canWalk)
+            {
                 foundNode = endNode;
                 //foundNode.previousNode = startNode;
                 quickFind = true;
             }
-        } else if (endTile.canWalk) {
-            foundNode = endNode;
-            //foundNode.previousNode = startNode;
-            quickFind = true;
         }
 
         while (foundNode == null && unCheckedNodes.Count > 0) {

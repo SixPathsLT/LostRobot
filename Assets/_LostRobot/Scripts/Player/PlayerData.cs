@@ -14,14 +14,22 @@ public class PlayerData : ScriptableObject
     public List<string> readEmails = new List<string>();
     public int level = 1;
 
-    public void SetHealth(int health)
-    {
+    public void SetHealth(int health) {
+        if (health > maxHealth)
+            health = maxHealth;
+        else if (health < 0)
+            health = 0;
+
         currentHealth = health;
         UIUpdater?.Invoke(health);
     }
 
-    public void SetConciousness(int value)
-    {
+    public void SetConciousness(int value) {
+        if (value > maxConciousness)
+            value = maxConciousness;
+        else if (value < 0)
+            value = 0;
+
         currentConciousness = value;
         UIUpdater?.Invoke(currentConciousness);
     }
@@ -40,6 +48,7 @@ public class PlayerData : ScriptableObject
             return;
 
         readEmails.Add(id);
+        SetConciousness(currentConciousness + 5);
 
         foreach (var ability in GameObject.FindGameObjectWithTag("Player").GetComponent<AbilitiesManager>().abilities) {
             if (GetEmailsCount() == ability.requiredReadEmails) {

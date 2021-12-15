@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -26,19 +27,22 @@ public class PlayerController : MonoBehaviour {
         ReduceConsciousness(10);
         Respawn();
         FindObjectOfType<Notification>().SendNotification("You were detected by the AI. Your consciousness level is now " + data.GetConcioussness() + ".");
-        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
-
+        StartCoroutine(Resume());
     }
 
     private void HandleDeath() {
        if (data.GetHealth() < 1) {
+            GameManager.GetInstance().ChangeState(GameManager.State.Captured);
             ReduceConsciousness(10);
             Respawn();
-       }
+            FindObjectOfType<Notification>().SendNotification("You were injured by the AI. " + " Your consciousness level is now " + data.GetConcioussness() + ".");
+        }
     }
 
     private void Respawn() {
+        GameManager.GetInstance().ChangeState(GameManager.State.Captured);
         transform.position = GameObject.Find("RespawnLocation").transform.position;
+        data.currentHealth = data.maxHealth;
         /*transform.position = respawnPoint;
         data.currentHealth = checkpoint.currentHealth;
         data.maxHealth = checkpoint.maxHealth;
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         data.maxConciousness = checkpoint.maxConciousness;*/
         //data.SetHealth(100);
         GameManager.GetInstance().OnRespawn();
+         StartCoroutine(Resume());
     }
 
     private void ReduceConsciousness(int amount) {
@@ -54,5 +59,11 @@ public class PlayerController : MonoBehaviour {
             consciousness = 0;
 
         data.SetConciousness(consciousness);
+    }
+
+
+    public IEnumerator Resume() {
+        yield return new WaitForSeconds(1);
+        GameManager.GetInstance().ChangeState(GameManager.State.Playing);
     }
 }

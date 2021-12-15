@@ -32,7 +32,7 @@ public class EndingCutscene : Cutscene {
         yield return new WaitForEndOfFrame();
         FindObjectOfType<CutsceneManager>().PlayCutscene(CutsceneManager.ELEVATOR_CUTSCENE, "EndingScene");
         yield return new WaitForSeconds(2);
-        GameObject.Find("AudioPlayer").GetComponent<AudioPlayer>().PlayClip("Level_6_AI_3_Clip_1");
+        GameObject.Find("AudioPlayer").GetComponent<AudioPlayer>().PlayClip("Level_6_AI_3_Clip_1", true);
     }
 
 }
