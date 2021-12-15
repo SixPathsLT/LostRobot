@@ -10,6 +10,7 @@ public class ShooterManager : Puzzles
     public GameObject[] targetsArray;
     Queue<GameObject> targetsQueue = new Queue<GameObject>();
     public bool hasTimer;
+    public Slider time;
     public override void Activate(bool showMouse)
     {
         base.Activate(false);
@@ -24,6 +25,7 @@ public class ShooterManager : Puzzles
         {
             if (hasTimer)
             {
+                time.value = timer - countDown;
                 countDown += Time.deltaTime;
                 if (countDown <= timer)
                 {
