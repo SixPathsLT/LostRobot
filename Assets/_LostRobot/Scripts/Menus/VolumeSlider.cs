@@ -9,7 +9,7 @@ public class VolumeSlider : MonoBehaviour
     public VolumeData data;
     private Slider slider;
     public TMPro.TextMeshProUGUI label;
-    public string volumeName;
+    public string volumeName;    
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +33,10 @@ public class VolumeSlider : MonoBehaviour
     {
         if (data)
         {
-            if (PlayerPrefs.HasKey(data.prefPrefix + volumeName))
-            {
-                float volume = data.GetVolumeLevels(volumeName);
+            float volume = data.GetVolumeLevels(volumeName);
 
-                OnChange(volume);
-                slider.value = volume;
-            }            
+            OnChange(volume);
+            slider.value = volume;
         }
     }
 }

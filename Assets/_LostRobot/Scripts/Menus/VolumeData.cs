@@ -7,6 +7,8 @@ using UnityEngine.Audio;
 public class Volume
 {
     public string name;
+    [Range(0.001f, 1)]
+    public float defaultVolume = .5f;
     public float volume;
     public float tempVol;
 }
@@ -21,7 +23,7 @@ public class VolumeData : ScriptableObject
 
     public float GetVolumeLevels(string name)
     {
-        float volume = 1;
+        float volume = .5f;
 
         if (mixer == null)
         {
@@ -35,6 +37,11 @@ public class VolumeData : ScriptableObject
                 if (PlayerPrefs.HasKey(prefPrefix + vol.name))
                 {
                     vol.volume = PlayerPrefs.GetFloat(prefPrefix + vol.name, vol.tempVol);
+                    return vol.volume;
+                }
+                else
+                {
+                    vol.volume = vol.defaultVolume;
                     return vol.volume;
                 }
             }
@@ -56,6 +63,10 @@ public class VolumeData : ScriptableObject
             if (PlayerPrefs.HasKey(prefPrefix + vol.name))
             {
                 vol.volume = PlayerPrefs.GetFloat(prefPrefix + vol.name, vol.tempVol);
+            }
+            else
+            {
+                vol.volume = vol.defaultVolume;
             }
             //Debug.Log("Receiving Values - " + prefPrefix + vol.name + ": " + vol.volume);
             vol.tempVol = vol.volume;
