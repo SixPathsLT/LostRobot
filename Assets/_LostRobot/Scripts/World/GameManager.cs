@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             switch (requestedState) {
                 case State.Cutscene:
                 case State.Playing:
-                    CloseInterfaces();
+                    ClosePuzzle();
                     approveChange = true;
                     break;
             }
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             switch (requestedState) {
                 case State.Playing:
                 case State.Cutscene:
-                    CloseInterfaces();
+                    ClosePC();
                     approveChange = true;
                     break;
             }
@@ -96,16 +96,19 @@ public class GameManager : MonoBehaviour
     }
 
     public void OnRespawn() {
-        CloseInterfaces();
+        ClosePuzzle();
+        ClosePC();
     }
 
-    void CloseInterfaces() {
+    void ClosePC() {
+        if (PCUI.current != null && Utils.HasEntity(player.transform.position, false, 4.5f))
+            PCUI.current.Close();
+    }
+
+    void ClosePuzzle() {
         Puzzles puzzle = FindObjectOfType<PuzzleManager>().currentPuzzle;
         if (puzzle != null)
             puzzle.Reset();
-
-        if (PCUI.current != null)
-            PCUI.current.Close();
     }
 
     [System.Serializable]
