@@ -19,8 +19,6 @@ public class DoorController : MonoBehaviour
         puzzle = FindObjectOfType<PuzzleManager>();
         _doorAnim = GetComponentInParent<Animator>();
         audio = GetComponent<AudioPlayer>();
-        audio.source.spatialBlend = 1;
-        audio.source.volume = .1f;
         _doorAnim = this.transform.parent.GetComponent<Animator>();
         //puzzle = FindObjectOfType<PuzzleManager>();
     }
@@ -30,7 +28,7 @@ public class DoorController : MonoBehaviour
     {
         _doorAnim.SetBool("Open", false);
         if (_doorAnim.GetCurrentAnimatorStateInfo(0).IsName("door_3_opened"))
-            audio.PlayClip("Door_Close_SFX");
+            audio.PlayClip(1);
         //Commented to prevent doors from locking when walking away
         //Locked = true;
     }
@@ -46,13 +44,13 @@ public class DoorController : MonoBehaviour
         if (!LockDown.LockDownInitiated && !Locked)
         {
             _doorAnim.SetBool("Open", true);
-            audio.PlayClip("Door_Open_SFX");
+            audio.PlayClip(0);
             Locked = false;
 
         }
         else if (LockDown.LockDownInitiated && !Locked)
         {
-            _doorAnim.SetBool("Open", true);
+            //_doorAnim.SetBool("Open", true);
             //audio.PlayClip("Door_Open_SFX");
         }
     }

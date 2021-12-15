@@ -16,7 +16,10 @@ public class AudioPlayer : MonoBehaviour
     public AudioSource source;
 
     void Awake() {
-        source = gameObject.AddComponent<AudioSource>();
+        if (GetComponent<AudioSource>() != null)
+            source = GetComponent<AudioSource>();
+        else
+            source = gameObject.AddComponent<AudioSource>();
     }
 
     public void PlayClip(int index, bool reset = false) {

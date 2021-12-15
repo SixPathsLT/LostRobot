@@ -1457,6 +1457,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 2003057878}
   volumeName: Player
+  defaultVolume: 1
 --- !u!114 &318379596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2744,6 +2745,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 477123648}
   volumeName: Music
+  defaultVolume: 0.4
 --- !u!114 &483893141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2791,7 +2793,7 @@ MonoBehaviour:
   m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0.4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5594,6 +5596,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 125705524}
   volumeName: Enemies
+  defaultVolume: 0.6
 --- !u!114 &1117835867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5641,7 +5644,7 @@ MonoBehaviour:
   m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -6334,6 +6337,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 408408163}
   volumeName: Puzzles
+  defaultVolume: 0.8
 --- !u!114 &1269294665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6381,7 +6385,7 @@ MonoBehaviour:
   m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.8
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -9058,6 +9062,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 92122467}
   volumeName: UI
+  defaultVolume: 1
 --- !u!114 &1911961132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9365,6 +9370,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 2111253271}
   volumeName: Master
+  defaultVolume: 1
 --- !u!114 &1956055158
 MonoBehaviour:
   m_ObjectHideFlags: 0
