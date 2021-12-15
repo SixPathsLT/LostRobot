@@ -5,7 +5,7 @@ public class LockDown : MonoBehaviour
 {
     public Vector2 timerRange;
     public Vector2 intervalRange;
-    public bool LockDownInitiated = false;
+    public static bool LockDownInitiated = false;
 
     DoorManager doorManager;
 

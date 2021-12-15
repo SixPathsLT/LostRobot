@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
         } else if (InPausedState())  {
             switch (requestedState) {
                 case State.Playing:
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Confined;
                     approveChange = true;
                     break;
             }

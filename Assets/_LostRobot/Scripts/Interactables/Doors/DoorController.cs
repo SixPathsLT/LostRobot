@@ -23,11 +23,28 @@ public class DoorController : MonoBehaviour
         audio.source.volume = .1f;
         _doorAnim = this.transform.parent.GetComponent<Animator>();
         //puzzle = FindObjectOfType<PuzzleManager>();
+
+       UpdateDoorColors();
+    }
+
+    void UpdateDoorColors() {
+        Color color = (Locked && cardRequired) ? Color.yellow : (Locked && triggerPuzzle) ? Color.magenta : Locked ? Color.red : Color.cyan;
+        for (int i = 0; i < transform.parent.childCount; i++) {
+            Transform child = transform.parent.GetChild(i);
+            if (!child.CompareTag("DoorLight"))
+                continue;
+
+            child.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", color * 2f);
+            child.GetComponentInChildren<Light>().color = color;
+        }
+
     }
 
 
     internal void Close()
     {
+        UpdateDoorColors();
+
         _doorAnim.SetBool("Open", false);
         if (_doorAnim.GetCurrentAnimatorStateInfo(0).IsName("door_3_opened"))
             audio.PlayClip("Door_Close_SFX");
@@ -42,7 +59,10 @@ public class DoorController : MonoBehaviour
     }
     public void OpenDoor()
     {
-        
+        if (!GameManager.GetInstance().InPlayingState())
+            return;
+        UpdateDoorColors();
+
         if (!LockDown.LockDownInitiated && !Locked)
         {
             _doorAnim.SetBool("Open", true);
@@ -89,25 +109,16 @@ public class DoorController : MonoBehaviour
     {
         _doorAnim.SetBool("Lockdown", true);
         // transform.parent.GetComponentInParent<Renderer>().material.color = Color.red;
-        if (doorsLights == null)
-            doorsLights = GameObject.FindGameObjectsWithTag("DoorLight");
-        foreach (var door in doorsLights) {
-            door.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", Color.red * 6f);
-            door.GetComponentInChildren<Light>().color = Color.red;
-        }
+       // UpdateDoorColors();
 
     }
 
     public void Unlock()
     {
-        if (doorsLights == null)
-            doorsLights = GameObject.FindGameObjectsWithTag("DoorLight");
+
         _doorAnim.SetBool("Lockdown", false);
         //transform.parent.GetComponentInParent<Renderer>().material.color = Color.white;
-        foreach (var door in doorsLights) {
-            door.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", Color.white * 6f);
-            door.GetComponentInChildren<Light>().color = Color.white;
-        }
+       // UpdateDoorColors();
 
     }
 }
