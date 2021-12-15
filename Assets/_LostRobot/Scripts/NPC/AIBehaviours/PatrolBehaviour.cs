@@ -47,6 +47,10 @@ public class PatrolBehaviour : AIBehaviour {
 
         if (aiManager.routeTiles == null) {
             Vector3 desiredPos = aiManager.nodes[aiManager.currentNode].position;
+
+            if (LockDown.LockDownInitiated && Random.Range(0, 30) == 1)
+                desiredPos = AIManager.player.transform.position;
+            
             float distance = Vector3.Distance(aiManager.gameObject.transform.position, desiredPos);
             if (distance <= 3)
                 aiManager.currentNode = Random.Range(0, aiManager.nodes.Length);

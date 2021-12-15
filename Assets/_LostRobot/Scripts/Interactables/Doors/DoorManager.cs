@@ -10,7 +10,8 @@ public class DoorManager : MonoBehaviour
     private void Start() {
         foreach (GameObject door in doors)
             entries.Add(door, door.GetComponentInChildren<DoorController>());
-        
+
+        SetDoorStates();
     }
 
     public void LockDownEnter() {
@@ -25,5 +26,16 @@ public class DoorManager : MonoBehaviour
             entries[door].Unlock();
     }
 
-
+    private void SetDoorStates()
+    {
+        foreach (GameObject door in doors)
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                if (!entries[door].cardRequired)
+                entries[door].Locked = false;
+                entries[door].triggerPuzzle = false;
+            }
+        }
+    }
 }
