@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
     private void HandleDeath() {
        if (data.GetHealth() < 1) {
             GameManager.GetInstance().ChangeState(GameManager.State.Captured);
-            ReduceConsciousness(10);
+            ReduceConsciousness(1);
             Respawn();
             FindObjectOfType<Notification>().SendNotification("You were injured by the AI. " + " Your consciousness level is now " + data.GetConcioussness() + ".");
         }

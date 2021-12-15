@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pathfinding : MonoBehaviour {
 
     static readonly bool DEBUGGING = false;
-    static readonly int GRID_SIZE_X = 200;
+    static readonly int GRID_SIZE_X = 265;
     static readonly int GRID_SIZE_Y = 200;
     static readonly int TOTAL_GRID_SIZE = GRID_SIZE_X * GRID_SIZE_Y;
     static readonly int STRAIGHT_COST = 10;

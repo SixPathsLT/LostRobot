@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c00327b19f1ff48b5c879515a4789d, type: 3}
   m_Name: MediChaseData
   m_EditorClassIdentifier: 
-  chaseDistance: 35
+  chaseDistance: 30

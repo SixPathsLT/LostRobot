@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eefe27a0d7aa4648b54b9f480fb100f, type: 3}
   m_Name: HardPatrolData
   m_EditorClassIdentifier: 
-  maxVisionDistance: 55
+  maxVisionDistance: 25
   maxVisionDegrees: 45
