@@ -1,10 +1,9 @@
-From	:	D. Garcia
-To		:	C. Pennington
-Subject :   Faulty Security Bots
-Date	:	9/8/2098
+From		:	D. Garcia
+To		    :	C. Pennington
+Subject     :   Faulty Security Bots
+Date		:	28/8/2098
 
 Hello Christian,
-I think there might be something wrong with my keycard to the Robotics lab. The Facility Management AI wouldn’t let me into the room no matter what I tried. I’m leaving it in the Software Engineering Lab, do you think you could see what’s wrong with it when you’re free?
-
+I think there might be something wrong with the door to the Robotics Lab. It kept locking on its own and the Facility Management AI wouldn’t let me in no matter what I tried. Could you send someone to look into it and see what the problem is?
 Regards, 
 -[Electrical Engineer] Daniel Garcia
