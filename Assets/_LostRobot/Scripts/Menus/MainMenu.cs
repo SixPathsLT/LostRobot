@@ -30,7 +30,14 @@ public class MainMenu : MonoBehaviour
                 }
                 if (child.name.ToLower().Contains("sensitivity"))
                 {
-                    child.GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+                    
+                    if (PlayerPrefs.HasKey("Sensitivity"))
+                        child.GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+                    else
+                    {
+                        child.GetComponentInChildren<Slider>().value = .5f;
+                        PlayerPrefs.SetFloat("Sensitivity", .5f);
+                    }
                 }
             }
         }

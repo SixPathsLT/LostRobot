@@ -3005,7 +3005,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564810285}
-  - component: {fileID: 564810286}
   m_Layer: 5
   m_Name: Help
   m_TagString: Untagged
@@ -3039,18 +3038,6 @@ RectTransform:
   m_AnchoredPosition: {x: -225, y: 0}
   m_SizeDelta: {x: 1262.8, y: 944.1592}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &564810286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564810284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &590690769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439240, guid: 548a40efc092c6f408cc4d1691b171cc, type: 3}
@@ -8355,6 +8342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753354238}
+  - component: {fileID: 1753354237}
   m_Layer: 5
   m_Name: Settings Menu
   m_TagString: Untagged
@@ -8362,6 +8350,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1753354237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753354236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1753354238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8897,8 +8897,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nMoving Keys\t\tWASD\nInteract\t\t\tE\nActivate Ability\t\tLMB\n\nSelecting
-    Abilities:\nMelee\t\t\t\t1\nSprint\t\t\t\t2\nStun\t\t\t\t3\nCloak\t\t\t\t4\n\n"
+  m_text: "\nMoving Keys\t\tWASD\nZoom\t\t\t\tScroll\nInteract\t\t\tE\nActivate Ability\t\tLMB\n\nSelecting
+    Abilities:\nSprint\t\t\t\t1\nCloak\t\t\t\t2\nStun\t\t\t\t3\nMelee\t\t\t\t4\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8925,7 +8925,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.05
+  m_fontSize: 49.4
   m_fontSizeBase: 84
   m_fontWeight: 400
   m_enableAutoSizing: 1

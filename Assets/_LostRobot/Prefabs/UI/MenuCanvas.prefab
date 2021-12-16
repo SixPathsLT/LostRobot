@@ -3375,8 +3375,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nMoving Keys\t\tWASD\nInteract\t\t\tE\nActivate Ability\t\tLMB\n\nSelecting
-    Abilities:\nMelee\t\t\t\t1\nSprint\t\t\t\t2\nStun\t\t\t\t3\nCloak\t\t\t\t4\n\n"
+  m_text: "\nMoving Keys\t\tWASD\nZoom\t\t\t\tScroll\nInteract\t\t\tE\nActivate Ability\t\tLMB\n\nSelecting
+    Abilities:\nSprint\t\t\t\t1\nCloak\t\t\t\t2\nStun\t\t\t\t3\nMelee\t\t\t\t4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3403,7 +3403,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.05
+  m_fontSize: 49.4
   m_fontSizeBase: 84
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4229,8 +4229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: {fileID: 0}
-  subtitles: {fileID: 0}
 --- !u!1 &3006376026031058084
 GameObject:
   m_ObjectHideFlags: 0
@@ -5718,8 +5716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: {fileID: 0}
-  subtitles: {fileID: 0}
 --- !u!1 &3006376026849850024
 GameObject:
   m_ObjectHideFlags: 0
@@ -10037,8 +10033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: {fileID: 0}
-  subtitles: {fileID: 0}
 --- !u!1 &7954978772664800417
 GameObject:
   m_ObjectHideFlags: 0

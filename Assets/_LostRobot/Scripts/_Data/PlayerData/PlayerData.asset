@@ -12,29 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d63c2512d3a6046a25a96a7f6dbf53, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  currentHealth: 100
+  currentHealth: 1
   maxHealth: 100
-  currentConciousness: 100
+  currentConciousness: 0
   maxConciousness: 100
-  obtainedKeyInfo:
-  - Lv_1_AC_1
-  - Lv_1_AC_2
-  - Lv_2_AC_1
-  - Lv_2_AC_2
-  obtainedKeyCards:
-  - Lv_1_AC_1
-  - Lv_1_AC_2
-  - Lv_2_AC_2
-  - Lv_2_AC_1
-  readEmails:
-  - Lv_1_PC_1
-  - Lv_1_PC_2
-  - Lv_1_PC_5
-  - Lv_1_PC_4
-  - Lv_1_PC_3
-  - Lv_2_PC_4
-  - Lv_2_PC_3
-  - Lv_2_PC_1
-  - Lv_2_PC_2
-  - Lv_2_PC_5
-  level: 7
+  obtainedKeyInfo: []
+  obtainedKeyCards: []
+  readEmails: []
+  level: 1

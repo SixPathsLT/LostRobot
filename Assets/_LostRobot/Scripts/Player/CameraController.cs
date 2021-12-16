@@ -44,7 +44,8 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
+        if (PlayerPrefs.GetFloat("Sensitivity") > 0)
+            ChangeSensitivity(PlayerPrefs.GetFloat("Sensitivity"));
     }
 
     private void Movement()
