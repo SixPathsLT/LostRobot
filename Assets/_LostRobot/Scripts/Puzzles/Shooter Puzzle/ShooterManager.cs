@@ -23,6 +23,8 @@ public class ShooterManager : Puzzles
         ActiveTarget();
         if (hasTimer)
             time.maxValue = timer;
+        else
+            time.gameObject.SetActive(false);
         canvas.SetActive(true);
     }
     private void Update()
@@ -53,7 +55,7 @@ public class ShooterManager : Puzzles
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     GameObject projectile = Instantiate(bullet, ship.transform.position, Quaternion.identity);
-                    GetComponent<AudioSource>().Play();
+                    bul.Play();
                     projectile.transform.SetParent(ship.transform);
                 }
             }
