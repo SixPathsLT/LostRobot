@@ -10,14 +10,14 @@ public abstract class Puzzles : MonoBehaviour
 
     protected PuzzleManager puzzleManager;
 
-    public virtual void Activate(bool showMouse)
+    public virtual void Activate()
     {
         puzzleManager = FindObjectOfType<PuzzleManager>();
         GameManager.GetInstance().ChangeState(GameManager.State.Puzzle);
-        if (showMouse){
+        /*if (showMouse){
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
-        }
+        }*/
         //FindObjectOfType<PuzzleManager>().movement.enabled = false;
         //FindObjectOfType<PuzzleManager>().abil.enabled = false;
 

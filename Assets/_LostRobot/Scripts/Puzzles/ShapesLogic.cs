@@ -7,8 +7,8 @@ public class ShapesLogic : Puzzles
 {
     private List<Sprite> puzzleImages = new List<Sprite>();
 
-    int[] correctImages = new int[4];
-    int[] displayedImages = new int[6];
+    int[] correctImages;
+    int[] displayedImages;
 
     private GraphicRaycaster hit;
     PointerEventData pointerData;
@@ -30,9 +30,11 @@ public class ShapesLogic : Puzzles
             puzzleImages.Add((Sprite)loadedImages[i]);
         hit = canvas.GetComponent<GraphicRaycaster>();
         eventSystem = GetComponent<EventSystem>();
+        correctImages = new int [displayImages.Length];
+        displayedImages = new int[optionsImages.Length];
     }
 
-    private void SelectRandom()
+private void SelectRandom()
     {
         int[] index = new int[puzzleImages.Count];
         for (int i = 0; i < puzzleImages.Count; i++)
@@ -42,7 +44,7 @@ public class ShapesLogic : Puzzles
             int k = Random.Range(j, index.Length);
             int temp = index[j];
             index[j] = index[k];
-            index[k] = temp;
+        index[k] = temp;
         }
         for (int a = 0; a < correctImages.Length; a++)
             correctImages[a] = index[a];
@@ -127,9 +129,11 @@ public class ShapesLogic : Puzzles
         }
     }
 
-    public override void Activate(bool showMouse)
+    public override void Activate()
     {
-        base.Activate(true);
+        base.Activate();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         canvas.SetActive(true);
         SelectRandom();
         SetTags();

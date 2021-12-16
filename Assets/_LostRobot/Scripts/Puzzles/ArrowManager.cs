@@ -9,9 +9,9 @@ public class ArrowManager : Puzzles
     [HideInInspector]
     public int fails;
     
-    public override void Activate(bool showMouse)
+    public override void Activate()
     {
-        base.Activate(true);
+        base.Activate();
         canvas.SetActive(true);
         state = true;
         Cursor.visible = true;

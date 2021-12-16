@@ -34,7 +34,7 @@ public class PuzzleManager : MonoBehaviour
     private void OpenPuzzle() {
         puzzleType = Random.Range(0, puzzles.Length);
         currentPuzzle = puzzles[puzzleType];
-        currentPuzzle.Activate(true);
+        currentPuzzle.Activate();
     }
 
     public void Unlock()

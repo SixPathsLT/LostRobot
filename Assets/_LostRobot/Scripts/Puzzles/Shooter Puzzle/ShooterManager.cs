@@ -11,12 +11,15 @@ public class ShooterManager : Puzzles
     Queue<GameObject> targetsQueue = new Queue<GameObject>();
     public bool hasTimer;
     public Slider time;
-    public override void Activate(bool showMouse)
+    public override void Activate()
     {
-        base.Activate(false);
+        base.Activate();
         state = true;
+        countDown = 0;
         SetTargetOrder();
         ActiveTarget();
+        if (hasTimer)
+            time.maxValue = timer;
         canvas.SetActive(true);
     }
     private void Update()
@@ -27,18 +30,18 @@ public class ShooterManager : Puzzles
             {
                 time.value = timer - countDown;
                 countDown += Time.deltaTime;
-                if (countDown <= timer)
+                if (countDown > timer)
+                {
+                    puzzleManager.fail.Play();
+                    Reset();
+                }
+                else
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         GameObject projectile = Instantiate(bullet, ship.transform.position, Quaternion.identity);
-                        projectile.transform.SetParent(ship.transform);
+                        projectile.transform.SetParent(ship.transform);;
                     }
-                }
-                else if (countDown > timer)
-                {
-                    puzzleManager.fail.Play();
-                    Reset();
                 }
             }
             else if (!hasTimer)
@@ -111,5 +114,6 @@ public class ShooterManager : Puzzles
         foreach (GameObject bullet in bullets)
             Destroy(bullet);
         canvas.SetActive(false);
+        countDown = 0;
     }
 }
