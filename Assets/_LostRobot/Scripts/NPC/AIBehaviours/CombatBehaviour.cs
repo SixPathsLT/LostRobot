@@ -19,6 +19,13 @@ public class CombatBehaviour : AIBehaviour {
             return;
         }
 
+        if (GameManager.GetInstance().data.GetHealth() < 1) {
+            aiManager.transform.position = aiManager.nodes[Random.Range(0, aiManager.nodes.Length)].position;
+            AIManager.player.GetComponent<PlayerController>().HandleDeath();
+            aiManager.SetBehaviour(aiManager.patrolBehaviour);
+            return;
+        }
+
         Quaternion rotation = aiManager.gameObject.transform.rotation;
         Vector3 lookDirection = (AIManager.player.transform.position - aiManager.gameObject.transform.position).normalized;
         if (lookDirection != Vector3.zero)
@@ -38,6 +45,7 @@ public class CombatBehaviour : AIBehaviour {
    
   
     public override void End(AIManager aiManager) {
+
     }
 
 

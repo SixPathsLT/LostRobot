@@ -28,7 +28,19 @@ public class DoorManager : MonoBehaviour
 
     private void SetDoorStates()
     {
-        foreach (GameObject door in doors)
+        
+        HashSet<GameObject> lockedDoors = new HashSet<GameObject>();
+        while (lockedDoors.Count < doors.Length / 2) {
+            GameObject door = doors[Random.Range(0, doors.Length)];
+            if (!lockedDoors.Contains(door)) {
+                if (!entries[door].cardRequired)
+                    entries[door].Locked = false;
+                entries[door].triggerPuzzle = false;
+                entries[door].UpdateDoorColors();
+                lockedDoors.Add(door);
+            }
+        }
+       /* foreach (GameObject door in doors)
         {
             if (Random.Range(0, 2) == 0)
             {
@@ -37,6 +49,6 @@ public class DoorManager : MonoBehaviour
                 entries[door].triggerPuzzle = false;
                 entries[door].UpdateDoorColors();
             }
-        }
+        }*/
     }
 }

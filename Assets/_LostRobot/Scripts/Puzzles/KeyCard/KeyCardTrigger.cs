@@ -14,7 +14,7 @@ public class KeyCardTrigger : MonoBehaviour
         mesh.SetActive(false);
         originalColor = mesh.GetComponent<Renderer>().materials[0].GetColor("_EmissionColor");
         material = mesh.GetComponent<Renderer>().materials[0];
-
+        
     }
 
 
@@ -22,9 +22,7 @@ public class KeyCardTrigger : MonoBehaviour
     {
         if (main.obtainedKey)
             return;
-        
-        
-
+         
         if (main.obtainedInfo)
             AreasOfInterest.Register(gameObject);
 

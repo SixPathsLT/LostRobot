@@ -27,6 +27,9 @@ public class SpeedAbility : Ability
         base.Process();
         if (state != AbilitiesManager.AbilityState.Active)
             return;
+        if (playerMovement == null)
+            playerMovement = AbilitiesManager.player.GetComponent<PlayerMovement>();
+
         AbilitiesManager.playerAnim.SetBool("SpeedBoost", playerMovement.direction.magnitude > 0.1f);
     }
 

@@ -23,7 +23,7 @@ public static class Utils {
     public static bool HasEntity(Vector3 position, bool includePlayer = true, float radius = 1f) {
         Collider[] colliders = Physics.OverlapSphere(position, radius, 1, QueryTriggerInteraction.Ignore);
         foreach (var collider in colliders) {
-            if (collider.GetComponent<AIManager>() != null || includePlayer && collider.CompareTag("Player"))
+            if ((collider.GetComponent<AIManager>() != null && !collider.GetComponent<AIManager>().isStunned) || includePlayer && collider.CompareTag("Player"))
                 return true;
         }
         return false;

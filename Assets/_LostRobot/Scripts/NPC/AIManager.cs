@@ -60,12 +60,11 @@ public class AIManager : MonoBehaviour {
     }
     static GameObject OBJECT_REQUIRED_REPATH = null;
 
-    internal void TakeDamage()
-    {
+    internal void TakeDamage() {
         if (isStunned)
             return;
 
-        health -= 30f;//instant 
+        health -= 20f;
         if (health < 0)
             StartCoroutine(Stun(20));
     }

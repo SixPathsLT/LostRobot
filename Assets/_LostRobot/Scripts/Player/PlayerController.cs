@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
         if (!GameManager.GetInstance().InPlayingState())
             return;
 
-        HandleDeath();
+       // HandleDeath();
 
     }
 
@@ -30,13 +30,11 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(Resume());
     }
 
-    private void HandleDeath() {
-       if (data.GetHealth() < 1) {
-            GameManager.GetInstance().ChangeState(GameManager.State.Captured);
-            ReduceConsciousness(1);
-            Respawn();
-            FindObjectOfType<Notification>().SendNotification("You were injured by the AI. " + " Your consciousness level is now " + data.GetConcioussness() + ".");
-        }
+    public void HandleDeath() {
+        Respawn();
+        ReduceConsciousness(1);
+        FindObjectOfType<Notification>().SendNotification("You were injured by the AI. " + " Your consciousness level is now " + data.GetConcioussness() + ".");
+        
     }
 
     private void Respawn() {

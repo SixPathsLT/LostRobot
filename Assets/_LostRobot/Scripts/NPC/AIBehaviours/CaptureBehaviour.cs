@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIBehaviours/CaptureBehaviour")]
 public class CaptureBehaviour : AIBehaviour {
 
-    bool captured;
+
     AbilitiesManager abilitiesManager;
     public override void Init(AIManager aiManager) {
         if (abilitiesManager == null)
@@ -12,8 +12,7 @@ public class CaptureBehaviour : AIBehaviour {
     }
 
     public override void Process(AIManager aiManager) {
-        if (captured)
-            return;
+
 
         if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform)
             && !abilitiesManager.UsingCloakingAbility()) {
@@ -35,7 +34,6 @@ public class CaptureBehaviour : AIBehaviour {
 
     public override void End(AIManager aiManager) {
         aiManager.transform.position = aiManager.nodes[Random.Range(0, aiManager.nodes.Length)].position;
-        captured = false;
     }
 
 }

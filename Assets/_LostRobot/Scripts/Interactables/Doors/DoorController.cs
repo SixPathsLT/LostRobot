@@ -62,8 +62,7 @@ public class DoorController : MonoBehaviour
     }
     public void OpenDoor()
     {
-        if (!GameManager.GetInstance().InPlayingState())
-            return;
+
         UpdateDoorColors();
 
         if (!LockDown.LockDownInitiated && !Locked)
@@ -75,13 +74,17 @@ public class DoorController : MonoBehaviour
         }
         else if (LockDown.LockDownInitiated && !Locked)
         {
-            //_doorAnim.SetBool("Open", true);
+            _doorAnim.SetBool("Open", true);
+            audio.PlayClip(0);
             //audio.PlayClip("Door_Open_SFX");
         }
     }
    
 
     private void OnTriggerStay(Collider other) {
+        if (!GameManager.GetInstance().InPlayingState())
+            return;
+
         if (other.GetComponent<AIManager>() != null)
         {
             _doorAnim.SetBool("AIinRange", true);
