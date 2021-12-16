@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour {
     }
     
     void Update() {
-        if (Input.GetKeyDown(KeyCode.H))
-            GameManager.GetInstance().forcestart();
+       // if (Input.GetKeyDown(KeyCode.H))
+       //     GameManager.GetInstance().forcestart();
         if (!GameManager.GetInstance().InPlayingState())
             return;
 

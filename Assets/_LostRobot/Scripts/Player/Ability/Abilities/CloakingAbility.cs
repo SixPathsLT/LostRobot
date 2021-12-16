@@ -49,6 +49,7 @@ public class CloakingAbility : Ability
     }
 
     public override void End() {
+        base.End();
         //if (hidingSpot != null)
         //    Destroy(hidingSpot);
         cloaked = false;

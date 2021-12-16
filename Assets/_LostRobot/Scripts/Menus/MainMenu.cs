@@ -4,17 +4,36 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject sensitivity;
-    public GameObject subtitles;
+    //public GameObject sensitivity;
+   // public GameObject subtitles;
 
     private void Start()
     {
-            sensitivity.GetComponent<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+        // sensitivity.GetComponent<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
 
-        if (PlayerPrefs.HasKey("Subtitles") && PlayerPrefs.GetInt("Subtitles") == 1)
+        /*if (PlayerPrefs.HasKey("Subtitles") && PlayerPrefs.GetInt("Subtitles") == 1)
             subtitles.transform.GetChild(1).GetComponent<Toggle>().isOn = true;
         else
-            subtitles.transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+            subtitles.transform.GetChild(0).GetComponent<Toggle>().isOn = true;*/
+
+        if (name.ToLower().Contains("settings"))
+        {
+            for (int i = 0; i < gameObject.transform.childCount; i++)
+            {
+                Transform child = gameObject.transform.GetChild(i);
+                if (child.name.ToLower().Contains("subtitle"))
+                {
+                    if (PlayerPrefs.HasKey("Subtitles") && PlayerPrefs.GetInt("Subtitles") == 1)
+                        child.GetChild(1).GetComponent<Toggle>().isOn = true;
+                    else
+                        child.GetChild(0).GetComponent<Toggle>().isOn = true;
+                }
+                if (child.name.ToLower().Contains("sensitivity"))
+                {
+                    child.GetComponentInChildren<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+                }
+            }
+        }
     }
 
     public void LoadGame()

@@ -50,7 +50,10 @@ public class ArrowManager : Puzzles
         state = false;
         completedDials = 0;
         canvas.SetActive(false);
-        
-        
+        fails = 0;
+
+
+
+
     }
 }

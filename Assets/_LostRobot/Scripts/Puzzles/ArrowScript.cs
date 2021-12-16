@@ -17,6 +17,8 @@ public class ArrowScript : MonoBehaviour
         rect = GetComponent<RectTransform>();
         spin = true;
         inLock = false;
+
+        rotationSpeed = Random.Range(100, 100 + (100 * GameManager.GetInstance().data.level));
     }
 
     void Update()

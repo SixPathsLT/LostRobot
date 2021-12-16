@@ -31,8 +31,8 @@ public class AbilitiesManager : MonoBehaviour
             ability.Process();
 
             if (Input.GetKey(ability.keyCode) && GameManager.GetInstance().InPlayingState()) {
-                if (selectedAbility != null)
-                    selectedAbility.End();
+                if (selectedAbility != null && selectedAbility.IsActive())
+                    selectedAbility.StartCooldown();
 
                 selectedAbility = ability;
                 break;

@@ -12,9 +12,13 @@ public class Notification : MonoBehaviour {
     }
 
     public void SendSubtitle(string message, bool reset = false) {
+        if (message.Length < 1)
+            return;
+
         int setting = PlayerPrefs.GetInt("Subtitles");
         if (setting == 0) {
             subtitle.text = message;
+
             if (reset)
                 StartCoroutine(Reset(subtitle));
         }        

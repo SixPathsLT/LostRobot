@@ -18,7 +18,7 @@ public class StunAbility : Ability
         Collider[] colliders = Physics.OverlapSphere(AbilitiesManager.player.transform.position, 10f);
         foreach (var collider in colliders) {
             AIManager aiManager  = collider.GetComponent<AIManager>();
-            if (aiManager != null)
+            if (aiManager != null && Utils.CanSeeTransform(AbilitiesManager.player.transform, aiManager.transform, 360f))
                 aiManager.StartCoroutine("Stun", stunTime);
         }
 
@@ -34,6 +34,11 @@ public class StunAbility : Ability
         if (state != AbilitiesManager.AbilityState.Active)
             return;
  
+    }
+
+    public override void End()
+    {
+        base.End();
     }
 
 

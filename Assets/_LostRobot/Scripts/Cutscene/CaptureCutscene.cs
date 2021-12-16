@@ -27,6 +27,7 @@ public class CaptureCutscene : Cutscene {
         base.Stop();
         notifs.SetActive(false);
         AIManager.player.GetComponent<PlayerController>().HandleCapture();
+        header.GetComponent<TextMeshProUGUI>().text = "Ability Unlocked!";
     }
 
 }

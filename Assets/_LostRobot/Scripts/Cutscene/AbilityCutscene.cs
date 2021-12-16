@@ -8,13 +8,15 @@ public class AbilityCutscene : Cutscene {
     public GameObject notifs;
     public override void Init() {
         base.Init();
+        if (LockDown.LockDownInitiated)
+            FindObjectOfType<LockDown>().GetComponent<AudioSource>().Stop();
         Cursor.visible = false;
         notifs.SetActive(true);
         cam = FindObjectOfType<CutsceneManager>().cutsceneCam;
         Vector3 desiredPos = player.transform.position + ((-player.transform.forward) * 5f) + player.transform.up;
         cam.transform.position = desiredPos;
         cam.transform.rotation = Quaternion.LookRotation(((player.transform.position + player.transform.up) - cam.transform.position).normalized);
-        
+
         int readEmails = player.GetComponent<PlayerController>().data.GetEmailsCount();
         foreach (var ability in player.GetComponent<AbilitiesManager>().abilities) {
             if (ability.requiredReadEmails == readEmails) {
@@ -31,6 +33,8 @@ public class AbilityCutscene : Cutscene {
 
     public override void Stop() {
         base.Stop();
+        if (LockDown.LockDownInitiated)
+            FindObjectOfType<LockDown>().GetComponent<AudioSource>().Play();
         GameManager.GetInstance().ChangeState(GameManager.State.Email);
         notifs.SetActive(false);
         Cursor.visible = true;

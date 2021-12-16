@@ -6,6 +6,8 @@ public class EndingCutscene : Cutscene {
     public override void Init() {
         base.Init();
 
+       FindObjectOfType<LockDown>().GetComponent<AudioSource>().Stop();
+
         GameObject.Find("Environment Audio").SetActive(false);
         GameManager.GetInstance().GetComponent<AudioSource>().Play();
         Time.timeScale = 0.7f;

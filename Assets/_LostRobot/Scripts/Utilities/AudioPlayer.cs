@@ -61,7 +61,6 @@ public class AudioPlayer : MonoBehaviour
     }
 
    IEnumerator PlayAll() {
-        yield return new WaitForSeconds(1);
         foreach (var data in audioData) {
             Play(data, data.audio == audioData[audioData.Length - 1].audio);
             yield return new WaitForSeconds(data.audio.length);
