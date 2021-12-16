@@ -8,7 +8,7 @@ public class IntroductionCutscene : Cutscene {
     public GameObject abilityIcon;
 
     PlayerData playerData;
-    PlayerUIControll uiController;
+    PlayerUIControl uiController;
 
     struct Data {
         public bool canGain;
@@ -19,7 +19,7 @@ public class IntroductionCutscene : Cutscene {
 
     public override void Init() {
         base.Init();
-        uiController = player.GetComponent<PlayerUIControll>();
+        uiController = player.GetComponent<PlayerUIControl>();
 
         health.value = 1f;
         playerData = player.GetComponent<PlayerController>().data;

@@ -797,6 +797,10 @@ MonoBehaviour:
   triggerPuzzle: 0
   puzzle: {fileID: 0}
   cardRequired: 0
+  locked: {r: 1, g: 0.13054681, b: 0, a: 1}
+  key: {r: 1, g: 0.7879015, b: 0, a: 1}
+  open: {r: 0, g: 0.9825599, b: 1, a: 1}
+  lockdown: {r: 0.4433962, g: 0, b: 0, a: 1}
 --- !u!114 &7933682143429967337
 MonoBehaviour:
   m_ObjectHideFlags: 0

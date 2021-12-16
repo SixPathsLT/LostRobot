@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilitiesManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class AbilitiesManager : MonoBehaviour
     public static Animator playerAnim;
     public AudioSource abilitySounds;
     public AudioClip[] audioClips;
+    public Renderer[] cloakMesh;
+    public Text cloakPC;
+    public Renderer cloakAbility;
 
     public static Ability selectedAbility;
   

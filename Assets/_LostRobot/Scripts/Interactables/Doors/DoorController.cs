@@ -13,6 +13,11 @@ public class DoorController : MonoBehaviour
     private AudioPlayer audio;
     static GameObject[] doorsLights;
 
+    public Color locked;
+    public Color key;
+    public Color open;
+    public Color lockdown;
+
     public void Start()
     {
         LockDown = FindObjectOfType<LockDown>();
@@ -25,14 +30,14 @@ public class DoorController : MonoBehaviour
        UpdateDoorColors();
     }
 
-    void UpdateDoorColors() {
-        Color color = (Locked && cardRequired) ? Color.yellow : (Locked && triggerPuzzle) ? Color.magenta : Locked ? Color.red : Color.cyan;
+    public void UpdateDoorColors() {
+        Color color = (Locked && cardRequired) ? key : (Locked && triggerPuzzle) ? locked : Locked ? lockdown : open;
         for (int i = 0; i < transform.parent.childCount; i++) {
             Transform child = transform.parent.GetChild(i);
             if (!child.CompareTag("DoorLight"))
                 continue;
 
-            child.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", color * 2f);
+            child.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", color * 8f);
             child.GetComponentInChildren<Light>().color = color;
         }
 

@@ -35,6 +35,7 @@ public class DoorManager : MonoBehaviour
                 if (!entries[door].cardRequired)
                 entries[door].Locked = false;
                 entries[door].triggerPuzzle = false;
+                entries[door].UpdateDoorColors();
             }
         }
     }
