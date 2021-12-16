@@ -25,7 +25,7 @@ RenderTexture:
   m_SRGB: 0
   m_UseDynamicScale: 1
   m_BindMS: 0
-  m_EnableCompatibleFormat: 1
+  m_EnableCompatibleFormat: 0
   m_TextureSettings:
     serializedVersion: 2
     m_FilterMode: 1
@@ -34,5 +34,5 @@ RenderTexture:
     m_WrapU: 1
     m_WrapV: 1
     m_WrapW: 1
-  m_Dimension: 5
+  m_Dimension: 2
   m_VolumeDepth: 1

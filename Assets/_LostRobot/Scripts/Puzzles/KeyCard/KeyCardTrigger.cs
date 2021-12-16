@@ -8,17 +8,25 @@ public class KeyCardTrigger : MonoBehaviour
 
     Color originalColor;
     Material material;
+    
     public void Start()
     { 
         mesh.SetActive(false);
         originalColor = mesh.GetComponent<Renderer>().materials[0].GetColor("_EmissionColor");
         material = mesh.GetComponent<Renderer>().materials[0];
+
     }
 
-    public void Update()
+
+    public void LateUpdate()
     {
         if (main.obtainedKey)
             return;
+        
+        
+
+        if (main.obtainedInfo)
+            AreasOfInterest.Register(gameObject);
 
         float distance = Vector3.Distance(mesh.transform.position, AbilitiesManager.player.transform.position);
         distance = Mathf.Clamp(distance, 1f, 100f) * 50f;
@@ -35,8 +43,8 @@ public class KeyCardTrigger : MonoBehaviour
             GetComponent<AudioSource>().Play();
             FindObjectOfType<Notification>().SendNotification("Access Card Acquired");            
             main.checkKey();
-
             mesh.SetActive(false);
+            AreasOfInterest.DeRegister(gameObject);
         }                
     }
 }

@@ -31,6 +31,9 @@ public class PCUI : MonoBehaviour
             read = true;
             locked = false;
         }
+
+        if (!read)
+            AreasOfInterest.Register(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,6 +93,7 @@ public class PCUI : MonoBehaviour
             data.AddEmail(id);
             read = true;
             FindObjectOfType<Journal>(true).CreateEntry(this);
+            AreasOfInterest.DeRegister(gameObject);
         }
     }
 

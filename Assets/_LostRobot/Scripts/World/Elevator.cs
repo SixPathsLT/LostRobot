@@ -4,6 +4,11 @@ public class Elevator : MonoBehaviour {
     public string sceneName;
     public KeyCardLogic access;
 
+    private void Start()
+    {
+        AreasOfInterest.Register(gameObject);
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (!other.CompareTag("Player") || sceneName == null)
             return;

@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class ArrowManager : Puzzles
 {
+    public int guesses = 3;
     [HideInInspector]
    public int completedDials = 0;
+
+    [HideInInspector]
+    public int fails;
     
     public override void Activate(bool showMouse)
     {
@@ -20,8 +24,14 @@ public class ArrowManager : Puzzles
             puzzleManager.win.Play();
             Reset();
             puzzleManager.Unlock();
-           
+        }
+    }
 
+    public void IncrementFails() {
+        fails++;
+        if (fails >= guesses) {
+            puzzleManager.fail.Play();
+            Reset();
         }
     }
 

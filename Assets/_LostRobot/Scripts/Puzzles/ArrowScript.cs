@@ -59,14 +59,12 @@ public class ArrowScript : MonoBehaviour
         }
     }
     
-    public void CheckIfInLock()
-    {
-
-        if (inLock && spin)
-        {
-            Debug.Log("clicked");
+    public void CheckIfInLock() {
+        if (inLock && spin) {
             spin = false;
             arrowManager.IncrementDials();
+        } else if (spin && !inLock) {
+            arrowManager.IncrementFails();
         }
     }
 }

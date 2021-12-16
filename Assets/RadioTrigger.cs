@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class RadioTrigger : MonoBehaviour
@@ -11,6 +10,8 @@ public class RadioTrigger : MonoBehaviour
     {
         audio = GetComponent<AudioPlayer>();
         audio.source.volume = .35f;
+       
+            AreasOfInterest.Register(gameObject);
     }
 
     private void OnTriggerStay(Collider other)
@@ -19,6 +20,7 @@ public class RadioTrigger : MonoBehaviour
         {
             played = true;
             audio.PlayAllClips();
+            AreasOfInterest.DeRegister(gameObject);
         }
     }
 }
