@@ -217,20 +217,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &3149976878891884999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4996933837723978346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd309f0657223b140bc7e61831513c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  combat: {fileID: 0}
-  aiManager: {fileID: 0}
 --- !u!136 &4215296971085050928
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -245,6 +231,18 @@ CapsuleCollider:
   m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: -0.28, z: 0}
+--- !u!114 &3149976878891884999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996933837723978346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd309f0657223b140bc7e61831513c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &5176731016445784472
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -271,8 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd309f0657223b140bc7e61831513c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combat: {fileID: 0}
-  aiManager: {fileID: 0}
 --- !u!1818360609 &3954628750243599504
 RotationConstraint:
   m_ObjectHideFlags: 0
@@ -332,7 +328,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
