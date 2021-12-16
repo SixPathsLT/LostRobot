@@ -3,8 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "AIBehaviours/CaptureBehaviour")]
 public class CaptureBehaviour : AIBehaviour {
-
-
+    
     AbilitiesManager abilitiesManager;
     public override void Init(AIManager aiManager) {
         if (abilitiesManager == null)
@@ -12,8 +11,6 @@ public class CaptureBehaviour : AIBehaviour {
     }
 
     public override void Process(AIManager aiManager) {
-
-
         if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform)
             && !abilitiesManager.UsingCloakingAbility()) {
             aiManager._anim.SetTrigger("Capture");

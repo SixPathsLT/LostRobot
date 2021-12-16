@@ -47,7 +47,7 @@ public class AbilitiesManager : MonoBehaviour
         abilitySounds.Play();
     }
     internal bool UsingCloakingAbility() {
-        return selectedAbility.GetType() == typeof(CloakingAbility) && selectedAbility.IsActive();
+        return selectedAbility.GetType() == typeof(CloakingAbility) && selectedAbility.IsActive() && ((CloakingAbility)selectedAbility).cloaked;
     }
     internal bool UsingSpeedAbility()
     {

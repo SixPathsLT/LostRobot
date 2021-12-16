@@ -23,7 +23,7 @@ public class LockDown : MonoBehaviour
         else if (!LockDownInitiated && playing)
             GetComponent<AudioSource>().Stop();*/
 
-        if (LockDownInitiated && GameManager.GetInstance().InPausedState())
+        if (LockDownInitiated && GameManager.GetInstance().InPausedState() || GetComponent<AudioSource>().isPlaying)
         {
             GetComponent<AudioSource>().Stop();
             stopped = true;

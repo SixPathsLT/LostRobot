@@ -33,6 +33,10 @@ public class NPCSpawner : MonoBehaviour
         }
 
         GameObject npc = Instantiate(npcPrefabs[id], position, rotation);
+
+        if (Utils.CanSeeTransform(npc.transform, AbilitiesManager.player.transform, 360))
+            npc.transform.position = patrolPoints[Random.Range(0, patrolPoints.Length)].position;
+
         npc.GetComponent<AIManager>().nodes = patrolPoints;
         spawnedNPCs.Add(npc);
     }

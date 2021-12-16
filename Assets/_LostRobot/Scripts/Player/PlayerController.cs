@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour {
         ReduceConsciousness(10);
         Respawn();
         FindObjectOfType<Notification>().SendNotification("You were detected by the AI. Your consciousness level is now " + data.GetConcioussness() + ".");
-        StartCoroutine(Resume());
     }
 
     public void HandleDeath() {
@@ -48,7 +47,7 @@ public class PlayerController : MonoBehaviour {
         data.maxConciousness = checkpoint.maxConciousness;*/
         //data.SetHealth(100);
         GameManager.GetInstance().OnRespawn();
-         StartCoroutine(Resume());
+        StartCoroutine(Resume());
     }
 
     private void ReduceConsciousness(int amount) {
