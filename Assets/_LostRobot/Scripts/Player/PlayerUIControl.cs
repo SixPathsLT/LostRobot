@@ -149,17 +149,17 @@ public class PlayerUIControl : MonoBehaviour
         selectedAbility = AbilitiesManager.selectedAbility.icon;
         abilityIcon.GetComponent<Renderer>().material.SetTexture("_MainTex", selectedAbility);
 
-        bool canModify = !GameManager.GetInstance().InCutsceneState() || CutsceneManager.timeElapsed > 10f;
+        //bool canModify = !GameManager.GetInstance().InCutsceneState() || CutsceneManager.timeElapsed > 7f;
 
             for (int i = 0; i < concioussnessIndicators.Length; i++)
             {
                 coolDownIndicators[i].materials[cDIndexes[i]].color = coolDown;
-                if (canModify)
+               // if (canModify)
                     coolDownIndicators[i].materials[cDIndexes[i]].SetColor("_EmissionColor", coolDown * emission * 2);
             }
 
             abilityIcon.GetComponent<Renderer>().material.color = coolDown;
-        if (canModify)
+        //if (canModify)
             abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", coolDown * emission * .5f);
         
     }
