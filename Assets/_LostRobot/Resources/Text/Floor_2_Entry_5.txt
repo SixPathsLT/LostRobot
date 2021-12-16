@@ -1,7 +1,7 @@
 From	:	J. Bailey
 To		:	T. Scott
 Subject	:	Unintentional Progress
-Date	:	09/08/2098
+Date	:	13/06/2098
 
 Although unintentional, Ben's rash decision to add an Interface module onto HK-734 seems to have somehow aided in allowing that particular unit to develop differently than expected. Due to the module he gained an interest in interfacing with both doors and computers with what appears to be an almost childlike curiosity. With this development though it could possibly aid us in reproducing such behaviour on a larger scale although we could also focus our efforts on this Unit and see what else they are able to do should we add any other modules onto their frame. This just depends on what the HoDs decide to do next though. Please tell Ben to refrain from doing something like this again though, The Engineer department up here had quite the colorful variety of words to describe his methods regardless of the outcome.
 
