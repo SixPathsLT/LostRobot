@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IntroductionCutscene : Cutscene {
 
-    public GameObject coolDown;
+   // public GameObject coolDown;
     public GameObject abilityIcon;
 
     PlayerData playerData;
@@ -23,7 +23,7 @@ public class IntroductionCutscene : Cutscene {
 
         health.value = 1f;
         playerData = player.GetComponent<PlayerController>().data;
-        coolDown.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+        //coolDown.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
         abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
         playerData.SetConciousness(0);
         playerData.SetHealth(1);
@@ -51,7 +51,7 @@ public class IntroductionCutscene : Cutscene {
 
             Color lerpedColor = Color.Lerp(Color.black, uiController.coolDown, (health.value * 1.5f) * Time.deltaTime);
 
-            coolDown.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 12f);
+            //coolDown.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 12f);
             abilityIcon.GetComponent<Renderer>().material.SetColor("_EmissionColor", lerpedColor * 6f);
 
             playerData.SetHealth((int) health.value);

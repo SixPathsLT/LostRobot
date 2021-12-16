@@ -358,10 +358,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 0}
   objectsToDisable:
-  - {fileID: 0}
+  - {fileID: 215828794}
   - {fileID: 1012842127}
-  coolDown: {fileID: 0}
-  abilityIcon: {fileID: 0}
+  abilityIcon: {fileID: 73816768}
 --- !u!114 &5908348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1442,31 +1441,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.456196
+      value: 8.443474
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.94755465
+      value: 0.9535009
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.31933165
+      value: -0.3013902
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.009872221
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.008364348
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.4451847
+      value: 1.5124302
       objectReference: {fileID: 0}
     - target: {fileID: 2198319514718012703, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.0631738
+      value: 1.0817418
       objectReference: {fileID: 0}
     - target: {fileID: 2198319515075881465, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1490,31 +1489,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.433958
+      value: 1.4920216
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7938752
+      value: 0.82027984
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.418934
+      value: 8.390057
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.027783796
+      value: 0.037274685
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0024463534
+      value: 0.010013699
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7204874
+      value: -0.7436179
       objectReference: {fileID: 0}
     - target: {fileID: 2198319516047634650, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.692907
+      value: 0.66748995
       objectReference: {fileID: 0}
     - target: {fileID: 2457351317022219816, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2450,6 +2449,11 @@ Animator:
 --- !u!95 &73816767 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2198319514553928671, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
+  m_PrefabInstance: {fileID: 73816765}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &73816768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2198319516047634651, guid: 7cddb017eea0bf64f9c3f35d5745852b, type: 3}
   m_PrefabInstance: {fileID: 73816765}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &78058354
@@ -13062,7 +13066,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1261967628}
-  - component: {fileID: 1261967630}
   - component: {fileID: 1261967629}
   m_Layer: 0
   m_Name: RespawnLocation
@@ -13098,20 +13101,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1261967630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261967627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a7a78dde68d244aba84d95e637d645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkpointData: {fileID: 11400000, guid: bfcf0dcfa468f694f98d75a9ba84ee61, type: 2}
-  player: {fileID: 0}
 --- !u!1 &1265145161
 GameObject:
   m_ObjectHideFlags: 0
@@ -14813,7 +14802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1501116212
 Animator:
   serializedVersion: 3
