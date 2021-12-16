@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArrowManager : Puzzles
 {
+    public Text attemps;
     public int guesses = 3;
     [HideInInspector]
    public int completedDials = 0;
@@ -13,6 +15,7 @@ public class ArrowManager : Puzzles
     {
         base.Activate();
         canvas.SetActive(true);
+        attemps.text = "" + guesses;
         state = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -20,6 +23,7 @@ public class ArrowManager : Puzzles
     
     public void IncrementDials(){
         completedDials++;
+        puzzleManager.click.Play();
         if (completedDials >= 3) {
             puzzleManager.win.Play();
             Reset();
@@ -29,6 +33,8 @@ public class ArrowManager : Puzzles
 
     public void IncrementFails() {
         fails++;
+        puzzleManager.wrong.Play();
+        attemps.text = "" + (guesses - fails);
         if (fails >= guesses) {
             puzzleManager.fail.Play();
             Reset();

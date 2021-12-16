@@ -4,12 +4,17 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject sensitivity;
+    public GameObject subtitles;
+
     private void Start()
     {
-        GameObject.FindGameObjectWithTag("SensitivitySlider").GetComponent<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
+            sensitivity.GetComponent<Slider>().value = PlayerPrefs.GetFloat("Sensitivity");
 
-        if (PlayerPrefs.GetInt("Subtitles") == 0)
-            GameObject.FindGameObjectWithTag("Subtitle_Buttons").transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+        if (PlayerPrefs.HasKey("Subtitles") && PlayerPrefs.GetInt("Subtitles") == 1)
+            subtitles.transform.GetChild(1).GetComponent<Toggle>().isOn = true;
+        else
+            subtitles.transform.GetChild(0).GetComponent<Toggle>().isOn = true;
     }
 
     public void LoadGame()

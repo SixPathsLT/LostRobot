@@ -6,12 +6,21 @@ public class LockDown : MonoBehaviour
     public Vector2 timerRange;
     public Vector2 intervalRange;
     public static bool LockDownInitiated = false;
+    private bool playing = false;
 
     DoorManager doorManager;
 
     private void Start() {
         StartCoroutine(LockDownCoroutine());
         doorManager = FindObjectOfType<DoorManager>();
+    }
+
+    private void Update()
+    {
+        if (LockDownInitiated && !playing)
+            GetComponent<AudioSource>().Play();
+        else if (!LockDownInitiated && playing)
+            GetComponent<AudioSource>().Stop();
     }
 
     IEnumerator LockDownCoroutine() {

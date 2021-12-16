@@ -105,11 +105,13 @@ private void SelectRandom()
                         imageCount++;
                         result.gameObject.tag = "Solved";
                         result.gameObject.GetComponent<Image>().color = new Color(0, 0.36f, 0);
+                        puzzleManager.click.Play();
                     }
                     else if (result.gameObject.tag == "Incorrect")
                     {
                         remainingGuesses--;
                         guesses.text = "" + remainingGuesses;
+                        puzzleManager.wrong.Play();
                     }
                 }
                 if (remainingGuesses <= 0)

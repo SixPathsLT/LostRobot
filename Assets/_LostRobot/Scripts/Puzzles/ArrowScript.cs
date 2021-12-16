@@ -3,6 +3,7 @@ public class ArrowScript : MonoBehaviour
 {
     
     public GameObject center;
+    public GameObject dial;
     public float rotationSpeed;
     public RectTransform indicator;
     bool inLock = false;
@@ -24,6 +25,7 @@ public class ArrowScript : MonoBehaviour
         if (spin)
         {
             transform.RotateAround(center.transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+            dial.transform.RotateAround(center.transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
         }
         else
         {

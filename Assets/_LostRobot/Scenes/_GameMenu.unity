@@ -1457,7 +1457,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 2003057878}
   volumeName: Player
-  defaultVolume: 1
 --- !u!114 &318379596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2138,7 +2137,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1753354237}
+      - m_Target: {fileID: 1602157086}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Subtitles
         m_Mode: 3
@@ -2150,7 +2149,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &469446682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,7 +2744,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 477123648}
   volumeName: Music
-  defaultVolume: 0.4
 --- !u!114 &483893141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2956,6 +2954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivity: {fileID: 0}
+  subtitles: {fileID: 0}
 --- !u!4 &590690769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439240, guid: 548a40efc092c6f408cc4d1691b171cc, type: 3}
@@ -5596,7 +5596,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 125705524}
   volumeName: Enemies
-  defaultVolume: 0.6
 --- !u!114 &1117835867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6337,7 +6336,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 408408163}
   volumeName: Puzzles
-  defaultVolume: 0.8
 --- !u!114 &1269294665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7728,6 +7726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivity: {fileID: 1997010557}
+  subtitles: {fileID: 1013106276}
 --- !u!224 &1602157087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8262,7 +8262,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753354238}
-  - component: {fileID: 1753354237}
   m_Layer: 5
   m_Name: Settings Menu
   m_TagString: Untagged
@@ -8270,18 +8269,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1753354237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753354236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db1c2edcc7e9704bbd10324380aa7a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1753354238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9062,7 +9049,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 92122467}
   volumeName: UI
-  defaultVolume: 1
 --- !u!114 &1911961132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9370,7 +9356,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 361e68b488ec5b14ba80a50a425dae63, type: 2}
   label: {fileID: 2111253271}
   volumeName: Master
-  defaultVolume: 1
 --- !u!114 &1956055158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10103,7 +10088,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1753354237}
+      - m_Target: {fileID: 1602157086}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ChangeSensitivity
         m_Mode: 0
@@ -10368,7 +10353,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1753354237}
+      - m_Target: {fileID: 1602157086}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Subtitles
         m_Mode: 3
@@ -10380,7 +10365,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &2015812156
 GameObject:
   m_ObjectHideFlags: 0

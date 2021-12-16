@@ -11,6 +11,9 @@ public class ShooterManager : Puzzles
     Queue<GameObject> targetsQueue = new Queue<GameObject>();
     public bool hasTimer;
     public Slider time;
+
+    public AudioSource bul;
+    public AudioSource hit;
     public override void Activate()
     {
         base.Activate();
@@ -40,6 +43,7 @@ public class ShooterManager : Puzzles
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         GameObject projectile = Instantiate(bullet, ship.transform.position, Quaternion.identity);
+                        bul.Play();
                         projectile.transform.SetParent(ship.transform);;
                     }
                 }
@@ -49,6 +53,7 @@ public class ShooterManager : Puzzles
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     GameObject projectile = Instantiate(bullet, ship.transform.position, Quaternion.identity);
+                    GetComponent<AudioSource>().Play();
                     projectile.transform.SetParent(ship.transform);
                 }
             }

@@ -12,6 +12,8 @@ public class PuzzleManager : MonoBehaviour
 
     public AudioSource win;
     public AudioSource fail;
+    public AudioSource click;
+    public AudioSource wrong;
 
     public void ChooseDoorPuzzle(DoorController door)
     {

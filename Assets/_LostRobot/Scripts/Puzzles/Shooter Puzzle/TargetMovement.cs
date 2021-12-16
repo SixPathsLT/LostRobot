@@ -37,6 +37,7 @@ public class TargetMovement : MonoBehaviour
             gameObject.SetActive(false);
             other.gameObject.SetActive(false);
             FindObjectOfType<ShooterManager>().CheckTargetHit(this.gameObject);
+            FindObjectOfType<ShooterManager>().hit.Play();
         }
     }
 }
