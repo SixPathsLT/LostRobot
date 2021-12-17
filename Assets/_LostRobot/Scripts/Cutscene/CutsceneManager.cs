@@ -69,7 +69,7 @@ public class CutsceneManager : MonoBehaviour {
         cutsceneCam.SetActive(false);
         canvas.SetActive(false);
         timeElapsed = 0f;
-        if (!GameManager.GetInstance().InCapturedState())
+        if (!GameManager.GetInstance().InCapturedState() && PCUI.current == null)
             GameManager.GetInstance().ChangeState(GameManager.State.Playing);
         if (RequestedSceneChange()) {
             SceneManager.LoadScene(sceneName);

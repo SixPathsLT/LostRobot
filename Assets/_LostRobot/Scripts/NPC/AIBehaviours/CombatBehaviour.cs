@@ -3,12 +3,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AIBehaviours/CombatBehaviour")]
 public class CombatBehaviour : AIBehaviour {
 
-
+    AbilitiesManager abilitiesManager;
     public override void Init(AIManager aiManager) {
         AIManager.player.GetComponent<PlayerMovement>().inCombat = true;
+        if (abilitiesManager == null)
+            abilitiesManager = AIManager.player.GetComponent<AbilitiesManager>();
     }
 
     public override void Process(AIManager aiManager) {
+        if (Utils.CanSeeTransform(aiManager.gameObject.transform, AIManager.player.transform) && abilitiesManager.UsingCloakingAbility()) {
+            aiManager.routeTiles = null;
+            aiManager.nextTile = null;
+            aiManager.SetBehaviour(aiManager.investigateBehaviour);
+            return;
+        }
         float distance = Vector3.Distance(AIManager.player.transform.position, aiManager.gameObject.transform.position);
         if (distance > 3) {
             aiManager.SetBehaviour(aiManager.chaseBehaviour);

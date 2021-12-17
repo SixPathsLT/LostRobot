@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
             switch (requestedState) {
                 case State.Playing:
                 case State.Captured:
+                case State.Email:
                     approveChange = true;
                     break;
             }

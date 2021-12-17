@@ -30,6 +30,11 @@ public class CloakingAbility : Ability
 
     public override void Process() {
         base.Process();
+        if (state == AbilitiesManager.AbilityState.Cooldown) {
+            cloaked = false;
+            ProcessMesh();
+            return;
+        }
         if (state != AbilitiesManager.AbilityState.Active)
             return;
 
@@ -42,7 +47,12 @@ public class CloakingAbility : Ability
             cloaked = false;
         else
             cloaked = true;
-        foreach(Renderer mesh in AbilitiesManager.player.GetComponent<AbilitiesManager>().cloakMesh)
+        ProcessMesh();
+    }
+
+    void ProcessMesh()
+    {
+        foreach (Renderer mesh in AbilitiesManager.player.GetComponent<AbilitiesManager>().cloakMesh)
             SetMesh(mesh);
         SetMesh(AbilitiesManager.player.GetComponent<AbilitiesManager>().cloakPC);
         SetMesh(AbilitiesManager.player.GetComponent<AbilitiesManager>().cloakAbility, 1);

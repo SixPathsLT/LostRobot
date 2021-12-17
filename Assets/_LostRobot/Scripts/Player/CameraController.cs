@@ -29,6 +29,9 @@ public class CameraController : MonoBehaviour
 
     public void ChangeSensitivity(float value)
     {
+        if (value < 0.1)
+            value = 0.1f;
+
         mouseSensitivity = value * 3f;
     }
     void Update() {
