@@ -25,7 +25,7 @@ public class CutsceneManager : MonoBehaviour {
     }
 
     void Update() {
-        /*if (Input.GetKeyDown(KeyCode.P))
+       /* if (Input.GetKeyDown(KeyCode.P))
         {
             AbilitiesManager.player.transform.parent.position = AbilitiesManager.player.transform.position;
             AbilitiesManager.player.transform.localRotation = Quaternion.identity;
@@ -39,7 +39,7 @@ public class CutsceneManager : MonoBehaviour {
                 StopCutscene();
             else if (currentCutscene.playerCam != null && !RequestedSceneChange() && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 1f) 
                 currentCutscene.playerCam.SetActive(true);
-            else if (RequestedSceneChange() && sceneName.Contains("EndingScene") && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 3f)
+            else if (RequestedSceneChange() && sceneName.Contains("EndingScene") && currentCutscene.GetPlayableDirector() != null && timeElapsed > currentCutscene.GetPlayableDirector().duration - 2.6f)
                 StopCutscene(true);
 
             timeElapsed += Time.deltaTime;

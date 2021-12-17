@@ -15,6 +15,6 @@ MonoBehaviour:
   keyCode: 49
   durationTime: 6
   coolDownTime: 10
-  requiredReadEmails: 3
+  requiredReadEmails: 4
   icon: {fileID: 2800000, guid: 77090cd1f7ebb3844a0230740168d699, type: 3}
   state: 0

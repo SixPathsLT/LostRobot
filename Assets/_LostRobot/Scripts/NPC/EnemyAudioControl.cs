@@ -9,13 +9,15 @@ public class EnemyAudioControl : MonoBehaviour
     private AudioSource source;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         source = GetComponent<AudioSource>();
     }
 
     void Step()
     {
+        if (source == null)
+            source = GetComponent<AudioSource>();
         AudioClip clip = clips[Random.Range(0,3)];
         source.volume = .4f;
         RandomizePitch(.5f, 1f);
@@ -24,6 +26,7 @@ public class EnemyAudioControl : MonoBehaviour
 
     void RandomizePitch(float min, float max)
     {
+
         source.pitch = Random.Range(min, max);
     }
 

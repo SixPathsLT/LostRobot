@@ -19,6 +19,10 @@ public class InvestigateBehaviour : AIBehaviour {
     public override void Process(AIManager aiManager) {
         float distance = Vector3.Distance(aiManager.gameObject.transform.position, AIManager.player.transform.position);
         if (distance > 4) {
+            if (timeElapsed > 0 && Utils.CanSeeTransform(aiManager.transform, AIManager.player.transform)) {
+                aiManager.SetBehaviour(aiManager.captureBehaviour);
+                return;
+            }
             if (aiManager.routeTiles == null)
                 aiManager.pathfinding.FindPath(aiManager.gameObject, AIManager.player.transform.position, Random.Range(0, 3) == 1);
 
