@@ -97026,6 +97026,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerRange: {x: 15, y: 30}
   intervalRange: {x: 80, y: 200}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  mat: {fileID: 2100000, guid: 6b6dfd77776c54a4781ec8cab4d87860, type: 2}
 --- !u!4 &1903293161
 Transform:
   m_ObjectHideFlags: 0
