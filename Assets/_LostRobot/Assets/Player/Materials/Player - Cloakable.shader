@@ -4,6 +4,8 @@ Shader "Custom/Player - Cloakable"
     {
         _Color("Color", Color) = (1,1,1,1)
         _MainTex("Albedo (RGB)", 2D) = "white" {}
+        _Glossiness("Smoothness", Range(0,1)) = 0.0
+        _Metallic("Metallic", Range(0,1)) = 0.0
         _NoiseTex("Noise", 2D) = "white" {}
 
         [HDR] _EmissionColor("Color", Color) = (0,0,0)
@@ -29,6 +31,8 @@ Shader "Custom/Player - Cloakable"
         sampler2D _MainTex;
         sampler2D _NoiseTex;
 
+        half _Glossiness;
+        half _Metallic;
         half _Cutoff;
         half _EdgeWidth;
 
@@ -55,6 +59,8 @@ Shader "Custom/Player - Cloakable"
         {
             pixel = tex2D(_MainTex, IN.uv_NoiseTex) * _Color;
             o.Albedo = pixel.rgb;
+            o.Metallic = _Metallic;
+            o.Smoothness = _Glossiness;
             noisePixel = tex2D(_NoiseTex, IN.uv_NoiseTex);
 
             clip(noisePixel.r >= _Cutoff ? 1 : -1);
