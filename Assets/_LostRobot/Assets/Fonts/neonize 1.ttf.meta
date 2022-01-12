@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 986cf582b758bf544a0f57efa19aa423
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Neonize
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8a15cb53d9541da43b5a53b5e5a92fbb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

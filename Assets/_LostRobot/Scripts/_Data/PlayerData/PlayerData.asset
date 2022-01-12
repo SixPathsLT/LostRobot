@@ -12,11 +12,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d63c2512d3a6046a25a96a7f6dbf53, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  currentHealth: 1
+  currentHealth: 32
   maxHealth: 100
-  currentConciousness: 0
+  currentConciousness: 100
   maxConciousness: 100
-  obtainedKeyInfo: []
-  obtainedKeyCards: []
-  readEmails: []
-  level: 1
+  obtainedKeyInfo:
+  - Lv_1_AC_1
+  - Lv_1_AC_2
+  - Lv_2_AC_1
+  - Lv_2_AC_2
+  - Lv_3_AC_1
+  - Lv_3_AC_2
+  - Lv_4_AC_1
+  - Lv_5_AC_1
+  - Lv_6_AC_2
+  - Lv_6_AC_1
+  obtainedKeyCards:
+  - Lv_1_AC_1
+  - Lv_1_AC_2
+  - Lv_2_AC_2
+  - Lv_2_AC_1
+  - Lv_3_AC_1
+  - Lv_3_AC_2
+  - Lv_4_AC_1
+  - Lv_5_AC_1
+  - Lv_6_AC_1
+  - Lv_6_AC_2
+  readEmails:
+  - Lv_1_PC_1
+  - Lv_1_PC_2
+  - Lv_1_PC_5
+  - Lv_1_PC_4
+  - Lv_1_PC_3
+  - Lv_2_PC_4
+  - Lv_2_PC_3
+  - Lv_2_PC_1
+  - Lv_2_PC_2
+  - Lv_2_PC_5
+  - Lv_3_PC_2
+  - Lv_3_PC_1
+  - Lv_3_PC_4
+  - Lv_3_PC_6
+  - Lv_3_PC_5
+  - Lv_3_PC_3
+  - Lv_4_PC_1
+  - Lv_4_PC_4
+  - Lv_4_PC_3
+  - Lv_4_PC_2
+  - Lv_5_PC_1
+  - Lv_5_PC_4
+  - Lv_5_PC_3
+  - Lv_5_PC_2
+  - Lv_6_PC_1
+  - Lv_6_PC_2
+  - Lv_6_PC_4
+  - Lv_6_PC_3
+  level: 8
